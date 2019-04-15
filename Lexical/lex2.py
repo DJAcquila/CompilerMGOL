@@ -115,6 +115,7 @@ class DFA():
 				#first, st = input_line.split(input_line[input_line.find(stop)], 1)
 				#print("Cont: {}".format(cont))
 				#print ("\tSplit: {}".format(st))
+				ponteiro -=1
 				st = str(ponteiro)
 				#print(st)
 				return False, st
