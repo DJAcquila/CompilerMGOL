@@ -222,13 +222,13 @@ if __name__ == "__main__":
 
 	_input = open('fonte.alg', 'r')
 	
-	contents = _input.read()
-	contents = contents.replace('\n', ' ')
+	#contents = _input.read()
+	#contents = contents.replace('\n', ' ')
 	
 	impressao_bonita('linha')
 	impressao_bonita('titulo')
 	impressao_bonita('linha')
-	#contents = input("Input a string ")
+	contents = input("Input a string ")
 	#print ("\nEntrada: " +  _input)
 	accept, tok = lex.dfa.accept(contents)
 	while(accept == False):
