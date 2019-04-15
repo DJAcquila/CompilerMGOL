@@ -1,5 +1,8 @@
 import hashlib
 import string
+
+_arquivo = open('fonte.alg', 'r')
+
 # Tokens
 TOKEN = lambda x:x
 TOKEN.num = 'num'
@@ -77,20 +80,21 @@ class DFA():
 			self.acceptStates[state] = True
 			self.statesToken[state] = token
 
-		def accept(self, _arquivo):
+		def accept(self, ponteiro):
 			state = 0
 			token = self.statesToken[state]
 			token_aceito = self.statesToken[state]
 			lexema_aceito = ''
 			ponteiro_aceito = 0
 			acumulated = ''
-			ponteiro = 0
 			try:
-				for ponteiro in _arquivo:
+				while (_arquivo.seek(ponteiro) is not None):
 					
+					_arquivo.seek(ponteiro)
+					c = _arquivo.read(1)
 					#print ("Caracter lido: " + c)
-					
-					state = self.transitions[state][ponteiro]
+
+					state = self.transitions[state][c]
 					
 					token = self.statesToken[state]
 
@@ -105,11 +109,10 @@ class DFA():
 
 				impressao_bonita('corpo', acumulated, token)
 				#first, st = input_line.split(input_line[input_line.find(stop)], 1)
-				st = input_line[cont:]
 				#print("Cont: {}".format(cont))
 				#print ("\tSplit: {}".format(st))
+				return False, ponteiro
 
-				return False, st
 
 # Construção do automato para o analisador léxico
 class LEX_DFA():
@@ -227,8 +230,6 @@ def repeat_to_length(string_to_expand, length):
 if __name__ == "__main__":
 
 	lex = LEX_DFA()
-
-	_input = open('fonte.alg', 'r')
 	
 	#contents = _input.read()
 	#contents = contents.replace('\n', ' ')
@@ -238,12 +239,11 @@ if __name__ == "__main__":
 	impressao_bonita('linha')
 	#contents = input("Input a string ")
 	#print ("\nEntrada: " +  _input)
-	accept, tok = lex.dfa.accept(_input)
+	accept, tok = lex.dfa.accept(0)
 	while(accept == False):
-		new_input = tok
-		if new_input == ' ':
+		if not(_arquivo.read(tok)):
 			break
 		#print ("\nEntrada: " +  new_input)
-		accept, tok = lex.dfa.accept(new_input)
+		accept, tok = lex.dfa.accept(tok)
 	impressao_bonita('linha')
 	#preset_print(accept, tok)
