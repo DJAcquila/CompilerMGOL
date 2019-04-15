@@ -116,7 +116,7 @@ class LEX_DFA():
 		self.load_DFA()
 		
 	'''
-		COnstroi o DFA
+		Constroi o DFA
 	'''
 	def load_DFA(self):
 		global TOKEN
