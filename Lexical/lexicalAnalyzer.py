@@ -239,11 +239,3 @@ if __name__ == "__main__":
 		accept, tok = lex.dfa.accept(new_input)
 	impressao_bonita('linha')
 	#preset_print(accept, tok)
-
-
-
-
-
-	
-
-
