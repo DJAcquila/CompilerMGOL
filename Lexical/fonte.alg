@@ -1,5 +1,5 @@
 inicio
-varinicio
+varinicio;;;;;;;;;;;;;
 A lit;
 B inteiro;
 D inteiro;

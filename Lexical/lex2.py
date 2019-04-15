@@ -2,18 +2,18 @@ import hashlib
 import string
 # Tokens
 TOKEN = lambda x:x
-TOKEN.num = hashlib.md5(b'num')
-TOKEN.literal = hashlib.md5(b'literal')
-TOKEN.id = hashlib.md5(b'id')
-TOKEN.noToken = hashlib.md5(b'noToken')
-TOKEN.eof = hashlib.md5(b'eof')
-TOKEN.opr = hashlib.md5(b'opr')
-TOKEN.rcb = hashlib.md5(b'rcb')
-TOKEN.opm = hashlib.md5(b'opm')
-TOKEN.ab_p = hashlib.md5(b'ab_p')
-TOKEN.fc_p = hashlib.md5(b'fc_p')
-TOKEN.pt_v = hashlib.md5(b'pt_v')
-TOKEN.erro = hashlib.md5(b'erro')
+TOKEN.num = 'num'
+TOKEN.literal = 'literal'
+TOKEN.id = 'id'
+TOKEN.noToken = 'noToken'
+TOKEN.eof = 'eof'
+TOKEN.opr = 'opr'
+TOKEN.rcb = 'rc'
+TOKEN.opm = 'opm'
+TOKEN.ab_p = 'ab_p'
+TOKEN.fc_p = 'fc_p'
+TOKEN.pt_v = 'pt_v'
+TOKEN.erro = 'erro'
 
 class bcolors:
     BOLD = '\033[1m'
@@ -77,22 +77,24 @@ class DFA():
 			self.acceptStates[state] = True
 			self.statesToken[state] = token
 
-		def accept(self, input_line):
+		def accept(self, _arquivo):
 			state = 0
 			token = self.statesToken[state]
-			stop = ''
+			token_aceito = self.statesToken[state]
+			lexema_aceito = ''
+			ponteiro_aceito = 0
 			acumulated = ''
-			cont = 0
+			ponteiro = 0
 			try:
-				for c in input_line:
+				for ponteiro in _arquivo:
 					
 					#print ("Caracter lido: " + c)
-					cont+=1
-					state = self.transitions[state][c]
+					
+					state = self.transitions[state][ponteiro]
 					
 					token = self.statesToken[state]
 
-					stop = c
+					ponteiro+=1
 					acumulated += c
 
 				impressao_bonita('corpo', acumulated, token)
@@ -103,7 +105,8 @@ class DFA():
 
 				impressao_bonita('corpo', acumulated, token)
 				#first, st = input_line.split(input_line[input_line.find(stop)], 1)
-				st = input_line[cont-1:]
+				st = input_line[cont:]
+				#print("Cont: {}".format(cont))
 				#print ("\tSplit: {}".format(st))
 
 				return False, st
@@ -143,6 +146,7 @@ class LEX_DFA():
 			self.dfa.set_DFA(5,str(digit),6)
 			self.dfa.set_DFA(6,str(digit),6)
 		self.dfa.set_acceptState(1, T.num)
+		self.dfa.set_acceptState(3, T.num)
 		self.dfa.set_acceptState(6, T.num)
 
 		#Ponto e vírgula
@@ -226,15 +230,15 @@ if __name__ == "__main__":
 
 	_input = open('fonte.alg', 'r')
 	
-	contents = _input.read()
-	contents = contents.replace('\n', ' ')
+	#contents = _input.read()
+	#contents = contents.replace('\n', ' ')
 	
 	impressao_bonita('linha')
 	impressao_bonita('titulo')
 	impressao_bonita('linha')
 	#contents = input("Input a string ")
 	#print ("\nEntrada: " +  _input)
-	accept, tok = lex.dfa.accept(contents)
+	accept, tok = lex.dfa.accept(_input)
 	while(accept == False):
 		new_input = tok
 		if new_input == ' ':
