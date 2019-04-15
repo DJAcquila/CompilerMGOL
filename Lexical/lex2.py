@@ -95,14 +95,15 @@ class DFA():
 					
 					_arquivo.seek(ponteiro)
 					c = _arquivo.read(1)
+
 					#print ("Caracter lido: " + c)
 					ponteiro+=1
 
 					state = self.transitions[state][c]
 					
 					token = self.statesToken[state]
-
-					acumulated += c
+					if state != 0:
+						acumulated += c
 
 				impressao_bonita('corpo', acumulated, token)
 
