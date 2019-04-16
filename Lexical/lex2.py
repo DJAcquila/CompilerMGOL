@@ -4,7 +4,9 @@ import string
 _arquivo = open('fonte.alg', 'r')
 lines = _arquivo.readlines()
 eof = _arquivo.tell()
-
+coluna = 0
+linha = 1
+erro = 0
 # Tokens
 TOKEN = lambda x:x
 TOKEN.num = 'num'
@@ -62,6 +64,8 @@ def impressao_bonita(id, acumulated = 0, token = ''):
 	elif id == 'linha':
 		print("+"+repeat_to_length('.', 29)+"+"+repeat_to_length('.', 29) + "+"+repeat_to_length('.', 29) + "+")
 	elif id == 'corpo':
+		if ('\n' in acumulated):
+			acumulated = acumulated.replace('\n','\\n')
 		print("|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' '))
 	else:
 		print("|%-3s ERRO! Caracter: %-25s  %-42s|" % (' ',acumulated,' '))
@@ -84,6 +88,9 @@ class DFA():
 			self.statesToken[state] = token
 
 		def accept(self, pt):
+			global linha 
+			global coluna
+			global erro
 			ponteiro = int(pt)
 			state = 0
 			token = self.statesToken[state]
@@ -96,17 +103,18 @@ class DFA():
 					
 					_arquivo.seek(ponteiro)
 					c = _arquivo.read(1)
-
 					#print ("Caracter lido: " + c)
 					ponteiro+=1
-
+					coluna+=1
 					state = self.transitions[state][c]
 					
 					token = self.statesToken[state]
-
 					ponteiro_aceito = ponteiro
 					if state != 0:
 						acumulated += c
+					if c == '\n':
+						linha += 1
+						coluna = 0
 
 				impressao_bonita('corpo', acumulated, token)
 
@@ -120,7 +128,8 @@ class DFA():
 					impressao_bonita('corpo', acumulated, token)
 					ponteiro-=1
 				elif state == 0:
-					impressao_bonita('erro', c, token)
+					impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
+					erro+=1
 				st = str(ponteiro)
 				#print(st)
 				return False, st
@@ -181,7 +190,7 @@ class LEX_DFA():
 
 		#Abre parênteses
 		self.dfa.set_DFA(0, '(', 13)
-		self.dfa.set_acceptState(10,T.ab_p)
+		self.dfa.set_acceptState(13,T.ab_p)
 
 		#Comentário
 		self.dfa.set_DFA(0, '{', 11)
@@ -242,14 +251,12 @@ def repeat_to_length(string_to_expand, length):
 if __name__ == "__main__":
 
 	lex = LEX_DFA()
-	
 	#contents = _input.read()
 	#contents = contents.replace('\n', ' ')
 	
 	impressao_bonita('linha')
 	impressao_bonita('titulo')
 	impressao_bonita('linha')
-	
 	#contents = input("Input a string ")
 	#print ("\nEntrada: " +  _input)
 	accept, tok = lex.dfa.accept(0)
@@ -261,4 +268,6 @@ if __name__ == "__main__":
 		else:
 			break
 	impressao_bonita('linha')
+	if (erro>0):
+		print("Foram encontrados "+str(erro)+" erros na análise léxica!")
 	#preset_print(accept, tok)
