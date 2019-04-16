@@ -88,7 +88,7 @@ class DFA():
 			token = self.statesToken[state]
 			token_aceito = self.statesToken[state]
 			lexema_aceito = ''
-			ponteiro_aceito = 0
+			ponteiro_aceito = ponteiro
 			acumulated = ''
 			try:
 				while (ponteiro < eof):
@@ -102,6 +102,8 @@ class DFA():
 					state = self.transitions[state][c]
 					
 					token = self.statesToken[state]
+
+					ponteiro_aceito = ponteiro
 					if state != 0:
 						acumulated += c
 
@@ -115,7 +117,8 @@ class DFA():
 				#first, st = input_line.split(input_line[input_line.find(stop)], 1)
 				#print("Cont: {}".format(cont))
 				#print ("\tSplit: {}".format(st))
-				ponteiro -=1
+				if state != 0:
+					ponteiro-=1
 				st = str(ponteiro)
 				#print(st)
 				return False, st
