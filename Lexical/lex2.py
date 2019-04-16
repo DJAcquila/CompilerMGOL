@@ -61,9 +61,10 @@ def impressao_bonita(id, acumulated = 0, token = ''):
 		print(bcolors.BOLD +"|%-10s LEXEMA %-11s| %-10s TOKEN %-10s | %-10s TIPO  %-10s |" % (' ', ' ', ' ', ' ',' ', ' ') + bcolors.END )
 	elif id == 'linha':
 		print("+"+repeat_to_length('.', 29)+"+"+repeat_to_length('.', 29) + "+"+repeat_to_length('.', 29) + "+")
+	elif id == 'corpo':
+		print("|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' '))
 	else:
-		print("|%-2s  %-25s| %-10s  %-10s %-5s| %-10s  - %-14s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' '))
-
+		print("|%-3s ERRO! Caracter: %-25s  %-42s|" % (' ',acumulated,' '))
 
 # Classe que define o dfa
 class DFA():
@@ -112,13 +113,14 @@ class DFA():
 				return self.acceptStates[state], token_def(self.statesToken[state])
 
 			except KeyError:
-
-				impressao_bonita('corpo', acumulated, token)
 				#first, st = input_line.split(input_line[input_line.find(stop)], 1)
 				#print("Cont: {}".format(cont))
 				#print ("\tSplit: {}".format(st))
 				if state != 0:
+					impressao_bonita('corpo', acumulated, token)
 					ponteiro-=1
+				elif state == 0:
+					impressao_bonita('erro', c, token)
 				st = str(ponteiro)
 				#print(st)
 				return False, st
