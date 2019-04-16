@@ -7,6 +7,7 @@ eof = _arquivo.tell()
 coluna = 0
 linha = 1
 erro = 0
+vetor_erros = []
 # Tokens
 TOKEN = lambda x:x
 TOKEN.num = 'num'
@@ -91,6 +92,7 @@ class DFA():
 			global linha 
 			global coluna
 			global erro
+			global vetor_erros
 			ponteiro = int(pt)
 			state = 0
 			token = self.statesToken[state]
@@ -127,8 +129,11 @@ class DFA():
 				if state != 0:
 					impressao_bonita('corpo', acumulated, token)
 					ponteiro-=1
+					coluna-=1
 				elif state == 0:
-					impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
+					dicionario_erro = {'acumulated': c+' linha: '+str(linha)+' coluna: '+str(coluna), 'token': token}
+					vetor_erros.append(dicionario_erro)
+					#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 					erro+=1
 				st = str(ponteiro)
 				#print(st)
@@ -270,4 +275,8 @@ if __name__ == "__main__":
 	impressao_bonita('linha')
 	if (erro>0):
 		print("Foram encontrados "+str(erro)+" erros na análise léxica!")
+		impressao_bonita('linha')
+		for err in vetor_erros:
+			impressao_bonita('erro', err['acumulated'], err['token'])
+		impressao_bonita('linha')
 	#preset_print(accept, tok)
