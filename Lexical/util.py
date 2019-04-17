@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 #Tabela de simbolos
 tabela_simbolos = []
 preencher_tabela = {'lexema':'inicio','token':'inicio','tipo':''}
