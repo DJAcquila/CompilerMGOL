@@ -1,7 +1,6 @@
 import string
 from util import *
-from dfa import *
-
+from openFile import *
 # Classe que define o dfa
 _arquivo = open('texto.alg', 'r')
 lines = _arquivo.readlines()
