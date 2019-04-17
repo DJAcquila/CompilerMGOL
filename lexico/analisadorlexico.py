@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-
 import string
-from util import *
-# Classe que define o dfa
+from lexico.util import *
 
+# Classe que define o dfa
 class DFA():
 		def __init__(self, statesNum, _arquivo, lines, eof):
 			global TOKEN

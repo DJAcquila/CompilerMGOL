@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from analisadorlexico import analisador_lexico
+from lexico.analisadorlexico import analisador_lexico
+from lexico.util import bcolors
 import argparse
-from util import bcolors
+
 
 if __name__ == "__main__":
 	
