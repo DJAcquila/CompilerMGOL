@@ -27,21 +27,3 @@ inicio
    escreva "programa finalizado";   
 
 fim
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

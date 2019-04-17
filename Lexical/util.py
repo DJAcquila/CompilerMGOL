@@ -25,6 +25,13 @@ tabela_simbolos.append(preencher_tabela)
 preencher_tabela = {'lexema':'real','token':'real','tipo':''}
 tabela_simbolos.append(preencher_tabela)
 
+# Variaveis globais 
+
+coluna = 0
+linha = 1
+erro = 0
+vetor_erros = []
+ponteiro = 0
 
 # Tokens
 TOKEN = lambda x:x

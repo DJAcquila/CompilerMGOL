@@ -1,25 +1,19 @@
 import string
 from util import *
-from openFile import *
 # Classe que define o dfa
-_arquivo = open('texto.alg', 'r')
-lines = _arquivo.readlines()
-eof = _arquivo.tell()
-
-coluna = 0
-linha = 1
-erro = 0
-vetor_erros = []
-ponteiro = 0
 
 class DFA():
-		def __init__(self, statesNum = 21):
+		def __init__(self, statesNum, _arquivo, lines, eof):
 			global TOKEN
 			T = TOKEN
 			self.statesNum = statesNum # Pode estar errado
 			self.transitions = [{} for i in range(statesNum)]
 			self.acceptStates = [False] * self.statesNum
 			self.statesToken = [T.noToken] * self.statesNum
+
+			self._arquivo = _arquivo
+			self. lines = lines
+			self. eof = eof
 
 		def set_DFA(self, src_state, char, target_state):
 			self.transitions[src_state][char] = target_state
@@ -42,10 +36,10 @@ class DFA():
 			ponteiro_aceito = ponteiro
 			acumulated = ''
 			try:
-				while (ponteiro < eof):
+				while (ponteiro < self.eof):
 					
-					_arquivo.seek(ponteiro)
-					c = _arquivo.read(1)
+					self._arquivo.seek(ponteiro)
+					c = self._arquivo.read(1)
 					#print ("Caracter lido: " + c)
 					ponteiro+=1
 					coluna+=1
@@ -111,8 +105,8 @@ class DFA():
 # Construção do automato para o analisador léxico
 class LEX_DFA():
 
-	def __init__(self):
-		self.dfa = DFA(21)
+	def __init__(self, _arquivo, lines, eof):
+		self.dfa = DFA(21, _arquivo, lines, eof)
 		self.load_DFA()
 		
 	'''
@@ -208,8 +202,12 @@ class LEX_DFA():
 		self.dfa.set_acceptState(19, T.id)
 
 if __name__ == "__main__":
+	
+	_arquivo = open('texto.alg', 'r')
+	lines = _arquivo.readlines()
+	eof = _arquivo.tell()
 
-	lex = LEX_DFA()
+	lex = LEX_DFA(_arquivo, lines, eof)
 	#contents = _input.read()
 	#contents = contents.replace('\n', ' ')
 	
