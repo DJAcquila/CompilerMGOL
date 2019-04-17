@@ -67,7 +67,7 @@ class DFA():
 						preencher_tabela = {'lexema':acumulated,'token':token,'tipo':''}
 						tabela_simbolos.append(preencher_tabela)
 						impressao_bonita('corpo', acumulated, token)
-				else:
+				elif token_def(token) is not None and token_def(token) is not ' ':
 					impressao_bonita('corpo', acumulated, token)
 
 				return self.acceptStates[state], token_def(self.statesToken[state])
@@ -89,7 +89,7 @@ class DFA():
 								preencher_tabela = {'lexema':acumulated,'token':token,'tipo':''}
 								tabela_simbolos.append(preencher_tabela)
 								impressao_bonita('corpo', acumulated, token)
-					else:
+					elif token_def(token) is not None and token_def(token) is not ' ':
 						impressao_bonita('corpo', acumulated, token)
 					ponteiro-=1
 					coluna-=1
