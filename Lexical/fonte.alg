@@ -2,6 +2,7 @@ inicio
 varinicio
 A lit;<.....#><><.^
 B inteiro;
+.
 D inteiro;
 C real;
 varfim;
@@ -33,4 +34,5 @@ escreva A;
 {
 a
 }
+E inteiro;
 fim
