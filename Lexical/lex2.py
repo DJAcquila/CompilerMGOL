@@ -342,6 +342,7 @@ if __name__ == "__main__":
 			accept, tok = lex.dfa.accept(p)
 		else:
 			break
+	impressao_bonita('corpo','','eof')
 	impressao_bonita('linha')
 	if (erro>0):
 		print("Foram encontrados "+ str(erro)+ bcolors.RED + bcolors.BOLD + " erros" + bcolors.END + " na análise léxica!")
