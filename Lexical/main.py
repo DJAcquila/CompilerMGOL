@@ -11,6 +11,7 @@ coluna = 0
 linha = 1
 erro = 0
 vetor_erros = []
+ponteiro = 0
 
 class DFA():
 		def __init__(self, statesNum = 21):
@@ -28,13 +29,13 @@ class DFA():
 			self.acceptStates[state] = True
 			self.statesToken[state] = token
 
-		def accept(self, pt):
+		def accept(self):
 			global linha 
 			global coluna
 			global erro
 			global vetor_erros
 			global tabela_simbolos
-			ponteiro = int(pt)
+			global ponteiro
 			state = 0
 			token = self.statesToken[state]
 			token_aceito = self.statesToken[state]
@@ -103,9 +104,9 @@ class DFA():
 					vetor_erros.append(dicionario_erro)
 					#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 					erro+=1
-				st = str(ponteiro)
+				#st = str(ponteiro)
 				#print(st)
-				return False, st
+				return False
 
 
 # Construção do automato para o analisador léxico
@@ -218,12 +219,12 @@ if __name__ == "__main__":
 	impressao_bonita('linha')
 	#contents = input("Input a string ")
 	#print ("\nEntrada: " +  _input)
-	accept, tok = lex.dfa.accept(0)
-	p = int(tok)
+	accept = lex.dfa.accept()
+	#p = int(tok)
 	while(accept == False):
-		if (p < eof):
-			p = int(tok)
-			accept, tok = lex.dfa.accept(p)
+		if (ponteiro < eof):
+			#p = int(tok)
+			accept = lex.dfa.accept()
 		else:
 			break
 	impressao_bonita('corpo','','eof')
