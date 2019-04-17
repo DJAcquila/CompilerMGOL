@@ -25,6 +25,8 @@ TOKEN.erro = 'erro'
 
 class bcolors:
     BOLD = '\033[1m'
+    GREEN = '\033[92m'
+    RED = '\033[91m'
     END = '\033[0m'
 
 '''		
@@ -69,7 +71,7 @@ def impressao_bonita(id, acumulated = 0, token = ''):
 			acumulated = acumulated.replace('\n','\\n')
 		print("|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' '))
 	else:
-		print("|%-3s ERRO! Caracter: %-25s  %-42s|" % (' ',acumulated,' '))
+		print("%-3s %-3s %-3s ERRO! %-5s Caracter: %-24s  %-43s" % (' ', bcolors.RED , bcolors.BOLD, bcolors.END, acumulated,' '))
 
 # Classe que define o dfa
 class DFA():
@@ -131,7 +133,8 @@ class DFA():
 					ponteiro-=1
 					coluna-=1
 				elif state == 0:
-					dicionario_erro = {'acumulated': c+' linha: '+str(linha)+' coluna: '+str(coluna), 'token': token}
+					acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 					erro+=1
@@ -274,7 +277,7 @@ if __name__ == "__main__":
 			break
 	impressao_bonita('linha')
 	if (erro>0):
-		print("Foram encontrados "+str(erro)+" erros na análise léxica!")
+		print("Foram encontrados "+ str(erro)+ bcolors.RED + bcolors.BOLD + " erros" + bcolors.END + " na análise léxica!")
 		impressao_bonita('linha')
 		for err in vetor_erros:
 			impressao_bonita('erro', err['acumulated'], err['token'])
