@@ -8,12 +8,41 @@ coluna = 0
 linha = 1
 erro = 0
 vetor_erros = []
+
+#Tabela de simbolos
+tabela_simbolos = []
+preencher_tabela = {'lexema':'inicio','token':'inicio','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'varinicio','token':'varinicio','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'varfim','token':'varfim','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'escreva','token':'escreva','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'leia','token':'leia','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'se','token':'se','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'entao','token':'entao','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'fimse','token':'fimse','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'fim','token':'fim','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'inteiro','token':'inteiro','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'lit','token':'lit','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+preencher_tabela = {'lexema':'real','token':'real','tipo':''}
+tabela_simbolos.append(preencher_tabela)
+
+
 # Tokens
 TOKEN = lambda x:x
 TOKEN.num = 'num'
 TOKEN.literal = 'literal'
 TOKEN.id = 'id'
-TOKEN.noToken = 'noToken'
+TOKEN.Comentario = 'Comentario'
 TOKEN.eof = 'eof'
 TOKEN.opr = 'opr'
 TOKEN.rcb = 'rc'
@@ -22,6 +51,7 @@ TOKEN.ab_p = 'ab_p'
 TOKEN.fc_p = 'fc_p'
 TOKEN.pt_v = 'pt_v'
 TOKEN.erro = 'erro'
+TOKEN.noToken = 'noToken'
 
 class bcolors:
     BOLD = '\033[1m'
@@ -42,8 +72,8 @@ def token_def(token):
 		return 'literal'
 	elif token == TOK.id:
 		return 'id'
-	elif token == TOK.noToken: 
-		return ' '
+	elif token == TOK.Comentario: 
+		return 'Comentario'
 	elif token == TOK.eof:
 		return 'eof'
 	elif token == TOK.opr:
@@ -60,6 +90,8 @@ def token_def(token):
 		return 'pt_v'
 	elif token == TOK.erro:
 		return 'erro'
+	elif token == TOK.noToken:
+		return ' '
 
 def impressao_bonita(id, acumulated = 0, token = ''):
 	if id == 'titulo':
@@ -70,6 +102,14 @@ def impressao_bonita(id, acumulated = 0, token = ''):
 		if ('\n' in acumulated):
 			acumulated = acumulated.replace('\n','\\n')
 		print("|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' '))
+	elif id == 'reservada':
+		if ('\n' in acumulated):
+			acumulated = acumulated.replace('\n','\\n')
+		print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token, ' ',' ',' ')+bcolors.END)
+	elif id == 'repetida':
+		if ('\n' in acumulated):
+			acumulated = acumulated.replace('\n','\\n')
+		print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' ')+bcolors.END)
 	else:
 		print("%-3s %-3s %-3s ERRO! %-5s Caracter: %-24s  %-43s" % (' ', bcolors.RED , bcolors.BOLD, bcolors.END, acumulated,' '))
 
@@ -95,6 +135,7 @@ class DFA():
 			global coluna
 			global erro
 			global vetor_erros
+			global tabela_simbolos
 			ponteiro = int(pt)
 			state = 0
 			token = self.statesToken[state]
@@ -119,8 +160,21 @@ class DFA():
 					if c == '\n':
 						linha += 1
 						coluna = 0
+													
 
-				impressao_bonita('corpo', acumulated, token)
+				if token is 'id':
+					teste1 = {'lexema':acumulated,'token':acumulated,'tipo':''}
+					teste2 = {'lexema':acumulated,'token':token,'tipo':''}
+					if teste1 in tabela_simbolos:
+						impressao_bonita('reservada', acumulated, acumulated)
+					elif teste2 in tabela_simbolos:
+						impressao_bonita('repetida', acumulated, token)
+					else:
+						preencher_tabela = {'lexema':acumulated,'token':token,'tipo':''}
+						tabela_simbolos.append(preencher_tabela)
+						impressao_bonita('corpo', acumulated, token)
+				else:
+					impressao_bonita('corpo', acumulated, token)
 
 				return self.acceptStates[state], token_def(self.statesToken[state])
 
@@ -129,7 +183,20 @@ class DFA():
 				#print("Cont: {}".format(cont))
 				#print ("\tSplit: {}".format(st))
 				if state != 0:
-					impressao_bonita('corpo', acumulated, token)
+					if token is 'id':
+						if token is 'id':
+							teste1 = {'lexema':acumulated,'token':acumulated,'tipo':''}
+							teste2 = {'lexema':acumulated,'token':token,'tipo':''}
+							if teste1 in tabela_simbolos:
+								impressao_bonita('reservada', acumulated, acumulated)
+							elif teste2 in tabela_simbolos:
+								impressao_bonita('repetida', acumulated, token)
+							else:
+								preencher_tabela = {'lexema':acumulated,'token':token,'tipo':''}
+								tabela_simbolos.append(preencher_tabela)
+								impressao_bonita('corpo', acumulated, token)
+					else:
+						impressao_bonita('corpo', acumulated, token)
 					ponteiro-=1
 					coluna-=1
 				elif state == 0:
@@ -205,7 +272,7 @@ class LEX_DFA():
 		for st in string.printable:
 			self.dfa.set_DFA(11, st, 11)
 		self.dfa.set_DFA(11,'}',12)
-		self.dfa.set_acceptState(12,T.noToken)
+		self.dfa.set_acceptState(12,T.Comentario)
 
 		#EOF (fim de arquivo)
 		self.dfa.set_DFA(0, "eof", 14)
@@ -282,4 +349,15 @@ if __name__ == "__main__":
 		for err in vetor_erros:
 			impressao_bonita('erro', err['acumulated'], err['token'])
 		impressao_bonita('linha')
+
+	print(bcolors.BOLD +"|%-10s  %-10s %-10s TABELA DE SIMBOLOS %-10s  %-10s   %-10s |" % (' ', ' ', ' ', ' ',' ', ' ') + bcolors.END )
+	impressao_bonita('linha')
+	impressao_bonita('titulo')
+	impressao_bonita('linha')
+	for tab in tabela_simbolos:
+		if tab['lexema'] is tab['token']:
+			impressao_bonita('reservada', tab['lexema'], tab['token'])
+		else:
+			impressao_bonita('repetida', tab['lexema'], tab['token'])
+	impressao_bonita('linha')
 	#preset_print(accept, tok)
