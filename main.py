@@ -23,5 +23,5 @@ if __name__ == "__main__":
 	if args.lexico:
 		analisador_lexico(_arquivo, lines, eof)
 	else:
-		print("Nada a fazer")
+		print("Ainda não foram desenvolvidas todas as etapas de compilação\nInsira a diretiva '-l' para execução do analisador léxico")
 	

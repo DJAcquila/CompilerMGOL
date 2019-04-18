@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import string
 from lexico.util import *
-
+from erro.errno import Error
 # Classe que define o dfa
 class DFA():
 		def __init__(self, statesNum, _arquivo, lines, eof):
@@ -224,11 +224,8 @@ def analisador_lexico(_arquivo, lines, eof):
 	impressao_bonita('corpo','','eof')
 	impressao_bonita('linha')
 	if (erro>0):
-		print("Foram encontrados "+ str(erro)+ bcolors.RED + bcolors.BOLD + " erros" + bcolors.END + " na análise léxica!")
-		impressao_bonita('linha')
-		for err in vetor_erros:
-			impressao_bonita('erro', err['acumulated'], err['token'])
-		impressao_bonita('linha')
+		err = Error(erro, vetor_erros)
+		err.printLexErro()
 
 	print(bcolors.BOLD +"|%-10s  %-10s %-10s TABELA DE SIMBOLOS %-10s  %-10s   %-10s |" % (' ', ' ', ' ', ' ',' ', ' ') + bcolors.END )
 	impressao_bonita('linha')
