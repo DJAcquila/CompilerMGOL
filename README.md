@@ -5,10 +5,10 @@ Compilador desenvolvido em python para tradução de um código em uma linguagem
 ## Requisitos
 Para execuço do compilador você precisará apenas de python3
 ```bash
-sudo apt update
-sudo apt isntall python3.6
-sudo at install python3.6-pip
-pip3 --version
+$ sudo apt update
+$ sudo apt isntall python3.6
+$ sudo at install python3.6-pip
+$ pip3 --version
 ```
 
 ## Divisão dos Arquivos
@@ -36,7 +36,8 @@ O projeto está divido da seguinte forma:
 ## Execução
 Para execução do help
 ```bash
-python3 main.py -h
+$ python3 main.py -h
+
 usage: main.py [-h] [-l] filename
 
 Compilador da linguagem MGOL - Por enquanto, apenas o analisador léxico
@@ -51,7 +52,7 @@ optional arguments:
 Para executar a análise léxica
 
 ```bash 
-python3 main.py fontesMGOL/algumarquivo.alg -l
+$ python3 main.py fontesMGOL/algumarquivo.alg -l
 ```
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
