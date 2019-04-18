@@ -28,8 +28,8 @@ O projeto está divido da seguinte forma:
 ├── LISCENCE
 └── README.md
 ```
-Em ```bash lexico``` temos os scripts da análise léxica 
-Em ```bash fontesMGOL``` temos os programas exemplares em MGOL
+* Em ```bash lexico``` temos os scripts da análise léxica 
+* Em ```bash fontesMGOL``` temos os programas exemplares em MGOL
 
 ## Execução
 Para execução do help
