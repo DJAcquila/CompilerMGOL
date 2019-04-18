@@ -6,7 +6,7 @@ Compilador desenvolvido em python para tradução de um código em uma linguagem
 Para execução do compilador você precisará apenas de python3
 ```bash
 $ sudo apt update
-$ sudo apt isntall python3.6
+$ sudo apt install python3.6
 $ sudo apt install python3.6-pip
 $ pip3 --version
 ```
@@ -25,12 +25,12 @@ O projeto está divido da seguinte forma:
 │   ├── fonte.alg
 │   ├── texto.alg
 ├── main.py
-├── LISCENCE
+├── LICENCE
 └── README.md
 ```
 * Em ```lexico``` temos os scripts da análise léxica 
 * Em ```fontesMGOL``` temos os exemplares em MGOL
-* O srcript principal é ```main.py```
+* O script principal é ```main.py```
 * Para lidar com impressões específicas de erros utiliza-se ```erro```
 
 ## Execução
