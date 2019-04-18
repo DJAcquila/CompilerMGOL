@@ -28,10 +28,10 @@ O projeto está divido da seguinte forma:
 ├── LISCENCE
 └── README.md
 ```
-* Em ```bash lexico``` temos os scripts da análise léxica 
-* Em ```bash fontesMGOL``` temos os programas exemplares em MGOL
-* O srcript principal é ```bash main.py```
-* Para lidar com impressões específicas dos erros na tela temos ```bash erro```
+* Em ```lexico``` temos os scripts da análise léxica 
+* Em ```fontesMGOL``` temos os programas exemplares em MGOL
+* O srcript principal é ```main.py```
+* Para lidar com impressões específicas dos erros na tela temos ```erro```
 
 ## Execução
 Para execução do help
