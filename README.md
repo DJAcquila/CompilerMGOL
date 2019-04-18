@@ -30,6 +30,8 @@ O projeto está divido da seguinte forma:
 ```
 * Em ```bash lexico``` temos os scripts da análise léxica 
 * Em ```bash fontesMGOL``` temos os programas exemplares em MGOL
+* O srcript principal é ```bash main.py```
+* Para lidar com impressões específicas dos erros na tela temos ```bash erro```
 
 ## Execução
 Para execução do help
