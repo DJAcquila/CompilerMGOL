@@ -25,12 +25,12 @@ O projeto está dividido da seguinte forma:
 │   ├── fonte.alg
 │   ├── texto.alg
 ├── main.py
-├── LISCENCE
+├── LICENCE
 └── README.md
 ```
 * Em ```lexico``` temos os scripts da análise léxica 
 * Em ```fontesMGOL``` temos os exemplares em MGOL
-* O srcript principal é ```main.py```
+* O script principal é ```main.py```
 * Para lidar com impressões específicas de erros utiliza-se ```erro```
 
 ## Execução
