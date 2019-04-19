@@ -20,7 +20,7 @@ O projeto está dividido da seguinte forma:
 ├── lexico
 │   ├── analisadorlexico.py
 │   ├── DFA-lex.py
-│   └── util
+│   └── util.py
 ├── fontesMGOL
 │   ├── fonte.alg
 │   ├── texto.alg
