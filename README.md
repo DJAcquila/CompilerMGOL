@@ -1,6 +1,6 @@
 # CompilerMGOL
 
-Compilador desenvolvido em python para tradução de um código em uma linguagem fictícia (MGOL), para C
+Compilador desenvolvido em python para tradução de MGOL para C
 
 ## Requisitos
 Para execução do compilador você precisará apenas de python3
@@ -12,7 +12,7 @@ $ pip3 --version
 ```
 
 ## Divisão dos Arquivos
-O projeto está divido da seguinte forma:
+O projeto está dividido da seguinte forma:
 ```bash
 .
 ├── erro
