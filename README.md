@@ -6,7 +6,7 @@ Compilador desenvolvido em python para tradução de MGOL para C
 Para execução do compilador você precisará apenas de python3
 ```bash
 $ sudo apt update
-$ sudo apt isntall python3.6
+$ sudo apt install python3.6
 $ sudo apt install python3.6-pip
 $ pip3 --version
 ```
