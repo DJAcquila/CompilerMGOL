@@ -11,6 +11,13 @@ leia B;
 escreva "Digite A:" ;
 leia A;
 ^
+{
+	aaa ."ola#####"}{
+}.#
+"
+".
+a.3.5.[{ *.3"} 
+
 se(B>2)
 entao
 se(B<=4)

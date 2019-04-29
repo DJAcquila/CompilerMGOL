@@ -23,7 +23,7 @@ class DFA():
 			self.acceptStates[state] = True
 			self.statesToken[state] = token
 
-		def lexico(self):
+		def accept(self):
 			global linha 
 			global coluna
 			global erro
@@ -59,21 +59,17 @@ class DFA():
 					teste1 = {'lexema':acumulated,'token':acumulated,'tipo':''}
 					teste2 = {'lexema':acumulated,'token':token,'tipo':''}
 					if teste1 in tabela_simbolos:
-						#impressao_bonita('reservada', acumulated, acumulated)
-						return self.acceptStates[state], acumulated, acumulated, ''
+						impressao_bonita('reservada', acumulated, acumulated)
 					elif teste2 in tabela_simbolos:
-						#impressao_bonita('repetida', acumulated, token)
-						return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
+						impressao_bonita('repetida', acumulated, token)
 					else:
 						preencher_tabela = {'lexema':acumulated,'token':token,'tipo':''}
 						tabela_simbolos.append(preencher_tabela)
-						#impressao_bonita('corpo', acumulated, token)
-						return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
+						impressao_bonita('corpo', acumulated, token)
 				elif token_def(token) is not None and token_def(token) is not ' ':
-					#impressao_bonita('corpo', acumulated, token)
-					return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
+					impressao_bonita('corpo', acumulated, token)
 
-				#return self.acceptStates[state], token_def(self.statesToken[state])
+				return self.acceptStates[state], token_def(self.statesToken[state])
 
 			except KeyError:
 				#first, st = input_line.split(input_line[input_line.find(stop)], 1)
@@ -81,40 +77,30 @@ class DFA():
 				#print ("\tSplit: {}".format(st))
 				if state != 0:
 					if token is 'id':
-						
-						teste1 = {'lexema':acumulated,'token':acumulated,'tipo':''}
-						teste2 = {'lexema':acumulated,'token':token,'tipo':''}
-						if teste1 in tabela_simbolos:
-							#impressao_bonita('reservada', acumulated, acumulated)
-							ponteiro-=1
-							coluna-=1
-							return False, acumulated, acumulated, ''
-						elif teste2 in tabela_simbolos:
-							#impressao_bonita('repetida', acumulated, token)
-							ponteiro-=1
-							coluna-=1
-							return False, acumulated, token_def(self.statesToken[state]), ''
-						else:
-							preencher_tabela = {'lexema':acumulated,'token':token,'tipo':''}
-							tabela_simbolos.append(preencher_tabela)
-							#impressao_bonita('corpo', acumulated, token)
-							ponteiro-=1
-							coluna-=1
-							return False, acumulated, token_def(self.statesToken[state]), ''
+						if token is 'id':
+							teste1 = {'lexema':acumulated,'token':acumulated,'tipo':''}
+							teste2 = {'lexema':acumulated,'token':token,'tipo':''}
+							if teste1 in tabela_simbolos:
+								impressao_bonita('reservada', acumulated, acumulated)
+							elif teste2 in tabela_simbolos:
+								impressao_bonita('repetida', acumulated, token)
+							else:
+								preencher_tabela = {'lexema':acumulated,'token':token,'tipo':''}
+								tabela_simbolos.append(preencher_tabela)
+								impressao_bonita('corpo', acumulated, token)
 					elif token_def(token) is not None and token_def(token) is not ' ':
-						#impressao_bonita('corpo', acumulated, token)
-						ponteiro-=1
-						coluna-=1
-						return False, acumulated, token_def(self.statesToken[state]), ''
+						impressao_bonita('corpo', acumulated, token)
+					ponteiro-=1
+					coluna-=1
 				elif state == 0:
 					acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 					erro+=1
-					return 'erro', None, None, None
 				#st = str(ponteiro)
 				#print(st)
+				return False, token_def(self.statesToken[state])
 
 
 # Construção do automato para o analisador léxico
@@ -219,28 +205,38 @@ class LEX_DFA():
 def analisador_lexico(_arquivo, lines, eof):
 
 	lex = LEX_DFA(_arquivo, lines, eof)
+	#contents = _input.read()
+	#contents = contents.replace('\n', ' ')
 	
-	try:
-		accept = lex.dfa.lexico()
-		print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
-		while(accept[0] is not True):
-			if (ponteiro < eof):
-				#p = int(tok)
-				accept = lex.dfa.lexico()
-				print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
-
-			else:
-				break
-	except TypeError:
-		pass
-
+	impressao_bonita('linha')
+	impressao_bonita('titulo')
+	impressao_bonita('linha')
+	#contents = input("Input a string ")
+	#print ("\nEntrada: " +  _input)
+	accept = lex.dfa.accept()
+	print(accept[1])
+	#p = int(tok)
+	while(accept[0] == False):
+		if (ponteiro < eof):
+			#p = int(tok)
+			accept = lex.dfa.accept()
+			print(accept[1])
+		else:
+			break
+	impressao_bonita('corpo','','eof')
+	impressao_bonita('linha')
 	if (erro>0):
 		err = Error(erro, vetor_erros)
 		err.printLexErro()
 
 	print(bcolors.BOLD +"|%-10s  %-10s %-10s TABELA DE SIMBOLOS %-10s  %-10s   %-10s |" % (' ', ' ', ' ', ' ',' ', ' ') + bcolors.END )
+	impressao_bonita('linha')
+	impressao_bonita('titulo')
+	impressao_bonita('linha')
 	for tab in tabela_simbolos:
 		if tab['lexema'] is tab['token']:
 			impressao_bonita('reservada', tab['lexema'], tab['token'])
 		else:
 			impressao_bonita('repetida', tab['lexema'], tab['token'])
+	impressao_bonita('linha')
+	#preset_print(accept, tok)

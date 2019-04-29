@@ -25,7 +25,7 @@ O projeto está dividido da seguinte forma:
 │   ├── fonte.alg
 │   ├── texto.alg
 ├── main.py
-├── LICENCE
+├── LICENSE
 └── README.md
 ```
 * Em ```lexico``` temos os scripts da análise léxica 
