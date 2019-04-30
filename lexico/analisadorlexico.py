@@ -271,17 +271,12 @@ def analisador_lexico(_arquivo, lines, eof):
 		accept = lex.dfa.lexico()
 		if accept[0] != 'erro':
 			print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
-		else:
-			accept[0] = False
-			print('oi')
 		while(accept[0] is not True):
 			if (ponteiro < eof):
 				#p = int(tok)
 				accept = lex.dfa.lexico()
 				if accept[0] != 'erro':
 					print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
-				else:
-					accept[0]=False
 			else:
 				break
 	except TypeError:
