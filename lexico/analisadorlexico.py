@@ -36,6 +36,8 @@ class DFA():
 			lexema_aceito = ''
 			ponteiro_aceito = ponteiro
 			acumulated = ''
+			aspas = 0
+			colchetes = 0
 			try:
 				while (ponteiro < self.eof):
 					
@@ -44,17 +46,20 @@ class DFA():
 					#print ("Caracter lido: " + c)
 					ponteiro+=1
 					coluna+=1
+					if state == 0 and c == '"':
+						aspas = 1
+					if state == 0 and c == '{':
+						aspas = 1	
 					state = self.transitions[state][c]
-					
 					token = self.statesToken[state]
 					ponteiro_aceito = ponteiro
 					if state != 0:
 						acumulated += c
 					if c == '\n':
 						linha += 1
-						coluna = 0
-													
-
+						coluna = 0		
+				acumulated = acumulated.replace('\n','\\n')
+				acumulated = acumulated.replace('\t','\\t')			
 				if token is 'id':
 					teste1 = {'lexema':acumulated,'token':acumulated,'tipo':''}
 					teste2 = {'lexema':acumulated,'token':token,'tipo':''}
@@ -72,6 +77,23 @@ class DFA():
 				elif token_def(token) is not None and token_def(token) is not ' ':
 					#impressao_bonita('corpo', acumulated, token)
 					return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
+				else:
+					if aspas == 1:
+						acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
+						vetor_erros.append(dicionario_erro)
+						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
+						erro+=1
+						return 'erro', None, None, None
+					elif colchetes == 1:
+						acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
+						vetor_erros.append(dicionario_erro)
+						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
+						erro+=1
+						return 'erro', None, None, None
+
+
 
 				#return self.acceptStates[state], token_def(self.statesToken[state])
 
@@ -79,6 +101,8 @@ class DFA():
 				#first, st = input_line.split(input_line[input_line.find(stop)], 1)
 				#print("Cont: {}".format(cont))
 				#print ("\tSplit: {}".format(st))
+				acumulated = acumulated.replace('\n','\\n')
+				acumulated = acumulated.replace('\t','\\t')
 				if state != 0:
 					if token is 'id':
 						
@@ -106,6 +130,28 @@ class DFA():
 						ponteiro-=1
 						coluna-=1
 						return False, acumulated, token_def(self.statesToken[state]), ''
+					else:
+						if aspas == 1:
+							acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+							dicionario_erro = {'acumulated': acumulated_string, 'token': token}
+							vetor_erros.append(dicionario_erro)
+							#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
+							erro+=1
+							return 'erro', None, None, None
+						elif parenteses == 1:
+							acumulated_string = acumulated+':Nao fechou parenteses'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+							dicionario_erro = {'acumulated': acumulated_string, 'token': token}
+							vetor_erros.append(dicionario_erro)
+							#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
+							erro+=1
+							return 'erro', None, None, None
+						elif colchetes == 1:
+							acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+							dicionario_erro = {'acumulated': acumulated_string, 'token': token}
+							vetor_erros.append(dicionario_erro)
+							#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
+							erro+=1
+							return 'erro', None, None, None
 				elif state == 0:
 					acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
@@ -115,6 +161,7 @@ class DFA():
 					return 'erro', None, None, None
 				#st = str(ponteiro)
 				#print(st)
+				return 'erro', None, None, None
 
 
 # Construção do automato para o analisador léxico
@@ -222,13 +269,19 @@ def analisador_lexico(_arquivo, lines, eof):
 	
 	try:
 		accept = lex.dfa.lexico()
-		print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
+		if accept[0] != 'erro':
+			print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
+		else:
+			accept[0] = False
+			print('oi')
 		while(accept[0] is not True):
 			if (ponteiro < eof):
 				#p = int(tok)
 				accept = lex.dfa.lexico()
-				print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
-
+				if accept[0] != 'erro':
+					print('\nlexema: {}\ntoken: {}\ntipo: {}\n'.format(accept[1],accept[2],accept[3]))
+				else:
+					accept[0]=False
 			else:
 				break
 	except TypeError:
