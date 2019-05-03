@@ -273,9 +273,6 @@ def parse(file, verbose = False):
 	if (erro>0):
 		err = Error(erro, vetor_erros)
 		err.printLexErro()
-	else:
-		print("Análise léxica realizada sem erros")
-
 	#Só mostra a tabela de simbolos no modo verboso
 	if verbose:
 		tabela_simbolos.print_table()
