@@ -10,35 +10,12 @@ $ sudo apt install python3.6
 $ sudo apt install python3.6-pip
 $ pip3 --version
 ```
-
-## Divisão dos Arquivos
-O projeto está dividido da seguinte forma:
-```bash
-.
-├── erro
-│   ├── errno.py
-├── lexico
-│   ├── analisadorlexico.py
-│   ├── DFA-lex.py
-│   └── util.py
-├── fontesMGOL
-│   ├── fonte.alg
-│   ├── texto.alg
-├── main.py
-├── LICENSE
-└── README.md
-```
-* Em ```lexico``` temos os scripts da análise léxica 
-* Em ```fontesMGOL``` temos os exemplares em MGOL
-* O script principal é ```main.py```
-* Para lidar com impressões específicas de erros utiliza-se ```erro```
-
 ## Execução
 Para execução do help
 ```bash
 $ python3 main.py -h
 
-usage: main.py [-h] [-l] filename
+usage: main.py [-h] [-l] [-v] filename
 
 Compilador da linguagem MGOL - Por enquanto, apenas o analisador léxico
 
@@ -46,8 +23,9 @@ positional arguments:
   filename
 
 optional arguments:
-  -h, --help    show this help message and exit
-  -l, --lexico  Realiza somente a analise léxica
+  -h, --help     show this help message and exit
+  -l, --lexico   Realiza somente a analise léxica
+  -v, --verbose  Ativa o modo verboso do compilador
 ```
 Para executar a análise léxica
 
