@@ -1,12 +1,14 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 import string
 from common.utility.util import *
 from common.erro.errno import Error
 from common.symbtable.table import SymbTable
 from common.file.fileHandler import FileHandler
+
 # Criar classe para lidar com os erros léxicos. Essa classe deve estender Erros
 class LexError(Error):
-    pass
+	pass
 
 # Classe que define o dfa
 class DFA():
@@ -64,11 +66,11 @@ class DFA():
 					acumulated += c
 				if c == '\n':
 					self.file.inc_lin()
-					#linha += 1
 					self.file.set_col(0)
 
 			acumulated = acumulated.replace('\n','\\n')
-			acumulated = acumulated.replace('\t','\\t')			
+			acumulated = acumulated.replace('\t','\\t')	
+
 			if token is 'id':
 
 				if tab.palavra_reservada(acumulated):
@@ -86,21 +88,17 @@ class DFA():
 
 			else:
 				if aspas == 1:
-					acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+					acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
 					return 'erro', None, None, None
 				elif colchetes == 1:
-					acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+					acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
 					return 'erro', None, None, None
-
-
-
-			#return self.acceptStates[state], token_def(self.statesToken[state])
 
 		except KeyError:
 			
@@ -128,21 +126,21 @@ class DFA():
 
 				else:
 					if aspas == 1:
-						acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+						acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 						vetor_erros.append(dicionario_erro)
 						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
 						return 'erro', None, None, None
 					elif colchetes == 1:
-						acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+						acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 						vetor_erros.append(dicionario_erro)
 						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
 						return 'erro', None, None, None
 			elif state == 0:
-				acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(coluna)
+				acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 				dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 				vetor_erros.append(dicionario_erro)
 				#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
@@ -252,20 +250,20 @@ class LEX_DFA():
 		self.dfa.set_DFA(19, '_', 19)
 		self.dfa.set_acceptState(19, T.id)
 
-def parse(file):
+def parse(file, verbose = False):
 
 	lex = LEX_DFA(file)
-	tabela_sintatica = SymbTable()
+	tabela_simbolos = SymbTable()
 	
 	try:
-		accept = lex.dfa.lexico(tabela_sintatica)
-		if accept[0] != 'erro':
+		accept = lex.dfa.lexico(tabela_simbolos)
+		if accept[0] != 'erro' and verbose:
 			print('\nLexema: {}\nToken: {}\nTipo: {}\n'.format(accept[1],accept[2],accept[3]))
 		while(accept[0] is not True):
 			if (file.ponteiro < file.eof):
 				#p = int(tok)
-				accept = lex.dfa.lexico(tabela_sintatica)
-				if accept[0] != 'erro':
+				accept = lex.dfa.lexico(tabela_simbolos)
+				if accept[0] != 'erro' and verbose:
 					print('\nLexema: {}\nToken: {}\nTipo: {}\n'.format(accept[1],accept[2],accept[3]))
 			else:
 				break
@@ -276,4 +274,7 @@ def parse(file):
 		err = Error(erro, vetor_erros)
 		err.printLexErro()
 
-	tabela_sintatica.print_table()
+	#Só mostra a tabela de simbolos no modo verboso
+	if verbose:
+		tabela_simbolos.print_table()
+

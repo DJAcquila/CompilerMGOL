@@ -1,39 +1,11 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-#Tabela de simbolos
-'''tabela_simbolos = []
-preencher_tabela = {'lexema':'inicio','token':'inicio','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'varinicio','token':'varinicio','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'varfim','token':'varfim','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'escreva','token':'escreva','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'leia','token':'leia','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'se','token':'se','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'entao','token':'entao','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'fimse','token':'fimse','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'fim','token':'fim','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'inteiro','token':'inteiro','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'lit','token':'lit','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-preencher_tabela = {'lexema':'real','token':'real','tipo':''}
-tabela_simbolos.append(preencher_tabela)
-'''
 # Variaveis globais 
 
-coluna = 0
-linha = 1
+
 erro = 0
 vetor_erros = []
-ponteiro = 0
 
 # Tokens
 TOKEN = lambda x:x

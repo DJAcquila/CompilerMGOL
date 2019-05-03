@@ -1,8 +1,10 @@
+#!/usr/bin/python3
+
 class bcolors:
-    BOLD = '\033[1m'
-    GREEN = '\033[92m'
-    RED = '\033[91m'
-    END = '\033[0m'
+	BOLD = '\033[1m'
+	GREEN = '\033[92m'
+	RED = '\033[91m'
+	END = '\033[0m'
 
 
 class Error():

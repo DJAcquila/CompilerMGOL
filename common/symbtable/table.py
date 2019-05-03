@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 from common.utility.util import *
 
 class SymbTable():

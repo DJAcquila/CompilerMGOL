@@ -7,7 +7,7 @@ inicio
 
    escreva "Digite um nome:";
    leia A;
-@
+
    escreva "Digite um numero:";
    leia B;
   
@@ -15,7 +15,7 @@ inicio
    B <- 3;
    c <- B+1;
    c <- c+1;
-    
+ @
    se (B<1)
    entao
      se (c <2)
@@ -24,6 +24,6 @@ inicio
      fimse
    fimse
 
-   escreva """"programa finalizado";   
+   escreva ""programa finalizado";   
 
 fim

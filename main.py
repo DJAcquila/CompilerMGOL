@@ -1,4 +1,6 @@
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
+
 from lexico.analisadorlexico import parse
 from common.utility.util import bcolors
 from common.file.fileHandler import FileHandler
@@ -9,6 +11,7 @@ if __name__ == "__main__":
 	
 	parser = argparse.ArgumentParser(description="Compilador da linguagem MGOL - Por enquanto, apenas o analisador léxico")
 	parser.add_argument('-l', '--lexico', help='Realiza somente a analise léxica', action="store_true")
+	parser.add_argument('-v', '--verbose', help='Ativa o modo verboso do compilador', action="store_true")
 	parser.add_argument('filename')
 	args = parser.parse_args()
 	if args.filename.find('.alg') < 0:
@@ -24,7 +27,9 @@ if __name__ == "__main__":
 	eof = _arquivo.tell()'''
 
 	if args.lexico:
-		parse(file)
+		if args.verbose:
+			print ("Modo verboso ativado")
+		parse(file, args.verbose)
 	else:
 		print("Ainda não foram desenvolvidas todas as etapas de compilação\nInsira a diretiva '-l' para execução do analisador léxico")
 	
