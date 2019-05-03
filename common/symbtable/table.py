@@ -59,3 +59,4 @@ class SymbTable():
                 impressao_bonita('reservada', line['lexema'], line['token'])
             else:
                 impressao_bonita('repetida', line['lexema'], line['token'])
+        impressao_bonita('linha')
