@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from lexico.analisadorlexico import analisador_lexico
-from lexico.util import bcolors
+from lexico.analisadorlexico import parse
+from common.utility.util import bcolors
+from common.file.fileHandler import FileHandler
 import argparse
 
 
@@ -12,16 +13,18 @@ if __name__ == "__main__":
 	args = parser.parse_args()
 	if args.filename.find('.alg') < 0:
 		print("\n" + bcolors.RED + bcolors.BOLD+ "Erro" + bcolors.END + " ao abrir '{}'".format(args.filename))
-		print("O arquivo não está na extensão correta para MGOL\n".format(args.filename))
+		print("O arquivo {} não está na extensão correta para MGOL\n".format(args.filename))
 		exit(0)
 
-	_arquivo = open(args.filename, 'r')
+	file = FileHandler(args.filename)
+
+	'''_arquivo = open(args.filename, 'r')
 		
 	lines = _arquivo.readlines()
-	eof = _arquivo.tell()
+	eof = _arquivo.tell()'''
 
 	if args.lexico:
-		analisador_lexico(_arquivo, lines, eof)
+		parse(file)
 	else:
 		print("Ainda não foram desenvolvidas todas as etapas de compilação\nInsira a diretiva '-l' para execução do analisador léxico")
 	

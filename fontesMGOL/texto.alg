@@ -10,7 +10,7 @@ inicio
 @
    escreva "Digite um numero:";
    leia B;
-{
+  
    B <- 2;
    B <- 3;
    c <- B+1;
@@ -20,10 +20,10 @@ inicio
    entao
      se (c <2)
      entao
-       escreva "texto;
+       escreva "texto";
      fimse
    fimse
 
-   escreva "programa finalizado";   
+   escreva """"programa finalizado";   
 
 fim

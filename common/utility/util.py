@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #Tabela de simbolos
-tabela_simbolos = []
+'''tabela_simbolos = []
 preencher_tabela = {'lexema':'inicio','token':'inicio','tipo':''}
 tabela_simbolos.append(preencher_tabela)
 preencher_tabela = {'lexema':'varinicio','token':'varinicio','tipo':''}
@@ -26,7 +26,7 @@ preencher_tabela = {'lexema':'lit','token':'lit','tipo':''}
 tabela_simbolos.append(preencher_tabela)
 preencher_tabela = {'lexema':'real','token':'real','tipo':''}
 tabela_simbolos.append(preencher_tabela)
-
+'''
 # Variaveis globais 
 
 coluna = 0
@@ -112,4 +112,4 @@ def impressao_bonita(id, acumulated = 0, token = ''):
 			acumulated = acumulated.replace('\n','\\n')
 		print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' ')+bcolors.END)
 	else:
-		print("%-3s %-3s %-3s ERRO! %-5s Caracter: %-24s  %-43s" % (' ', bcolors.RED , bcolors.BOLD, bcolors.END, acumulated,' '))
+		print("%-3s %-3s ERRO! %-5s Caracter: %-24s  %-43s" % (bcolors.RED , bcolors.BOLD, bcolors.END, acumulated,' '))

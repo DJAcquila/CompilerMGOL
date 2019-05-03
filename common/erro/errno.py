@@ -18,12 +18,10 @@ class Error():
 			if id == 'linha':
 				print("+"+repeat_to_length('.', 29)+"+"+repeat_to_length('.', 29) + "+"+repeat_to_length('.', 29) + "+")
 			else:
-				print("%-3s %-3s %-3s ERRO! %-5s Caracter: %-24s  %-43s" % (' ', bcolors.RED , bcolors.BOLD, bcolors.END, acumulated,' '))
+				print("%-3s %-3s ERRO! %-5s Caracter: %-24s  %-43s\n" % (bcolors.RED , bcolors.BOLD, bcolors.END, acumulated,' '))
 
-		print(str(self.num)+ bcolors.RED + bcolors.BOLD + " erro(s)" + bcolors.END + " encontrado(s) na análise léxica!")
-		impressao_bonita('linha')
+		print(str(self.num)+ bcolors.RED + bcolors.BOLD + " erro(s)" + bcolors.END + " encontrado(s) na análise léxica!\n")
 		for err in self.v_erros:
 			impressao_bonita('erro', err['acumulated'], err['token'])
-		impressao_bonita('linha')
 
 	#def printSintaxErro(self):
