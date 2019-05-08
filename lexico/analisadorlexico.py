@@ -256,9 +256,8 @@ def parse(file, verbose = False):
 	tabela_simbolos = SymbTable()
 	
 	try:
-		accept = lex.dfa.lexico(tabela_simbolos)
-		if accept[0] != 'erro' and verbose:
-			print('\nLexema: {}\nToken: {}\nTipo: {}\n'.format(accept[1],accept[2],accept[3]))
+		accept = False, None, None, None
+		
 		while(accept[0] is not True):
 			if (file.ponteiro < file.eof):
 				#p = int(tok)
