@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
+
 import pandas as pd
 import string
 
@@ -28,7 +29,7 @@ class Pilha(object):
 
 def Shift_Reduce():
 	pilha = Pilha()
-	pilha.empilha(18)
+	pilha.empilha(0)
 	a = 'id' #simbolo do lexico
 	while True:
 		s = int(pilha.desempilha())
