@@ -1,40 +1,40 @@
-,Antecedente,Consequente,B_number
-0,P' , P,1
-1,P , inicio V A,3
-2,V , varinicio LV,2
-3,LV , D LV,2
-4,LV , varfim ;,2
-5,D , id TIPO ;,3
-6,TIPO , int,1
-7,TIPO , real,1
-8,TIPO , lit,1
-9,A , ES A,2
-10,ES , leia id ;,3
-11,ES , escreva ARG ;,3
-12,ARG , literal,1
-13,ARG , num,1
-14,ARG , id,1
-15,A , CMD A,2
-16,CMD , id rcb LD ;,4
-17,LD , OPRD opm OPRD,3
-18,LD , OPRD,1
-19,OPRD , id,1
-20,OPRD , num,1
-21,A , COND A,2
-22,COND , CABECALHO CORPO,2
-23,CABECALHO , se ( EXP_R ) entao,5
-24,EXP_R , OPRD opr OPRD,3
-25,CORPO , ES CORPO,2
-26,CORPO , CMD CORPO,2
-27,CORPO , COND CORPO,2
-28,CORPO , fimse,1
-29,A , fim,1
-30,CORPO , REP CORPO,2
-31,A , REP A,2
-32,REP , W CORPO2,2
-33,W , enquanto ( EXP_R ) faca,5
-34,CORPO2 , ES CORPO2,2
-35,CORPO2 , CMD CORPO2,2
-36,CORPO2 , COND CORPO2,2
-37,CORPO2 , REP CORPO2,2
-38,CORPO2 , fimenquanto,1
+,Antecedente,Consequente,B_number,
+0,P', P,1,
+1,P, inicio V A,3,
+2,V, varinicio LV,2,
+3,LV, D LV,2,
+4,LV, varfim ,2,
+5,D, id TIPO ,3,
+6,TIPO, int,1,
+7,TIPO, real,1,
+8,TIPO, lit,1,
+9,A, ES A,2,
+10,ES, leia id,3,
+11,ES, escreva ARG,3,
+12,ARG, literal,1,
+13,ARG, num,1,
+14,ARG, id,1,
+15,A, CMD A,2,
+16,CMD, id rcb LD,4,
+17,LD, OPRD opm OPRD,3,
+18,LD, OPRD,1,
+19,OPRD, id,1,
+20,OPRD, num,1,
+21,A, COND A,2,
+22,COND, CABECALHO CORPO,2,
+23,CABECALHO, se ( EXP_R ) entao,5,
+24,EXP_R, OPRD opr OPRD,3,
+25,CORPO, ES CORPO,2,
+26,CORPO, CMD CORPO,2,
+27,CORPO, COND CORPO,2,
+28,CORPO, fimse,1,
+29,A, fim,1,
+30,CORPO, REP CORPO,2,
+31,A, REP A,2,
+32,REP, W CORPO2,2,
+33,W, enquanto ( EXP_R ) faca,5,
+34,CORPO2, ES CORPO2,2,
+35,CORPO2, CMD CORPO2,2,
+36,CORPO2, COND CORPO2,2,
+37,CORPO2, REP CORPO2,2,
+38,CORPO2, fimenquanto,1,
