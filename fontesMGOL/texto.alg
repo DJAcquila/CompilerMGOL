@@ -7,7 +7,7 @@ inicio
 
    escreva "Digite um nome:";
    leia A;
-
+{
    escreva "Digite um numero:";
    leia B;
 
