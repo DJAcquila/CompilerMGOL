@@ -80,7 +80,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras):
 						#print('ponteiro:{}\neof:{}'.format(file.ponteiro,file.eof))
 						if accept[0] != 'erro':
 							a = accept[2]
-							print(accept[1]+accept[2])
+							print("{} {}".format(accept[1],accept[2]))
 						else:
 							print('erro lexico: {}'.format(accept[1]))
 					else:
