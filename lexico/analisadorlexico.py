@@ -74,16 +74,20 @@ class DFA():
 			if token is 'id':
 
 				if tab.palavra_reservada(acumulated):
+					self.retreat()
 					return self.acceptStates[state], acumulated, acumulated, ''
 
 				elif tab.palavra_nao_reservada(acumulated, token):
+					self.retreat()
 					return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 				else:
 					tab.append_table(acumulated, token)
+					self.retreat()
 					return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 			elif token_def(token) is not None and token_def(token) is not ' ':
+				self.retreat()
 				return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 			else:
@@ -92,13 +96,13 @@ class DFA():
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
-					return 'erro', None, None, None
+					return 'erro', acumulated_string, None, None
 				elif colchetes == 1:
 					acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
-					return 'erro', None, None, None
+					return 'erro', acumulated_string, None, None
 
 		except KeyError:
 			
@@ -106,7 +110,6 @@ class DFA():
 			acumulated = acumulated.replace('\t','\\t')
 			if state != 0:
 				if token is 'id':
-					
 					if tab.palavra_reservada(acumulated):
 						self.retreat()
 						return False, acumulated, acumulated, ''
@@ -131,21 +134,21 @@ class DFA():
 						vetor_erros.append(dicionario_erro)
 						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
-						return 'erro', None, None, None
+						return 'erro', acumulated_string, None, None
 					elif colchetes == 1:
 						acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 						vetor_erros.append(dicionario_erro)
 						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
-						return 'erro', None, None, None
+						return 'erro', acumulated_string, None, None
 			elif state == 0:
 				acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 				dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 				vetor_erros.append(dicionario_erro)
 				#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 				erro+=1
-				return 'erro', None, None, None
+				return 'erro', acumulated_string, None, None
 			#st = str(ponteiro)
 			#print(st)
 			return 'erro', None, None, None

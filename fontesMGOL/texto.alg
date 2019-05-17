@@ -7,10 +7,9 @@ inicio
 
    escreva "Digite um nome:";
    leia A;
-
    escreva "Digite um numero:";
    leia B;
-   
+
    B <- 2;
    B <- 3;
    c <- B+1;
