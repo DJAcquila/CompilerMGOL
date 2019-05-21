@@ -3,7 +3,7 @@
 1,P, inicio V A,3,
 2,V, varinicio LV,2,
 3,LV, D LV,2,
-4,LV, varfim ,2,
+4,LV, varfim ;,2,
 5,D, id TIPO ;,3,
 6,TIPO, int,1,
 7,TIPO, real,1,
