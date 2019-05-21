@@ -1,11 +1,11 @@
 ,inicio,varinicio,varfim,pt_v,id,inteiro,real,lit,leia,escreva,literal,num,rcb,opm,se,ab_p,fc_p,entao,opr,fimse,fim,enquanto,faca,fimenquanto,$
 0,s2,sem inicio, , , , , , , , , , , , , , , , , , , , , , , 
-1,token não esperado no escopo de declaração de inicio, , , , , , , , , , , , , , , , , , , , , , , ,acc
-2,token não esperado no escopo de declaração de inicio,s4,não teve varinicio,não há escopo de declaração de var,não há escopo de declaração de var,não há escopo de declaração de var,não há escopo de declaração de var,não há escopo de declaração de var,, , , , , , , , , , , , , , , , 
-3,token não esperado no escopo de declaração de inicio,não teve varinicio, , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
-4,token não esperado no escopo de declaração de inicio,dois varinicio’s,s20,; não esperado após token,s21,tipo não relacionado a nenhuma var,tipo não relacionado a nenhuma var,tipo não relacionado a nenhuma var,token não esperado no escopo de declaração de var, , , , , , , , , , , , , , , ,fim inesperado
-5, , , , , , , , , , , , , , , , , , , , , , , , ,r1
-6, , , , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
+1,dupla declaração de inicio, , , , , , , , , , , , , , , , , , , , , , , ,acc
+2,dupla declaração de inicio,s4,não teve varinicio,não há escopo de declaração de var,não há escopo de declaração de var,não há escopo de declaração de var,não há escopo de declaração de var,não há escopo de declaração de var,, , , , , , , , , , , , , , , , 
+3,dupla declaração de inicio,não teve token, , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
+4,dupla declaração de inicio,dois varinicio’s,s20,; não esperado após token,s21,tipo não relacionado a nenhuma var,tipo não relacionado a nenhuma var,tipo não relacionado a nenhuma var,token não esperado no escopo de declaração de var, , , , , , , , , , , , , , , ,fim inesperado
+5,pulando, , , , , , , , , , , , , , , , , , , , , , , ,r1
+6, ,Início de sentença inválido, , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
 7, , , , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
 8, , , , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
 9, , , , , , , , , , , , , , , , , , , , , , , , ,r29
@@ -19,8 +19,8 @@
 17, , , , , , , , , , , , , , , ,s45, , , , , , , , , 
 18, , , , ,r2, , , ,r2,r2, , , , ,r2, , , , , ,r2,r2, , , 
 19, , ,s20, ,s21, , , , , , , , , , , , , , , , , , , , 
-20,token não esperado no escopo de declaração de inicio,; esperado após varfim, ,s47, , , , , , , , , , , , , , , , , , , , , 
-21, , , , , ,s49,s50,s51, , , , , , , , , , , , , , , , , 
+20,dupla declaração de inicio,; esperado após varfim, ,s47, , , , , , , , , , , , , , , , , , , , , 
+21,dupla declaração de inicio,é esperado um tipo para a definição da var, , , ,s49,s50,s51, , , , , , , , , , , , , , , , , 
 22, , , , , , , , , , , , , , , , , , , , , , , , ,r9
 23, , , , , , , , , , , , , , , , , , , , , , , , ,r15
 24, , , , , , , , , , , , , , , , , , , , , , , , ,r21
@@ -46,11 +46,11 @@
 44, , , , ,s56, , , , , , ,s57, , , , , , , , , , , , , 
 45, , , , ,s56, , , , , , ,s57, , , , , , , , , , , , , 
 46, , , , ,r3, , , ,r3,r3, , , , ,r3, , , , , ,r3,r3, , , 
-47, , , , ,r4, , , ,r4,r4, , , , ,r4, , , , , ,r4,r4, , , 
+47,dupla declaração de inicio,Início de sentença inválido, , ,r4, , , ,r4,r4, , , , ,r4, , , , , ,r4,r4, , , 
 48, , , ,s69, , , , , , , , , , , , , , , , , , , , , 
-49, , , ,r6, , , , , , , , , , , , , , , , , , , , , 
-50, , , ,r7, , , , , , , , , , , , , , , , , , , , , 
-51, , , ,r8, , , , , , , , , , , , , , , , , , , , , 
+49, ,; esperado após definição de tipo, ,r6, , , , , , , , , , , , , , , , , , , , , 
+50, ,; esperado após definição de tipo, ,r7, , , , , , , , , , , , , , , , , , , , , 
+51, ,; esperado após definição de tipo, ,r8, , , , , , , , , , , , , , , , , , , , , 
 52, , , , ,r10, , , ,r10,r10, , , , ,r10, , , , ,r10,r10,r10, ,r10, 
 53, , , , ,r11, , , ,r11,r11, , , , ,r11, , , , ,r11,r11,r11, ,r11, 
 54, , , ,s70, , , , , , , , , , , , , , , , , , , , , 

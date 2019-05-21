@@ -116,5 +116,6 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras):
 			break
 		else:
 			print('erro')
+			print(pilha.dados)
 			tabela_simbolos.print_table()
 			break

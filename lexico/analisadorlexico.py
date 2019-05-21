@@ -71,19 +71,17 @@ class DFA():
 			acumulated = acumulated.replace('\n','\\n')
 			acumulated = acumulated.replace('\t','\\t')	
 
+
 			if token is 'id':
 
 				if tab.palavra_reservada(acumulated):
-					self.retreat()
 					return self.acceptStates[state], acumulated, acumulated, ''
 
 				elif tab.palavra_nao_reservada(acumulated, token):
-					self.retreat()
 					return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 				else:
 					tab.append_table(acumulated, token)
-					self.retreat()
 					return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 			elif token_def(token) is not None and token_def(token) is not ' ':
