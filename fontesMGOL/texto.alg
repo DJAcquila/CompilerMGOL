@@ -1,8 +1,6 @@
 inicio
    varinicio
-      A lit;
-      B inteiro;
-      c inteiro;
+      
    varfim;
 
    escreva "Digite um nome:";

@@ -82,7 +82,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras):
 							a = accept[2]
 							print("{} {}".format(accept[1],accept[2]))
 						else:
-							print('erro lexico: {}'.format(accept[1]))
+							print('Erro lexico: {}'.format(accept[1]))
 					else:
 						a = '$'
 
