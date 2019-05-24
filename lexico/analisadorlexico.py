@@ -85,7 +85,6 @@ class DFA():
 					return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 			elif token_def(token) is not None and token_def(token) is not ' ':
-				self.retreat()
 				return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 			else:
