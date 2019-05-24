@@ -51,7 +51,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros):
 					coluna_s = coluna_s0
 					a = accept[2]
 					linha_s0 = file.linha
-					coluna_s0 = file.coluna
+					coluna_s0 = file.coluna - len(accept[1])
 					#print(a)
 				else:
 					print('erro lexico: {}'.format(accept[1]))
@@ -89,7 +89,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros):
 							coluna_s = coluna_s0
 							a = accept[2]
 							linha_s0 = file.linha
-							coluna_s0 = file.coluna
+							coluna_s0 = file.coluna - len(accept[1])
 							#print("{} {}".format(accept[1],accept[2]))
 						else:
 							print('Erro lexico: {}'.format(accept[1]))
@@ -126,11 +126,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros):
 			break
 		else:
 			print('erro')
-			print(pilha.dados)
+			#print(pilha.dados)
 			erro_num = tabela_acoes.loc[s][a]
 			erro_num = erro_num.split('e')
 			erro_num = int(erro_num[1])
-			print(erro_num)
-			print('Erro sintático: {} linha: {} coluna: {}' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s, coluna_s))
+			#print(erro_num)
+			print('Erro sintático: {} linha: {} coluna: {}' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
 			tabela_simbolos.print_table()
 			break
