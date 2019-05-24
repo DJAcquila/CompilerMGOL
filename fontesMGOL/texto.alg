@@ -1,4 +1,5 @@
 inicio
+   inicio
    varinicio 
 
    varfim;

@@ -1,11 +1,11 @@
 ,inicio,varinicio,varfim,pt_v,id,inteiro,real,lit,leia,escreva,literal,num,rcb,opm,se,ab_p,fc_p,entao,opr,fimse,fim,enquanto,faca,fimenquanto,$
-0,s2, , , , , , , , , , , , , , , , , , , , , , , , 
-1,, , , , , , , , , , , , , , , , , , , , , , , ,acc
-2,,s4, , , , , , , , , , , , , , , , , , , , , , , 
-3, , , , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
-4, , ,s20, ,s21, , , , , , , , , , , , , , , , , , , , 
-5, , , , , , , , , , , , , , , , , , , , , , , , ,r1
-6, , , , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
+0,s2,var inicio esperada, , , , , , , , , , , , , , , , , , , , , , , 
+1,inicio ja declarado, , , , , , , , , , , , , , , , , , , , , , , ,acc
+2,inicio ja declarado,s4,varinicio esperado,varinicio esperado,varinicio esperado,varinicio esperado,varinicio esperado,varinicio esperado,, , , , , , , , , , , , , , , ,fim inesperado
+3,inicio ja declarado,não teve token, , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
+4,inicio ja declarado,varinicio ja declarado,s20,; não esperado,s21,tipo não relacionado a nenhuma var,tipo não relacionado a nenhuma var,tipo não relacionado a nenhuma var,token não esperado no escopo de declaração de var, , , , , , , , , , , , , , , ,fim inesperado
+5,inicio ja declarado, , , , , , , , , , , , , , , , , , , , , , , ,r1
+6, ,Início de sentença inválido, , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
 7, , , , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
 8, , , , ,s13, , , ,s11,s12, , , , ,s16, , , , , ,s9,s17, , , 
 9, , , , , , , , , , , , , , , , , , , , , , , , ,r29
@@ -19,8 +19,8 @@
 17, , , , , , , , , , , , , , , ,s45, , , , , , , , , 
 18, , , , ,r2, , , ,r2,r2, , , , ,r2, , , , , ,r2,r2, , , 
 19, , ,s20, ,s21, , , , , , , , , , , , , , , , , , , , 
-20, , , ,s47, , , , , , , , , , , , , , , , , , , , , 
-21, , , , , ,s49,s50,s51, , , , , , , , , , , , , , , , , 
+20,inicio ja declarado,; esperado, ,s47, , , , , , , , , , , , , , , , , , , , , 
+21,inicio ja declarado,declaracao de tipo esperada, , , ,s49,s50,s51, , , , , , , , , , , , , , , , , 
 22, , , , , , , , , , , , , , , , , , , , , , , , ,r9
 23, , , , , , , , , , , , , , , , , , , , , , , , ,r15
 24, , , , , , , , , , , , , , , , , , , , , , , , ,r21
@@ -46,11 +46,11 @@
 44, , , , ,s56, , , , , , ,s57, , , , , , , , , , , , , 
 45, , , , ,s56, , , , , , ,s57, , , , , , , , , , , , , 
 46, , , , ,r3, , , ,r3,r3, , , , ,r3, , , , , ,r3,r3, , , 
-47, , , , ,r4, , , ,r4,r4, , , , ,r4, , , , , ,r4,r4, , , 
+47,inicio ja declarado,Início de sentença inválido, , ,r4, , , ,r4,r4, , , , ,r4, , , , , ,r4,r4, , , 
 48, , , ,s69, , , , , , , , , , , , , , , , , , , , , 
-49, , , ,r6, , , , , , , , , , , , , , , , , , , , , 
-50, , , ,r7, , , , , , , , , , , , , , , , , , , , , 
-51, , , ,r8, , , , , , , , , , , , , , , , , , , , , 
+49, ,; esperado, ,r6, , , , , , , , , , , , , , , , , , , , , 
+50, ,; esperado, ,r7, , , , , , , , , , , , , , , , , , , , , 
+51, ,; esperado, ,r8, , , , , , , , , , , , , , , , , , , , , 
 52, , , , ,r10, , , ,r10,r10, , , , ,r10, , , , ,r10,r10,r10, ,r10, 
 53, , , , ,r11, , , ,r11,r11, , , , ,r11, , , , ,r11,r11,r11, ,r11, 
 54, , , ,s70, , , , , , , , , , , , , , , , , , , , , 
