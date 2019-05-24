@@ -22,7 +22,7 @@ if __name__ == "__main__":
 		exit(0)
 
 	file = FileHandler(args.filename)
-	tabela_acoes = pd.read_csv("sintatico/tabela-sintatica-acoes.csv")
+	tabela_acoes = pd.read_csv("sintatico/erros2.csv")
 	#print(tabela_acoes.loc[3]['id'])
 
 	tabela_desvios = pd.read_csv("sintatico/tabela-sintatica-desvios.csv")
@@ -30,6 +30,8 @@ if __name__ == "__main__":
 
 	#gramatica, usadas no algoritmo para o reduce
 	regras = pd.read_csv("sintatico/gramatica.csv")
+
+	tabela_erros = pd.read_csv("sintatico/mensagensErros.csv")
 
 	'''_arquivo = open(args.filename, 'r')
 		
@@ -42,7 +44,7 @@ if __name__ == "__main__":
 		parse(file, args.verbose)
 
 	if args.sintatico:
-		Shift_Reduce(file, tabela_acoes, tabela_desvios, regras)
+		Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros)
 	else:
 		print("Ainda não foram desenvolvidas todas as etapas de compilação\nInsira a diretiva '-l' para execução do analisador léxico")
 	

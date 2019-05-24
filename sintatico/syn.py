@@ -26,13 +26,15 @@ class Pilha(object):
 		indice = len(self.dados) - 1
 		return self.dados[indice]
 
-def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras):
+def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros):
 
 	lex = LEX_DFA(file)
 	tabela_simbolos = SymbTable()
 	accept = []
 	accept =['erro']
 	a = '$'
+	linha_s0 = 0
+	coluna_s0 = 0
 
 	pilha = Pilha()
 	pilha.empilha(0)
@@ -45,7 +47,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras):
 				accept = lex.dfa.lexico(tabela_simbolos)
 				if accept[0] != 'erro':
 					#print('\nLexema: {}\nToken: {}\nTipo: {}\n'.format(accept[1],accept[2],accept[3]))
+					linha_s = linha_s0
+					coluna_s = coluna_s0
 					a = accept[2]
+					linha_s0 = file.linha
+					coluna_s0 = file.coluna
 					#print(a)
 				else:
 					print('erro lexico: {}'.format(accept[1]))
@@ -79,8 +85,12 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras):
 						accept = lex.dfa.lexico(tabela_simbolos)
 						#print('ponteiro:{}\neof:{}'.format(file.ponteiro,file.eof))
 						if accept[0] != 'erro':
+							linha_s = linha_s0
+							coluna_s = coluna_s0
 							a = accept[2]
-							print("{} {}".format(accept[1],accept[2]))
+							linha_s0 = file.linha
+							coluna_s0 = file.coluna
+							#print("{} {}".format(accept[1],accept[2]))
 						else:
 							print('Erro lexico: {}'.format(accept[1]))
 					else:
@@ -117,5 +127,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras):
 		else:
 			print('erro')
 			print(pilha.dados)
+			erro_num = tabela_acoes.loc[s][a]
+			erro_num = erro_num.split('e')
+			erro_num = int(erro_num[1])
+			print(erro_num)
+			print('Erro sintático: {} linha: {} coluna: {}' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s, coluna_s))
 			tabela_simbolos.print_table()
 			break
