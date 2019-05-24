@@ -1,7 +1,8 @@
 inicio
-   inicio
-   varinicio 
 
+   varinicio 
+      A lit;
    varfim;
+
 
 fim

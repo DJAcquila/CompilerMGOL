@@ -88,18 +88,20 @@ class DFA():
 				return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 			else:
-				if aspas == 1:
+				if aspas == 1 and c != '"':
 					acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
 					return 'erro', acumulated_string, None, None
-				elif colchetes == 1:
+				elif colchetes == 1 and c != '}':
 					acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
 					return 'erro', acumulated_string, None, None
+				else:
+					return 'erro', None, None, None
 
 		except KeyError:
 			
@@ -125,20 +127,24 @@ class DFA():
 					return False, acumulated, token_def(self.statesToken[state]), ''
 
 				else:
-					if aspas == 1:
+					if aspas == 1 and '"' not in acumulated:
 						acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 						vetor_erros.append(dicionario_erro)
 						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
 						return 'erro', acumulated_string, None, None
-					elif colchetes == 1:
+					elif colchetes == 1 and '}' not in acumulated:
 						acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 						vetor_erros.append(dicionario_erro)
 						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
+						print('caralho')
+						print(c)
 						return 'erro', acumulated_string, None, None
+					else:
+						return 'erro', None, None, None
 			elif state == 0:
 				acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
 				dicionario_erro = {'acumulated': acumulated_string, 'token': token}
@@ -213,7 +219,7 @@ class LEX_DFA():
 		for st in string.printable:
 			self.dfa.set_DFA(11, st, 11)
 		self.dfa.set_DFA(11,'}',12)
-		self.dfa.set_acceptState(12,T.Comentario)
+		self.dfa.set_acceptState(12,T.noToken)
 
 		#EOF (fim de arquivo)
 		self.dfa.set_DFA(0, "eof", 14)
