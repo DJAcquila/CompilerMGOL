@@ -62,7 +62,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros):
 			a = '$'
 			break
 
-	print('simbolo: {}'.format(a))
+	#print('simbolo: {}'.format(a))
 	while True:
 		#print('ponteiro: {}'.format(file.ponteiro))
 		#print("Inicio: {}".format(pilha.dados))

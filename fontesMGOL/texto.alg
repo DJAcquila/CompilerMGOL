@@ -3,6 +3,4 @@ inicio
       A lit;
    varfim;
 
-   inteiro
-
 fim
