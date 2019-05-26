@@ -1,6 +1,6 @@
 inicio
    varinicio 
-      A lit;
+      A lit	
    varfim;
-
+   varfim;
 fim

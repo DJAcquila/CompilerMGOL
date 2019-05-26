@@ -121,7 +121,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			Ant = regras.loc[red]['Antecedente']
 			#print(Ant)
 			#print(tabela_desvios.loc[t][Ant])
-			print('a= {} s={}' .format(a,s))
+			print('a= {} s={}' .format(Ant,t))
 			pilha.empilha(int(tabela_desvios.loc[t][Ant]))
 			print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
 
@@ -144,7 +144,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				print('Erro sintático: {} linha: {} coluna: {}' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
 			if a == '$':
 				break
-			#pilha.desempilha()
+			pilha.desempilha()
 			p_index = len(pilha.dados)-1
 			#print(pilha.dados)
 			#print(p_index)

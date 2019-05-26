@@ -33,6 +33,8 @@ if __name__ == "__main__":
 
 	tabela_erros = pd.read_csv("sintatico/mensagensErros.csv")
 
+	tabela_follow = pd.read_csv("sintatico/first-follow.csv")
+
 	'''_arquivo = open(args.filename, 'r')
 		
 	lines = _arquivo.readlines()
@@ -42,9 +44,8 @@ if __name__ == "__main__":
 		if args.verbose:
 			print ("Modo verboso ativado")
 		parse(file, args.verbose)
-
 	if args.sintatico:
-		Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros)
+		Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabela_follow )
 	else:
 		print("Ainda não foram desenvolvidas todas as etapas de compilação\nInsira a diretiva '-l' para execução do analisador léxico")
 	
