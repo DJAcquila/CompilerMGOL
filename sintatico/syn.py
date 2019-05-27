@@ -122,8 +122,9 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			#print(Ant)
 			#print(tabela_desvios.loc[t][Ant])
 			print('a= {} s={}' .format(a,s))
-			pilha.empilha(int(tabela_desvios.loc[t][Ant]))
-			print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
+			if tabela_desvios.loc[t][Ant] != ' ':
+				pilha.empilha(int(tabela_desvios.loc[t][Ant]))
+				print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
 
 		elif 'acc' in tabela_acoes.loc[s][a]:
 			print('aceita')
@@ -139,7 +140,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			erro_num = int(erro_num[1])
 			#print(erro_num)
 			if erro_num == 8:
-				print('Erro sintático:{} {} linha: {} coluna: {}' .format(a,tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
+				print("Erro sintático:'{}' {} linha: {} coluna: {}" .format(a,tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
 			else:
 				print('Erro sintático: {} linha: {} coluna: {}' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
 			if a == '$':
