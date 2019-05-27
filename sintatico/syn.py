@@ -121,10 +121,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			Ant = regras.loc[red]['Antecedente']
 			#print(Ant)
 			#print(tabela_desvios.loc[t][Ant])
-			print('a= {} s={}' .format(a,s))
-			if tabela_desvios.loc[t][Ant] != ' ':
-				pilha.empilha(int(tabela_desvios.loc[t][Ant]))
-				print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
+			print('a= {} s= {}' .format(a,s))
+
+			pilha.empilha(int(tabela_desvios.loc[t][Ant]))
+			print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
 
 		elif 'acc' in tabela_acoes.loc[s][a]:
 			print('aceita')
@@ -135,6 +135,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			#print(pilha.dados)
 			#print(len(pilha.dados))
 			#print(pilha.dados[0])
+			print("a: {}\ns: {}\n".format(a, s))
 			erro_num = tabela_acoes.loc[s][a]
 			erro_num = erro_num.split('e')
 			erro_num = int(erro_num[1])
@@ -145,32 +146,34 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				print('Erro sintático: {} linha: {} coluna: {}' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
 			if a == '$':
 				break
-			#pilha.desempilha()
-			p_index = len(pilha.dados)-1
+			
+			#p_index = len(pilha.dados)-1
 			#print(pilha.dados)
 			#print(p_index)
 			flag = 0
-			while p_index >= 0 and flag == 0:
-			#p_index = pilha.desempilha()
-			#while p_index != None and flag == 0:
+			#while p_index >= 0 and flag == 0:
+			p_index = pilha.desempilha()
+			while p_index != None and flag == 0:
 				#print('p_index: {}'.format(p_index))
 				for i in range (0,19):
 					nao_terminal = tabela_follow.loc[i]['Variavel']
-					#print('nao_terminal: {}'.format(nao_terminal))
-					goto = tabela_desvios.loc[pilha.dados[p_index]][nao_terminal]
+					
+					goto = tabela_desvios.loc[ p_index][nao_terminal]
 					if goto != ' ':
+						#print('nao_terminal: {}\npilha.dados[p_index]: {}\n'.format(nao_terminal, pilha.dados[p_index]))
 						#print('goto: {}' .format(goto))
+						pilha.empilha(p_index)
 						pilha.empilha(int(goto))
 						#print(pilha.dados)
 						flag = 1
 						conj_follow = tabela_follow.loc[i]['FOLLOW']
 						#if 'pt_v' in conj_follow:
-						#	print(conj_follow)
+						print("Conjunto follow: {}".format(conj_follow))
 						break
-				p_index -= 1
-				#empilhar = p_index = pilha.desempilha()
+				p_index = pilha.desempilha()
+				empilhar = p_index
 			#tabela_simbolos.print_table()
-			#pilha.empilha(empilhar)
+			pilha.empilha(empilhar)
 			accept = ['erro']
 			#print('oi1')
 			while(accept[0] == 'erro'):
@@ -180,7 +183,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 					if (file.ponteiro < file.eof):
 						accept = lex.dfa.lexico(tabela_simbolos)
-						#print('ponteiro:{}\neof:{}'.format(file.ponteiro,file.eof))
+						#print('accept[0]: {}\nponteiro:{}\neof:{}'.format(accept[0], file.ponteiro,file.eof))
 						#print('oi3')
 						if accept[0] != 'erro':
 							#print('oi4')
@@ -189,10 +192,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							a = accept[2]
 							linha_s0 = file.linha
 							coluna_s0 = file.coluna - len(accept[1])
-							#print(accept[2])
+							print("accept[2]: {}".format(accept[2]))
 							if accept[2] not in conj_follow:
-								#print('accept {}' .format(accept[2]))
+								print('Dentro de erro: accept[2] {}' .format(accept[2]))
 								accept = ['erro']
+
 							#print("{} {}".format(accept[1],accept[2]))
 						else:
 							print('Erro lexico: {}'.format(accept[1]))
@@ -203,6 +207,6 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					a = '$'
 					#print(file.ponteiro)
 					break
-			print('a{}'.format(a))
+			print('a -- {}'.format(a))
 			print(pilha.dados)
 			#break

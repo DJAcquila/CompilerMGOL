@@ -1,7 +1,7 @@
 inicio
    varinicio
-   	  A lit;
    	  B lit
    varfim;
-   varfim;
+   leia;
+   A ->
 fim

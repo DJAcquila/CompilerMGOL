@@ -1,35 +1,29 @@
 inicio
-varinicio
-A lit;
-B inteiro;
-D inteiro;
-C real;
-varfim;
-escreva "Digite B" ;
-leia B;
-escreva "Digite A:" ;
-leia A;
-{
-	aaa ."ola#####"}{
-}.#
-se(B>2)
-entao
-se(B<=4)
-entao
-escreva "B esta entre 2 e 4" ;
-fimse
-}
-fimse
-B<-B+1;
-B<-B+2;
-B<-B+3;
-escreva "\nB=\n";
-escreva D;
-escreva "\n";
-escreva C;
-escreva "\n";
-escreva A;
-{
-a
-}
+   varinicio
+      A lit;
+      B inteiro;
+      c inteiro;
+   varfim;
+
+   escreva "Digite um nome:";
+   leia A;
+
+   escreva "Digite um numero:";
+   leia B;
+
+   B <- 2;
+   B <- 3;
+   c <- B+1;
+   c <- c+1;
+    
+   se (B<1)
+   entao
+     se (c <2)
+     entao
+       escreva "texto";
+     fimse
+   fimse
+
+   escreva "programa finalizado";   
+
 fim
