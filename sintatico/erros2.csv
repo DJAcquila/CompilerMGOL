@@ -1,9 +1,9 @@
 ,inicio,varinicio,varfim,pt_v,id,inteiro,real,lit,leia,escreva,literal,num,rcb,opm,se,ab_p,fc_p,entao,opr,fimse,fim,enquanto,faca,fimenquanto,$
-0,s2,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e13,e14,e1,e1,e1,e1,e1,e1,e1,e23
-1,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e13,e14,e2,e2,e2,e2,e2,e2,e2,acc
-2,e4,s4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e13,e14,e4,e4,e4,e4,e4,e4,e4,e23
-3,e5,e5,e5,e5,s13,e5,e5,e5,s11,s12,e5,e5,e5,e5,s16,e13,e14,e5,e5,e5,s9,s17,e5,e5,e23
-4,e3,e24,s20,e6,s21,e7,e7,e7,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e23
+0,s2,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1,e1
+1,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,acc
+2,e4,s4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4,e4
+3,e5,e5,e5,e5,s13,e5,e5,e5,s11,s12,e5,e5,e5,e5,s16,e5,e5,e5,e5,e5,s9,s17,e5,e5,e5
+4,e8,e8,s20,e8,s21,e7,e7,e7,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8,e8
 5,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,e2,r1
 6,e5,e5,e5,e5,s13,e5,e5,e5,s11,s12,e5,e5,e5,e5,s16,e5,e5,e5,e5,e5,s9,s17,e5,e5,e23
 7,e5,e5,e5,e5,s13,e5,e5,e5,s11,s12,e5,e5,e5,e5,s16,e5,e5,e5,e5,e5,s9,s17,e5,e5,e23

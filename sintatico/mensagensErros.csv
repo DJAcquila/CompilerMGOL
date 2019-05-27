@@ -1,15 +1,15 @@
 ,mensagem
 0, ''
-1,'inicio’ esperado
+1,'inicio’ não declarado 
 2,sentença fora do escopo do programa
 3,'inicio’ já declarado
 4,'varinicio’ esperado
-5,início de sentença inválido
+5,sentença inválida
 6,';’ não esperado
-7,tipo não relacionado a nehuma variável
+7,tipo não relacionado a nenhuma variável
 8,não esperado no escopo de declaração de variáveis
-9,variável esperada
-10,argumento esperado
+9,variável esperada após a declaração de ‘leia’
+10,argumento esperado após a declaração de ‘escreva’
 11,'rcb’ esperado
 12,tipo fora do escopo de declaração de variáveis
 13,'(‘ não esperado

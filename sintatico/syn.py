@@ -121,7 +121,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			Ant = regras.loc[red]['Antecedente']
 			#print(Ant)
 			#print(tabela_desvios.loc[t][Ant])
-			print('a= {} s= {}' .format(a,s))
+			#print('a= {} s= {}' .format(a,s))
 
 			pilha.empilha(int(tabela_desvios.loc[t][Ant]))
 			print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
@@ -135,7 +135,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			#print(pilha.dados)
 			#print(len(pilha.dados))
 			#print(pilha.dados[0])
-			print("a: {}\ns: {}\n".format(a, s))
+			#print("a: {}\ns: {}\n".format(a, s))
 			erro_num = tabela_acoes.loc[s][a]
 			erro_num = erro_num.split('e')
 			erro_num = int(erro_num[1])
@@ -168,7 +168,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						flag = 1
 						conj_follow = tabela_follow.loc[i]['FOLLOW']
 						#if 'pt_v' in conj_follow:
-						print("Conjunto follow: {}".format(conj_follow))
+						#print("Conjunto follow: {}".format(conj_follow))
 						break
 				p_index = pilha.desempilha()
 				empilhar = p_index
@@ -192,9 +192,9 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							a = accept[2]
 							linha_s0 = file.linha
 							coluna_s0 = file.coluna - len(accept[1])
-							print("accept[2]: {}".format(accept[2]))
+							#print("accept[2]: {}".format(accept[2]))
 							if accept[2] not in conj_follow:
-								print('Dentro de erro: accept[2] {}' .format(accept[2]))
+								#print('Dentro de erro: accept[2] {}' .format(accept[2]))
 								accept = ['erro']
 
 							#print("{} {}".format(accept[1],accept[2]))
@@ -207,6 +207,6 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					a = '$'
 					#print(file.ponteiro)
 					break
-			print('a -- {}'.format(a))
+			#print('a -- {}'.format(a))
 			print(pilha.dados)
 			#break
