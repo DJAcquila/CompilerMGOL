@@ -1,8 +1,6 @@
 inicio
    varinicio
-      A lit;
-      B inteiro;
-      c inteiro;
+     c inteiro;
    varfim;
 
    escreva "Digite um nome:";
@@ -14,9 +12,9 @@ inicio
  
    B <- 3;
    c <- B+1;
-   c <- c+1;
+   c <- c + 1;
     
-   se (B < 2) entao
+   se (B > 2) entao
      se (c < 2 ) entao
        escreva "texto";
      fimse

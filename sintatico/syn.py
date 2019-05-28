@@ -35,6 +35,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 	a = '$'
 	linha_s0 = 0
 	coluna_s0 = 0
+	a_antigo = 'nao'
+	flag_a_antigo = 3
 
 	pilha = Pilha()
 	pilha.empilha(0)
@@ -65,6 +67,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 	#print('simbolo: {}'.format(a))
 	while True:
+		if flag_a_antigo == 1:
+			flag_a_antigo = 0
+			#print('flag 1')
+		elif flag_a_antigo == 0:
+			#print('flag2')
+			a = a_antigo
+			flag_a_antigo = 3
+		#print('a inicial = {} flag = {}'.format(a,flag_a_antigo))
 		#print('ponteiro: {}'.format(file.ponteiro))
 		#print("Inicio: {}".format(pilha.dados))
 		s = int(pilha.topo())
@@ -79,31 +89,32 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			#print(t)
 			pilha.empilha(int(t))
 			#a = #proximo simbolo de entrada
-			accept = ['erro']
-			while(accept[0] == 'erro'):
-				try:
-					accept = False, None, None, None
+			if flag_a_antigo == 3:
+				accept = ['erro']
+				while(accept[0] == 'erro'):
+					try:
+						accept = False, None, None, None
 
-					if (file.ponteiro < file.eof):
-						accept = lex.dfa.lexico(tabela_simbolos)
-						#print('ponteiro:{}\neof:{}'.format(file.ponteiro,file.eof))
-						if accept[0] != 'erro':
-							linha_s = linha_s0
-							coluna_s = coluna_s0
-							a = accept[2]
-							#print(accept[2])
-							linha_s0 = file.linha
-							coluna_s0 = file.coluna - len(accept[1])
-							#print("{} {}".format(accept[1],accept[2]))
+						if (file.ponteiro < file.eof):
+							accept = lex.dfa.lexico(tabela_simbolos)
+							#print('ponteiro:{}\neof:{}'.format(file.ponteiro,file.eof))
+							if accept[0] != 'erro':
+								linha_s = linha_s0
+								coluna_s = coluna_s0
+								a = accept[2]
+								#print(accept[2])
+								linha_s0 = file.linha
+								coluna_s0 = file.coluna - len(accept[1])
+								#print("{} {}".format(accept[1],accept[2]))
+							else:
+								print('Erro lexico: {}'.format(accept[1]))
 						else:
-							print('Erro lexico: {}'.format(accept[1]))
-					else:
-						a = '$'
+							a = '$'
 
-				except TypeError:
-					a = '$'
-					#print(file.ponteiro)
-					break
+					except TypeError:
+						a = '$'
+						#print(file.ponteiro)
+						break
 			#print('simbolo: {} '.format(a))
 		elif 'r' in tabela_acoes.loc[s][a]:
 			red = tabela_acoes.loc[s][a]
@@ -154,54 +165,86 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			if a == '$':
 				break
 			if erro_num == 1:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'inicio'
+				flag_a_antigo = 1
 				#print('erro inicio')
 			elif erro_num == 4:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'varinicio'
+				flag_a_antigo = 1
 			elif erro_num == 9:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'id'
+				flag_a_antigo = 1
 			elif erro_num == 10:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'id'
+				flag_a_antigo = 1
 			elif erro_num == 11:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'rcb'
+				flag_a_antigo = 1
 			elif erro_num == 17:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'ab_p'
+				flag_a_antigo = 1
 			elif erro_num == 18:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'id'
+				flag_a_antigo = 1
 			elif erro_num == 19:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'opr'
+				flag_a_antigo = 1
 			elif erro_num == 20:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'entao'
+				flag_a_antigo = 1
 			elif erro_num == 21:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'faca'
+				flag_a_antigo = 1
 			elif erro_num == 22:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'fc_p'
+				flag_a_antigo = 1
 			elif erro_num == 25:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'pt_v'
+				flag_a_antigo = 1
 			elif erro_num == 26:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'lit'
+				flag_a_antigo = 1
 			elif erro_num == 31:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'ab_p'
+				flag_a_antigo = 1
 			elif erro_num == 32:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'fc_p'
+				flag_a_antigo = 1
 			elif erro_num == 33:
-				file.ponteiro-= len(accept[2])
+				#file.ponteiro-= len(accept[2])
+				a_antigo = a
 				a = 'fc_p'
+				flag_a_antigo = 1
 			else:	
 				#p_index = len(pilha.dados)-1
 				#print(pilha.dados)

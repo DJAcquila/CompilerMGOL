@@ -4,7 +4,7 @@ inicio
         B inteiro;
     varfim;
 
-    enquanto (B < 1) faca
+    enquanto (B < 1 faca
         escreva A;
     fimenquanto
 

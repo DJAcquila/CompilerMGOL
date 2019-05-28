@@ -4,7 +4,7 @@
 2,sentença fora do escopo do programa
 3,'inicio’ já declarado
 4,'varinicio’ esperado
-5,"sentença inválida. ‘leia’, ‘escreva’, ‘se’ ou ‘enquanto’ esperados"
+5,"sentença inválida. Variável, ‘leia’, ‘escreva’, ‘se’ ou ‘enquanto’ esperados"
 6,';’ não esperado antes de
 7,tipo não relacionado a nenhuma variável
 8,não esperado no escopo de declaração de variáveis
