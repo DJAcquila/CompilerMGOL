@@ -51,7 +51,6 @@ class DFA():
 				
 				self.file.file_seek()
 				c = self.file.get_char()
-				#print ("Caracter lido: " + c)
 
 				self.advance()
 			
@@ -89,13 +88,13 @@ class DFA():
 
 			else:
 				if aspas == 1 and c != '"':
-					acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
+					acumulated_string = acumulated+': Nao fechou aspas ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
 					return 'erro', acumulated_string, None, None
 				elif colchetes == 1 and c != '}':
-					acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
+					acumulated_string = acumulated+':Nao fechou colchetes ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
 					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 					vetor_erros.append(dicionario_erro)
 					erro+=1
@@ -128,32 +127,26 @@ class DFA():
 
 				else:
 					if aspas == 1 and '"' not in acumulated:
-						acumulated_string = acumulated+': Nao fechou aspas'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
+						acumulated_string = acumulated+': Nao fechou aspas ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
 						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 						vetor_erros.append(dicionario_erro)
-						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
 						return 'erro', acumulated_string, None, None
 					elif colchetes == 1 and '}' not in acumulated:
-						acumulated_string = acumulated+':Nao fechou colchetes'+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
+						acumulated_string = acumulated+':Nao fechou colchetes ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
 						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 						vetor_erros.append(dicionario_erro)
-						#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 						erro+=1
-						print('caralho')
-						print(c)
 						return 'erro', acumulated_string, None, None
 					else:
 						return 'erro', None, None, None
 			elif state == 0:
-				acumulated_string = c+ bcolors.GREEN + bcolors.BOLD +' linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)
+				acumulated_string = c+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
 				dicionario_erro = {'acumulated': acumulated_string, 'token': token}
 				vetor_erros.append(dicionario_erro)
-				#impressao_bonita('erro', c+' linha: '+str(linha)+' coluna: '+str(coluna), token)
 				erro+=1
 				return 'erro', acumulated_string, None, None
-			#st = str(ponteiro)
-			#print(st)
+
 			return 'erro', None, None, None
 
 
@@ -266,7 +259,6 @@ def parse(file, verbose = False):
 		
 		while(accept[0] is not True):
 			if (file.ponteiro < file.eof):
-				#p = int(tok)
 				accept = lex.dfa.lexico(tabela_simbolos)
 				if accept[0] != 'erro' and verbose:
 					print('\nLexema: {}\nToken: {}\nTipo: {}\n'.format(accept[1],accept[2],accept[3]))
@@ -281,4 +273,3 @@ def parse(file, verbose = False):
 	#Só mostra a tabela de simbolos no modo verboso
 	if verbose:
 		tabela_simbolos.print_table()
-

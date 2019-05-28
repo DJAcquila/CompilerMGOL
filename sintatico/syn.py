@@ -55,6 +55,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					
 				else:
 					print('erro lexico: {}'.format(accept[1])) #impressao dos erros lexicos
+					flag_sintatico = 1
 
 			else:
 				a = '$'#caso nao haja mais tokens, indica eof
@@ -95,6 +96,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								coluna_s0 = file.coluna - len(accept[1])
 							else:
 								print('Erro lexico: {}'.format(accept[1]))
+								flag_sintatico = 1
 						else:
 							a = '$'
 
@@ -132,11 +134,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			
 			#impressao dos erros de acordo com o tipo, acontece antes de recuperar do erro
 			if erro_num == 8:
-				print("Erro sintático: '{}' {} (linha: {} coluna: {})" .format(a,tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
+				string_erro = 'Erro sintático:\''+a+'\''+tabela_erros.loc[erro_num]['mensagem']+'('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
+				print(string_erro)
 			elif erro_num == 25 or erro_num == 6 or erro_num == 26:
-				print("Erro sintático: {} '{}' (linha: {} coluna: {})" .format(tabela_erros.loc[erro_num]['mensagem'], a,linha_s0, coluna_s0))
+				string_erro = 'Erro sintático:'+tabela_erros.loc[erro_num]['mensagem']+'\''+a+'\''+'('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END+str(linha_s0) + bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
+				print(string_erro)
 			else:
-				print('Erro sintático: {} (linha: {} coluna: {})' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
+				string_erro = 'Erro sintático:'+tabela_erros.loc[erro_num]['mensagem']+'('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
+				print(string_erro)
 			if a == '$':
 				break
 				
