@@ -4,26 +4,30 @@
 2,sentença fora do escopo do programa
 3,'inicio’ já declarado
 4,'varinicio’ esperado
-5,sentença inválida
-6,';’ não esperado
+5,"sentença inválida! ‘leia’, ‘escreva’, ‘se’ ou ‘enquanto’ esperados"
+6,';’ não esperado antes de
 7,tipo não relacionado a nenhuma variável
 8,não esperado no escopo de declaração de variáveis
 9,variável esperada após a declaração de ‘leia’
 10,argumento esperado após a declaração de ‘escreva’
-11,'rcb’ esperado
+11,esperada a utilização de ‘<-’  após a variável
 12,tipo fora do escopo de declaração de variáveis
 13,'(‘ não esperado
 14,')’ não esperado
 15,fim não esperado no escopo de condicional
 16,fim não esperado no escopo de repetição
-17,'(‘ esperado
+17,'(‘ esperado após declaração de ‘se’
 18,variável ou constante numérica esperada
 19,operador de relação esperado
-20,'entao’ esperado
-21,'faca’ esperado
+20,'entao’ esperado após declaração do argumento de ‘se’
+21,'faca’ esperado após declaração do argumento de ‘enquanto’
 22,')’ esperado
 23,fim inesperado do código
 24,'varinicio’ já declarada
-25,';’ esperado
-26,declaração de tipo esperada
+25,';’ esperado antes de 
+26,esperada declaração de tipo antes de 
 27,operação inválida
+28,argumento esperado após a declaração de ‘se’
+29,argumento esperado após a declaração de ‘enquanto’
+30,operando esperado após operador
+31,'(‘ esperado após declaração de ‘enquanto’

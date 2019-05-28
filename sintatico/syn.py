@@ -141,9 +141,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			erro_num = int(erro_num[1])
 			#print(erro_num)
 			if erro_num == 8:
-				print("Erro sintático:'{}' {} linha: {} coluna: {}" .format(a,tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
+				print("Erro sintático: '{}' {} (linha: {} coluna: {})" .format(a,tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
+			if erro_num == 25 or erro_num == 6 or erro_num == 26:
+				print("Erro sintático: {} '{}' (linha: {} coluna: {})" .format(tabela_erros.loc[erro_num]['mensagem'], a,linha_s0, coluna_s0))
 			else:
-				print('Erro sintático: {} linha: {} coluna: {}' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
+				print('Erro sintático: {} (linha: {} coluna: {})' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
 			if a == '$':
 				break
 			
