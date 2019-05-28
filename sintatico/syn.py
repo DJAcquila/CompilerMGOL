@@ -134,13 +134,13 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			
 			#impressao dos erros de acordo com o tipo, acontece antes de recuperar do erro
 			if erro_num == 8:
-				string_erro = 'Erro sintático:\''+a+'\''+tabela_erros.loc[erro_num]['mensagem']+'('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
+				string_erro = 'Erro sintático: \''+a+'\''+tabela_erros.loc[erro_num]['mensagem']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
 				print(string_erro)
 			elif erro_num == 25 or erro_num == 6 or erro_num == 26:
-				string_erro = 'Erro sintático:'+tabela_erros.loc[erro_num]['mensagem']+'\''+a+'\''+'('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END+str(linha_s0) + bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
+				string_erro = 'Erro sintático: '+tabela_erros.loc[erro_num]['mensagem']+'\''+a+'\''+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END+str(linha_s0) + bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
 				print(string_erro)
 			else:
-				string_erro = 'Erro sintático:'+tabela_erros.loc[erro_num]['mensagem']+'('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
+				string_erro = 'Erro sintático: '+tabela_erros.loc[erro_num]['mensagem']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
 				print(string_erro)
 			if a == '$':
 				break

@@ -1,11 +1,10 @@
 inicio
    varinicio
-     c inteiro;
+     c real;
    varfim;
-   .
 
-   escreva "Digite um nome:";
-   leia A
+   escreva ;
+   leia A;
 
    escreva "Digite um numero:";
    leia B;
