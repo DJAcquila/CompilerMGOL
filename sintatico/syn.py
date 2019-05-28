@@ -38,6 +38,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 	pilha = Pilha()
 	pilha.empilha(0)
+	flag_sintatico = 0
 	#a = 'id' #simbolo do lexico
 	while(accept[0] == 'erro'):	
 		try:
@@ -127,10 +128,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
 
 		elif 'acc' in tabela_acoes.loc[s][a]:
-			print('aceita')
-			tabela_simbolos.print_table()
+			if flag_sintatico == 0:
+				print('aceita')
+				tabela_simbolos.print_table()
+			else:
+				print('rejeita')
 			break
 		else:
+			flag_sintatico = 1
 			#print('erro')
 			#print(pilha.dados)
 			#print(len(pilha.dados))
@@ -142,73 +147,122 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			#print(erro_num)
 			if erro_num == 8:
 				print("Erro sintático: '{}' {} (linha: {} coluna: {})" .format(a,tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
-			if erro_num == 25 or erro_num == 6 or erro_num == 26:
+			elif erro_num == 25 or erro_num == 6 or erro_num == 26:
 				print("Erro sintático: {} '{}' (linha: {} coluna: {})" .format(tabela_erros.loc[erro_num]['mensagem'], a,linha_s0, coluna_s0))
 			else:
 				print('Erro sintático: {} (linha: {} coluna: {})' .format(tabela_erros.loc[erro_num]['mensagem'],linha_s0, coluna_s0))
 			if a == '$':
 				break
-			
-			#p_index = len(pilha.dados)-1
-			#print(pilha.dados)
-			#print(p_index)
-			flag = 0
-			#while p_index >= 0 and flag == 0:
-			p_index = pilha.desempilha()
-			while p_index != None and flag == 0:
-				#print('p_index: {}'.format(p_index))
-				for i in range (0,19):
-					nao_terminal = tabela_follow.loc[i]['Variavel']
-					
-					goto = tabela_desvios.loc[ p_index][nao_terminal]
-					if goto != ' ':
-						#print('nao_terminal: {}\npilha.dados[p_index]: {}\n'.format(nao_terminal, pilha.dados[p_index]))
-						#print('goto: {}' .format(goto))
-						pilha.empilha(p_index)
-						pilha.empilha(int(goto))
-						#print(pilha.dados)
-						flag = 1
-						conj_follow = tabela_follow.loc[i]['FOLLOW']
-						#if 'pt_v' in conj_follow:
-						#print("Conjunto follow: {}".format(conj_follow))
-						break
+			if erro_num == 1:
+				file.ponteiro-= len(accept[2])
+				a = 'inicio'
+				#print('erro inicio')
+			elif erro_num == 4:
+				file.ponteiro-= len(accept[2])
+				a = 'varinicio'
+			elif erro_num == 9:
+				file.ponteiro-= len(accept[2])
+				a = 'id'
+			elif erro_num == 10:
+				file.ponteiro-= len(accept[2])
+				a = 'id'
+			elif erro_num == 11:
+				file.ponteiro-= len(accept[2])
+				a = 'rcb'
+			elif erro_num == 17:
+				file.ponteiro-= len(accept[2])
+				a = 'ab_p'
+			elif erro_num == 18:
+				file.ponteiro-= len(accept[2])
+				a = 'id'
+			elif erro_num == 19:
+				file.ponteiro-= len(accept[2])
+				a = 'opr'
+			elif erro_num == 20:
+				file.ponteiro-= len(accept[2])
+				a = 'entao'
+			elif erro_num == 21:
+				file.ponteiro-= len(accept[2])
+				a = 'faca'
+			elif erro_num == 22:
+				file.ponteiro-= len(accept[2])
+				a = 'fc_p'
+			elif erro_num == 25:
+				file.ponteiro-= len(accept[2])
+				a = 'pt_v'
+			elif erro_num == 26:
+				file.ponteiro-= len(accept[2])
+				a = 'lit'
+			elif erro_num == 31:
+				file.ponteiro-= len(accept[2])
+				a = 'ab_p'
+			elif erro_num == 32:
+				file.ponteiro-= len(accept[2])
+				a = 'fc_p'
+			elif erro_num == 33:
+				file.ponteiro-= len(accept[2])
+				a = 'fc_p'
+			else:	
+				#p_index = len(pilha.dados)-1
+				#print(pilha.dados)
+				#print(p_index)
+				flag = 0
+				#while p_index >= 0 and flag == 0:
 				p_index = pilha.desempilha()
-				empilhar = p_index
-			#tabela_simbolos.print_table()
-			pilha.empilha(empilhar)
-			accept = ['erro']
-			#print('oi1')
-			while(accept[0] == 'erro'):
-				#print('oi2')
-				try:
-					accept = False, None, None, None
+				while p_index != None and flag == 0:
+					#print('p_index: {}'.format(p_index))
+					for i in range (0,19):
+						nao_terminal = tabela_follow.loc[i]['Variavel']
+						
+						goto = tabela_desvios.loc[ p_index][nao_terminal]
+						if goto != ' ':
+							#print('nao_terminal: {}\npilha.dados[p_index]: {}\n'.format(nao_terminal, pilha.dados[p_index]))
+							#print('goto: {}' .format(goto))
+							pilha.empilha(p_index)
+							pilha.empilha(int(goto))
+							#print(pilha.dados)
+							flag = 1
+							conj_follow = tabela_follow.loc[i]['FOLLOW']
+							#if 'pt_v' in conj_follow:
+							#print("Conjunto follow: {}".format(conj_follow))
+							break
+					p_index = pilha.desempilha()
+					empilhar = p_index
+				#tabela_simbolos.print_table()
+				pilha.empilha(empilhar)
+				accept = ['erro']
+				#print('oi1')
+				while(accept[0] == 'erro'):
+					#print('oi2')
+					try:
+						accept = False, None, None, None
 
-					if (file.ponteiro < file.eof):
-						accept = lex.dfa.lexico(tabela_simbolos)
-						#print('accept[0]: {}\nponteiro:{}\neof:{}'.format(accept[0], file.ponteiro,file.eof))
-						#print('oi3')
-						if accept[0] != 'erro':
-							#print('oi4')
-							linha_s = linha_s0
-							coluna_s = coluna_s0
-							a = accept[2]
-							linha_s0 = file.linha
-							coluna_s0 = file.coluna - len(accept[1])
-							#print("accept[2]: {}".format(accept[2]))
-							if accept[2] not in conj_follow:
-								#print('Dentro de erro: accept[2] {}' .format(accept[2]))
-								accept = ['erro']
+						if (file.ponteiro < file.eof):
+							accept = lex.dfa.lexico(tabela_simbolos)
+							#print('accept[0]: {}\nponteiro:{}\neof:{}'.format(accept[0], file.ponteiro,file.eof))
+							#print('oi3')
+							if accept[0] != 'erro':
+								#print('oi4')
+								linha_s = linha_s0
+								coluna_s = coluna_s0
+								a = accept[2]
+								linha_s0 = file.linha
+								coluna_s0 = file.coluna - len(accept[1])
+								#print("accept[2]: {}".format(accept[2]))
+								if accept[2] not in conj_follow:
+									#print('Dentro de erro: accept[2] {}' .format(accept[2]))
+									accept = ['erro']
 
-							#print("{} {}".format(accept[1],accept[2]))
+								#print("{} {}".format(accept[1],accept[2]))
+							else:
+								print('Erro lexico: {}'.format(accept[1]))
 						else:
-							print('Erro lexico: {}'.format(accept[1]))
-					else:
-						a = '$'
+							a = '$'
 
-				except TypeError:
-					a = '$'
-					#print(file.ponteiro)
-					break
-			#print('a -- {}'.format(a))
-			print(pilha.dados)
-			#break
+					except TypeError:
+						a = '$'
+						#print(file.ponteiro)
+						break
+				#print('a -- {}'.format(a))
+				#print(pilha.dados)
+				#break
