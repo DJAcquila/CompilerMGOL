@@ -212,7 +212,7 @@ class LEX_DFA():
 		for st in string.printable:
 			self.dfa.set_DFA(11, st, 11)
 		self.dfa.set_DFA(11,'}',12)
-		self.dfa.set_acceptState(12,T.noToken)
+		self.dfa.set_acceptState(12,T.Comentario)
 
 		#EOF (fim de arquivo)
 		self.dfa.set_DFA(0, "eof", 14)

@@ -41,7 +41,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 	pilha.empilha(0) #empilha 0 para comecar do estado inicial do automato LR 0
 	flag_sintatico = 0
 
-	while(accept[0] == 'erro'):#utilizado para ignorar/pular os erros lexicos
+	while(accept[0] == 'erro' or accept[2] == 'Comentario'):#utilizado para ignorar/pular os erros lexicos
 		try:
 			accept = False, None, None, None
 			if (file.ponteiro < file.eof): #enquanto o arquivo nao chegou ao fim
@@ -82,7 +82,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			pilha.empilha(int(t))
 			if flag_a_antigo == 3:
 				accept = ['erro']
-				while(accept[0] == 'erro'):
+				while(accept[0] == 'erro' or accept[2] == 'Comentario'):
 					try:
 						accept = False, None, None, None
 
@@ -220,7 +220,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					empilhar = p_index
 				pilha.empilha(empilhar)
 				accept = ['erro']
-				while(accept[0] == 'erro'):
+				while(accept[0] == 'erro' or accept[2] == 'Comentario'):
 					try:
 						accept = False, None, None, None
 
