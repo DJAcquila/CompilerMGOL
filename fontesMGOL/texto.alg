@@ -3,7 +3,7 @@ inicio
         A lit;
         B inteiro;
     varfim;
-.
+
     enquanto (B < 1) faca
         escreva A;
     fimenquanto

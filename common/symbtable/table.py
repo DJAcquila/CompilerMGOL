@@ -54,7 +54,7 @@ class SymbTable():
         impressao_bonita('linha')
         print(bcolors.BOLD +"|%-10s  %-10s %-10s TABELA DE SIMBOLOS %-10s  %-10s   %-10s |" % (' ', ' ', ' ', ' ',' ', ' ') + bcolors.END )
         impressao_bonita('linha')
-        print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', 'Lexema', ' ', 'Token', ' ',' ',' ')+bcolors.END)
+        print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s  %-10s %-5s|" % (' ', 'Lexema', ' ', 'Token', ' ',' ','Tipo',' ')+bcolors.END)
         impressao_bonita('linha')
 
         for line in self.tabela:

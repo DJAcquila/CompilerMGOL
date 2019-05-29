@@ -121,10 +121,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 		elif 'acc' in tabela_acoes.loc[s][a]: #aceita o arquivo
 			if flag_sintatico == 0:
-				print('aceita')
+				print('Analise sintatica realizada. Codigo correto.')
 				tabela_simbolos.print_table()
 			else:
-				print('rejeita') #deveria ser aceito, mas como teve erro sintatico não aceita
+				print('Analise sintatica realizada. Codigo incorreto.') #deveria ser aceito, mas como teve erro sintatico não aceita
 			break
 		else: #ocorre um erro sintatico
 			flag_sintatico = 1 #utilizada para adicionar tokens faltantes
