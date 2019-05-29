@@ -1,12 +1,29 @@
 inicio
-    varinicio
-        A lit;
-        B inteiro;
-    varfim;
+   varinicio
+      A lit;
+      B inteiro;
+      c inteiro;
+   varfim;
 
-    enquanto (B < 1) faca
-        escreva A;
-    fimenquanto
+   escreva "Digite um nome:";
+   leia A;
 
-    escreva "ok";
+   escreva "Digite um numero:";
+   leia B;
+
+   B <- 2;
+   B <- 3;
+   c <- B+1;
+   c <- c+1;
+    
+   se (B<1)
+   entao
+     se (c <2)
+     entao
+       escreva "texto";
+     fimse
+   fimse
+
+   escreva "programa finalizado";   
+
 fim
