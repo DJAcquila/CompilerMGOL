@@ -34,7 +34,7 @@ Para executar a análise léxica
 ```bash 
 $ python3 main.py fontesMGOL/algumarquivo.alg -l
 ```
-Para executar a análise léxica
+Para executar a análise sintática
 
 ```bash 
 $ python3 main.py fontesMGOL/algumarquivo.alg -s
