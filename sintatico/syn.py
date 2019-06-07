@@ -52,7 +52,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					a = accept[2] #token em que nao ha erro, utilizado para seguir em frente com algoritmo sintatico
 					linha_s0 = file.linha
 					coluna_s0 = file.coluna - len(accept[1])
-					
+
 				else:
 					print('erro lexico: {}'.format(accept[1])) #impressao dos erros lexicos
 					flag_sintatico = 1
@@ -72,7 +72,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			#print('flag2')
 			a = a_antigo
 			flag_a_antigo = 3
-			
+
 		s = int(pilha.topo())
 		if 's' in tabela_acoes.loc[s][a]: #acao shift
 			t = tabela_acoes.loc[s][a]
@@ -131,7 +131,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			erro_num = tabela_acoes.loc[s][a]
 			erro_num = erro_num.split('e')
 			erro_num = int(erro_num[1])
-			
+
 			#impressao dos erros de acordo com o tipo, acontece antes de recuperar do erro
 			if erro_num == 8:
 				string_erro = 'Erro sintático: \''+a+'\''+tabela_erros.loc[erro_num]['mensagem']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')'
@@ -144,7 +144,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				print(string_erro)
 			if a == '$':
 				break
-				
+
 			#erros tratados individualmente adicionando o que falta
 			if erro_num == 1:
 				a_antigo = a
@@ -208,7 +208,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				while p_index != None and flag == 0:
 					for i in range (0,19):
 						nao_terminal = tabela_follow.loc[i]['Variavel']
-						
+
 						goto = tabela_desvios.loc[ p_index][nao_terminal]
 						if goto != ' ':
 							pilha.empilha(p_index)
