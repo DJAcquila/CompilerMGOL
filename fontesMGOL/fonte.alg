@@ -1,25 +1,45 @@
 inicio
-   varinicio
-     c real;
-   varfim;
 
-   escreva ;
-   leia A;
+    varinicio
+        B inteiro;
+        C lit;
+        A real;
+    varfim;
 
    escreva "Digite um numero:";
    leia B;
 
- 
+   {Este eh um comentario no meio do programa}
+
+   B <- 2;
    B <- 3;
    c <- B+1;
-   c <- c + 1;
+   c <- c+1;
     
-   se (B > 2) entao
-     se (c < 2 ) entao
+   se (B<1)
+   entao
+     se (c <2)
+     entao
        escreva "texto";
      fimse
    fimse
 
-   escreva "programa finalizado";   
+   {o contador B recebe valor dez e vai decaindo
+   com as iteracoes}
+
+   enquanto (B >= 0) faca
+     escreva "iteracao...iterando...";
+     B <- B -  1;
+     se (B > 5)
+     entao
+       escreva "Numero maior que cinco";
+       D <- 2;
+       enquanto (D >= 0) faca
+        escreva "imprimindo teste...";
+       fimenquanto
+     fimse
+   fimenquanto
+
+   escreva "programa finalizado";
 
 fim
