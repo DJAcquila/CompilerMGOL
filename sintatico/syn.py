@@ -9,6 +9,8 @@ from common.file.fileHandler import FileHandler
 from lexico.analisadorlexico import *
 from dataclasses import dataclass
 
+#arq_obj = open('programa.c', 'a+')
+
 class Pilha(object): #pilha utilizada para guardar estados no algoritmo sintatico
 	def __init__(self):
 		self.dados = []
@@ -154,9 +156,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			red = red.split('r')
 			red = int(red[1])
 			B_simbols = int(regras.loc[red]['B_number'])
-			while (B_simbols > 0):
+			count = B_simbols
+			while (count > 0):
 				pilha.desempilha()
-				B_simbols-= 1
+				count-= 1
 
 			t = pilha.topo()
 			Ant = regras.loc[red]['Antecedente']

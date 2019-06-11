@@ -38,6 +38,13 @@ class SymbTable():
                 return line
         return False
 
+    def put_tipo (self, lexema, token, tipo):
+        for line in self.tabela:
+            if line['token'] == token and line['lexema'] == lexema :
+                line.update(('tipo', tipo) for chave, valor in line.items())
+        
+            #if line['token'] == token and line['lexema'] == lexema :
+
     def palavra_reservada(self, lexema):
         if self.get_symbol(lexema, lexema) is not False:
             return True

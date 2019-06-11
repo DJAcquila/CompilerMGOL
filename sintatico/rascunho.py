@@ -4,9 +4,20 @@ if resultado == '-':
 else:
     num_semantico = int(resultado)
     if num_semantico == 5:
-        pass
+        arq_obj = open('programa.c', 'a+')
+        arq_obj.write('\n\n\n')
+        arq_obj.close()
+        pilha_semantico.desempilha()
+        pilha_semantico.desempilha()
+        val_semantico = Struct_Semantico('', '','')
+        pilha_semantico.empilha(val_semantico)
     elif num_semantico == 6:
-        pass
+        arq_obj = open('programa.c', 'a+')
+        tipo = pilha_semantico.desempilha()
+        ident = pilha_semantico.desempilha()
+        
+        arq_obj.write('')
+        arq_obj.close()
     elif num_semantico == 7:
         pass
     elif num_semantico == 8:
@@ -36,8 +47,16 @@ else:
     elif num_semantico == 21:
         pass
     elif num_semantico == 23:
-        pass
+        arq_obj = open('programa.c', 'a+')
+        arq_obj.write('}')
+        arq_obj.close()
     elif num_semantico == 24:
         pass
     elif num_semantico == 25:
+        pass
+    elif num_semantico == 33:
+        arq_obj = open('programa.c', 'a+')
+        arq_obj.write('}')
+        arq_obj.close()
+    elif num_semantico == 34:
         pass
