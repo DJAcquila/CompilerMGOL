@@ -9,14 +9,17 @@ else:
         arq_obj.close()
         pilha_semantico.desempilha()
         pilha_semantico.desempilha()
-        val_semantico = Struct_Semantico('', '','')
+        val_semantico = {'lexema':'', 'token':'','tipo':''}
         pilha_semantico.empilha(val_semantico)
     elif num_semantico == 6:
         arq_obj = open('programa.c', 'a+')
         tipo = pilha_semantico.desempilha()
         ident = pilha_semantico.desempilha()
-        
-        arq_obj.write('')
+        tabela_simbolos.put_tipo(ident['lexema'],ident['token'],tipo['tipo'])
+        val_semantico = {'lexema':'', 'token':'','tipo':''}
+        arq_obj.write(tipo['tipo'])
+        arq_obj.write(' ')
+        arq_obj.write(ident['lexema'])
         arq_obj.close()
     elif num_semantico == 7:
         pass

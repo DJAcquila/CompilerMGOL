@@ -7,7 +7,7 @@ from common.erro.errno import Error
 from common.symbtable.table import SymbTable
 from common.file.fileHandler import FileHandler
 from lexico.analisadorlexico import *
-from dataclasses import dataclass
+#from dataclasses import dataclass
 
 #arq_obj = open('programa.c', 'a+')
 
@@ -29,12 +29,12 @@ class Pilha(object): #pilha utilizada para guardar estados no algoritmo sintatic
 		indice = len(self.dados) - 1
 		return self.dados[indice]
 
-@dataclass
+'''@dataclass
 class Struct_Semantico:
 	lexema: str
 	token: str
 	tipo: str
-
+'''
 def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabela_follow):
 	lex = LEX_DFA(file) #instancia do lexico, que sera o unico utilizado para acessar o arquivo
 	tabela_simbolos = SymbTable()
@@ -62,23 +62,30 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					a = accept[2] #token em que nao ha erro, utilizado para seguir em frente com algoritmo sintatico
 					linha_s0 = file.linha
 					coluna_s0 = file.coluna - len(accept[1])
-					if (accept[1] == 'rcb'):
-						val_semantico = Struct_Semantico(accept[0], accept[1],'=')
+					if (accept[2] == 'rcb'):
+						#val_semantico = Struct_Semantico(accept[0], accept[1],'=')
+						val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'='}
+						print('struct Semantico: {}'.format(val_semantico['lexema']))
 						pilha_semantico.empilha(val_semantico)
-					elif (accept[1] == 'opr'):
-						if (accept[0] == '<>'):
-							val_semantico = Struct_Semantico(accept[0], accept[1],'!=')
+					elif (accept[2] == 'opr'):
+						if (accept[1] == '<>'):
+							#val_semantico = Struct_Semantico(accept[0], accept[1],'!=')
+							val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'!='}
 							pilha_semantico.empilha(val_semantico)
-						elif (accept[0] == '='):
-							val_semantico = Struct_Semantico(accept[0], accept[1],'==')
+						elif (accept[1] == '='):
+							#val_semantico = Struct_Semantico(accept[0], accept[1],'==')
+							val_semantico = {'lexema':accept[1],'token':accept[1],'tipo':'=='}
 							pilha_semantico.empilha(val_semantico)
 						else:
-							val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+							#val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+							val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
+							print('struct Semantico: {}'.format(val_semantico['lexema']))
 							pilha_semantico.empilha(val_semantico)
-					elif (accept[1] == 'Comentario'):
+					elif (accept[2] == 'Comentario'):
 						pass
 					else: #tem que ver sobre constante numerica, por causa do exponencial
-						val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+						#val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+						val_semantico = {'lexema':accept[0],'token':accept[1],'tipo':accept[0]}
 						pilha_semantico.empilha(val_semantico)
 
 
@@ -123,23 +130,29 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								a = accept[2]
 								linha_s0 = file.linha
 								coluna_s0 = file.coluna - len(accept[1])
-								if (accept[1] == 'rcb'):
-									val_semantico = Struct_Semantico(accept[0], accept[1],'=')
+								if (accept[2] == 'rcb'):
+									#val_semantico = Struct_Semantico(accept[0], accept[1],'=')
+									val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'='}
 									pilha_semantico.empilha(val_semantico)
-								elif (accept[1] == 'opr'):
-									if (accept[0] == '<>'):
-										val_semantico = Struct_Semantico(accept[0], accept[1],'!=')
+								elif (accept[2] == 'opr'):
+									if (accept[1] == '<>'):
+										#val_semantico = Struct_Semantico(accept[0], accept[1],'!=')
+										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'!='}
 										pilha_semantico.empilha(val_semantico)
-									elif (accept[0] == '='):
-										val_semantico = Struct_Semantico(accept[0], accept[1],'==')
+									elif (accept[1] == '='):
+										#val_semantico = Struct_Semantico(accept[0], accept[1],'==')
+										val_semantico = {'lexema':accept[1],'token':accept[1],'tipo':'=='}
 										pilha_semantico.empilha(val_semantico)
 									else:
-										val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+										#val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
+										print('struct Semantico: {}'.format(val_semantico['lexema']))
 										pilha_semantico.empilha(val_semantico)
-								elif (accept[1] == 'Comentario'):
+								elif (accept[2] == 'Comentario'):
 									pass
 								else: #tem que ver sobre constante numerica, por causa do exponencial
-									val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+									#val_semantico = Struct_Semantico(accept[0], accept[1],accept[0])
+									val_semantico = {'lexema':accept[0],'token':accept[1],'tipo':accept[0]}
 									pilha_semantico.empilha(val_semantico)
 							else:
 								print('Erro lexico: {}'.format(accept[1]))
