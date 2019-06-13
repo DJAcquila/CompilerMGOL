@@ -10,12 +10,12 @@
 8,TIPO, lit,1,9
 9,A, ES A,2,-
 10,ES, leia id,3,11
-11,ES, escreva ARG,3,12
+11,ES, escreva ARG ;,3,12
 12,ARG, literal,1,13
 13,ARG, num,1,14
 14,ARG, id,1,15
 15,A, CMD A,2,-
-16,CMD, id rcb LD,4,17
+16,CMD, id rcb LD ;,4,17
 17,LD, OPRD opm OPRD,3,18
 18,LD, OPRD,1,19
 19,OPRD, id,1,20

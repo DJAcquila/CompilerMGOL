@@ -3,7 +3,8 @@ inicio
    varinicio
       A lit;
       B inteiro;
-      c inteiro;
+      C inteiro;
+      D real;
    varfim;
 
 
@@ -15,12 +16,12 @@ inicio
 
    B <- 2;
    B <- 3;
-   c <- B+1;
-   c <- c+1;
+   C <- B+1;
+   C <- C+1;
 
    se (B<1)
    entao
-     se (c <2)
+     se (C <2)
      entao
        escreva "texto";
      fimse

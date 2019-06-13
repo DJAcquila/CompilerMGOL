@@ -40,7 +40,7 @@ class SymbTable():
 
     def put_tipo (self, lexema, token, tipo):
         for line in self.tabela:
-            if line['token'] == token and line['lexema'] == lexema :
+            if line['token'] == token and line['lexema'] == lexema: 
                 line.update(('tipo', tipo) for chave, valor in line.items())
         
             #if line['token'] == token and line['lexema'] == lexema :
@@ -66,7 +66,8 @@ class SymbTable():
 
         for line in self.tabela:
             if line['lexema'] is line['token']:
-                impressao_bonita('reservada', line['lexema'], line['token'])
+                impressao_bonita('reservada', line['lexema'], line['token'], line['tipo'])
+                #print (line['tipo'])
             else:
-                impressao_bonita('repetida', line['lexema'], line['token'])
+                impressao_bonita('repetida', line['lexema'], line['token'], line['tipo'])
         impressao_bonita('linha')

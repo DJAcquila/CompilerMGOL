@@ -66,7 +66,7 @@ def token_def(token):
 def repeat_to_length(string_to_expand, length):
     return (string_to_expand * (int(length/len(string_to_expand))+1))[:length]
 
-def impressao_bonita(id, acumulated = 0, token = ''):
+def impressao_bonita(id, acumulated = 0, token = '', tipo=''):
 	if id == 'titulo':
 		print(bcolors.BOLD +"|%-10s LEXEMA %-11s| %-10s TOKEN %-10s | %-10s TIPO  %-10s |" % (' ', ' ', ' ', ' ',' ', ' ') + bcolors.END )
 	elif id == 'linha':
@@ -78,10 +78,10 @@ def impressao_bonita(id, acumulated = 0, token = ''):
 	elif id == 'reservada':
 		if ('\n' in acumulated):
 			acumulated = acumulated.replace('\n','\\n')
-		print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token, ' ',' ',' ')+bcolors.END)
+		print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-11s %-4s| %-10s  %-10s %-5s|" % (' ', acumulated, ' ', token, ' ',' ', tipo, ' ')+bcolors.END)
 	elif id == 'repetida':
 		if ('\n' in acumulated):
 			acumulated = acumulated.replace('\n','\\n')
-		print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s   %-15s|" % (' ', acumulated, ' ', token_def(token), ' ',' ',' ')+bcolors.END)
+		print(bcolors.BOLD+"|%-2s  %-25s| %-10s  %-10s %-5s| %-10s  %-10s %-5s|" % (' ', acumulated, ' ', token_def(token), ' ',' ', tipo,' ')+bcolors.END)
 	else:
 		print("%-3s %-3s ERRO! %-5s Caracter: %-24s  %-43s" % (bcolors.RED , bcolors.BOLD, bcolors.END, acumulated,' '))
