@@ -141,10 +141,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 									flag_a_novo = 1
 									print('struct Semantico: {} {}'.format(val_semantico['lexema'],val_semantico['tipo']))
 							else:
-								print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-								#print(accept[[1]])
-								print('@@@@@@@@@@@@@@@@@@ flag erro @@@@@@@@@@@@@@@@@@@@@@@@')
-								print('2Erro lexico: {}'.format(accept[1]))
+								print('Erro lexico: {}'.format(accept[1]))
 								flag_sintatico = 1
 						else:
 							a[2] = '$'
@@ -325,6 +322,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							arq_obj.write('\n')
 							arq_obj.close()
 						else:
+							flag_sintatico = 1
 							print('Erro semantico: Tipos diferentes para atribuição. {} {}'.format(LD['tipo'],tipo_teste['tipo']))
 						tipo_erro = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(tipo_erro)
@@ -350,6 +348,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.write('\n')
 						arq_obj.close()
 					else:
+						flag_sintatico = 1
 						print ('Erro semantico: Operandos {} {} com tipos incompativeis.'.format(OPRD1['tipo'],OPRD2['tipo']))
 						LD = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(LD)
@@ -370,6 +369,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						OPRD = {'lexema':tipo_teste['lexema'], 'token':tipo_teste['token'],'tipo':tipo_teste['tipo']}
 						pilha_semantico.empilha(OPRD)
 					else:
+						flag_sintatico = 1
 						print('Erro semantico: Variavel {} nao declarada.'.format(identificador['lexema']))
 						OPRD = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(OPRD)
@@ -431,6 +431,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.write('\n')
 						arq_obj.close()
 					else:
+						flag_sintatico = 1
 						print ('Erro semantico: Operandos {} {} com tipos incompativeis. linha {} coluna {}'.format(OPRD1['tipo'],OPRD2['tipo'],linha_s0,coluna_s0))
 						print('pilha: {}'.format(pilha_semantico.dados))
 						EXP = {'lexema':'', 'token':'','tipo':''}

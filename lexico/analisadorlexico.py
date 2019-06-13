@@ -87,20 +87,23 @@ class DFA():
 				return self.acceptStates[state], acumulated, token_def(self.statesToken[state]), ''
 
 			else:
-				if aspas == 1 and c != '"':
-					acumulated_string = acumulated+': Nao fechou aspas ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
-					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
-					vetor_erros.append(dicionario_erro)
-					erro+=1
-					return 'erro', acumulated_string, None, None
-				elif colchetes == 1 and c != '}':
-					acumulated_string = acumulated+':Nao fechou colchetes ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
-					dicionario_erro = {'acumulated': acumulated_string, 'token': token}
-					vetor_erros.append(dicionario_erro)
-					erro+=1
-					return 'erro', acumulated_string, None, None
+				if state != 0:
+					if aspas == 1 and c != '"':
+						acumulated_string = acumulated+': Nao fechou aspas ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
+						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
+						vetor_erros.append(dicionario_erro)
+						erro+=1
+						return 'erro', acumulated_string, None, None
+					elif colchetes == 1 and c != '}':
+						acumulated_string = acumulated+':Nao fechou colchetes ('+ bcolors.GREEN + bcolors.BOLD +'linha: ' + bcolors.END + str(self.file.linha)+ bcolors.GREEN + bcolors.BOLD + ' coluna: '+ bcolors.END+str(self.file.coluna)+')'
+						dicionario_erro = {'acumulated': acumulated_string, 'token': token}
+						vetor_erros.append(dicionario_erro)
+						erro+=1
+						return 'erro', acumulated_string, None, None
+					else:
+						return False, None, 'Comentario', None
 				else:
-					return 'erro', None, None, None
+					return False, None, 'Comentario', None
 
 		except KeyError:
 
