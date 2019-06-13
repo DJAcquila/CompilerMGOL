@@ -262,7 +262,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						else:
 							flag_sintatico = 1
 							print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
-							
+
 					else:
 						flag_sintatico = 1
 						print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
@@ -409,7 +409,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.write(str(var_temp))
 						arq_obj.write(OPRD1['lexema'])
 						arq_obj.write(' ')
-						arq_obj.write(opm['tipo'])
+						arq_obj.write(opr['tipo'])
 						arq_obj.write(' ')
 						arq_obj.write(OPRD2['lexema'])
 						arq_obj.write('\n')
