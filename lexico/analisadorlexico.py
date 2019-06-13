@@ -20,7 +20,7 @@ class DFA():
 		self.acceptStates = [False] * self.statesNum
 		self.statesToken = [T.noToken] * self.statesNum
 		self.file = file
-		
+
 
 	def set_DFA(self, src_state, char, target_state):
 		self.transitions[src_state][char] = target_state
@@ -32,7 +32,7 @@ class DFA():
 	def retreat(self):
 		self.file.dec_ponteiro()
 		self.file.dec_col()
-		
+
 	def advance(self):
 		self.file.inc_ponteiro()
 		self.file.inc_col()
@@ -42,23 +42,23 @@ class DFA():
 		global vetor_erros
 		state = 0
 		token = self.statesToken[state]
-		
+
 		acumulated = ''
 		aspas = 0
 		colchetes = 0
 		try:
 			while (self.file.ponteiro < self.file.eof):
-				
+
 				self.file.file_seek()
 				c = self.file.get_char()
 
 				self.advance()
-			
+
 				if state == 0 and c == '"':
 					aspas = 1
 				if state == 0 and c == '{':
 					colchetes = 1
-					
+
 				state = self.transitions[state][c]
 				token = self.statesToken[state]
 				if state != 0:
@@ -68,7 +68,7 @@ class DFA():
 					self.file.set_col(0)
 
 			acumulated = acumulated.replace('\n','\\n')
-			acumulated = acumulated.replace('\t','\\t')	
+			acumulated = acumulated.replace('\t','\\t')
 
 
 			if token is 'id':
@@ -103,7 +103,7 @@ class DFA():
 					return 'erro', None, None, None
 
 		except KeyError:
-			
+
 			acumulated = acumulated.replace('\n','\\n')
 			acumulated = acumulated.replace('\t','\\t')
 			if state != 0:
@@ -156,13 +156,13 @@ class LEX_DFA():
 	def __init__(self, file):
 		self.dfa = DFA(21, file)
 		self.load_DFA()
-		
+
 	'''
 		Constroi o DFA
 	'''
 	def load_DFA(self):
 		global TOKEN
-		T = TOKEN 
+		T = TOKEN
 		#Ignora (comentario, pulo de linha e espaço)
 		self.dfa.set_DFA(0, ' ', 0)
 		self.dfa.set_DFA(0, '\n', 0)
@@ -253,10 +253,10 @@ def parse(file, verbose = False):
 
 	lex = LEX_DFA(file)
 	tabela_simbolos = SymbTable()
-	
+
 	try:
 		accept = False, None, None, None
-		
+
 		while(accept[0] is not True):
 			if (file.ponteiro < file.eof):
 				accept = lex.dfa.lexico(tabela_simbolos)
