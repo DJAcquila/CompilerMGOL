@@ -80,14 +80,12 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						else:
 							val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
 
-						val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[3]}
 						pilha_semantico.empilha(val_semantico)
 						flag_a_novo = 1
 						print('struct Semantico: {}'.format(val_semantico['lexema']))
 				else:
 					print('erro lexico: {}'.format(accept[1])) #impressao dos erros lexicos
 					flag_sintatico = 1
-					print('1@@@@@@@@@@@@@@@@@@ flag erro @@@@@@@@@@@@@@@@@@@@@@@@')
 
 			else:
 				a[2] = '$'#caso nao haja mais tokens, indica eof
@@ -117,13 +115,9 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				while(accept[0] == 'erro' or accept[2] == 'Comentario'):
 					try:
 						accept = False, None, None, None
-						print(file.ponteiro)
-						print(file.eof)
+
 						if (file.ponteiro < file.eof):
 							accept = lex.dfa.lexico(tabela_simbolos)
-							print(str(accept[0]))
-							print(file.ponteiro)
-							print(file.eof)
 							if accept[0] != 'erro':
 								linha_s = linha_s0
 								coluna_s = coluna_s0
@@ -136,10 +130,21 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								if accept[2] == 'Comentario':
 									pass
 								else:
-									val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[3]}
+									if accept[2] == 'rcb':
+										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'='}
+									elif accept[2] == 'opr':
+										if accept[1] == '<>':
+											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'!='}
+										elif accept[1] == '=':
+											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'=='}
+										else:
+											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
+									else:
+										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
+
 									pilha_semantico.empilha(val_semantico)
 									flag_a_novo = 1
-									print('struct Semantico: {} {}'.format(val_semantico['lexema'],val_semantico['tipo']))
+									print('struct Semantico: {}'.format(val_semantico['lexema']))
 							else:
 								print('Erro lexico: {}'.format(accept[1]))
 								flag_sintatico = 1
@@ -166,7 +171,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
 						#SEMANTICO
 			resultado = regras.loc[red]['Semantico']
-			#print('pilha: {}'.format(pilha_semantico.dados))
+			print('pilha: {}'.format(pilha_semantico.dados))
 			a_repetido = 0
 			if resultado == '-':
 				if flag_a_novo:
@@ -587,13 +592,21 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								if accept[2] not in conj_follow:
 									accept = ['erro']
 								else:
-									if accept[2] == 'Comentario':
-										pass
+									if accept[2] == 'rcb':
+										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'='}
+									elif accept[2] == 'opr':
+										if accept[1] == '<>':
+											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'!='}
+										elif accept[1] == '=':
+											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'=='}
+										else:
+											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
 									else:
-										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[3]}
-										pilha_semantico.empilha(val_semantico)
-										flag_a_novo = 1
-										print('struct Semantico: {}'.format(val_semantico['lexema']))
+										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
+
+									pilha_semantico.empilha(val_semantico)
+									flag_a_novo = 1
+									print('struct Semantico: {}'.format(val_semantico['lexema']))
 
 							else:
 								print('Erro lexico: {}'.format(accept[1]))
