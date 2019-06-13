@@ -68,6 +68,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					if accept[2] == 'Comentario':
 						pass
 					else:
+
 						val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[3]}
 						pilha_semantico.empilha(val_semantico)
 						flag_a_novo = 1
