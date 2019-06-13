@@ -68,6 +68,17 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					if accept[2] == 'Comentario':
 						pass
 					else:
+						if accept[2] == 'rcb':
+							val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'='}
+						elif accept[2] == 'opr':
+							if accept[1] == '<>':
+								val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'!='}
+							elif accept[1] == '=':
+								val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'=='}
+							else:
+								val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
+						else:
+							val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
 
 						val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[3]}
 						pilha_semantico.empilha(val_semantico)
@@ -131,7 +142,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 									print('struct Semantico: {} {}'.format(val_semantico['lexema'],val_semantico['tipo']))
 							else:
 								print('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-								print(accept[[1]])
+								#print(accept[[1]])
 								print('@@@@@@@@@@@@@@@@@@ flag erro @@@@@@@@@@@@@@@@@@@@@@@@')
 								print('2Erro lexico: {}'.format(accept[1]))
 								flag_sintatico = 1
@@ -326,11 +337,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					OPRD1 = pilha_semantico.desempilha()
 					if OPRD1['tipo'] != 'lit' and (OPRD2['tipo'] == OPRD1['tipo']):
 						var_temp+=1
-						LD = {'lexema':'T'+var_temp, 'token':'','tipo':''}
+						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':''}
 						pilha_semantico.empilha(LD)
 						arq_obj = open('programa.c', 'a+')
 						arq_obj.write('T')
-						arq_obj.write(var_temp)
+						arq_obj.write(str(var_temp))
 						arq_obj.write(OPRD1['lexema'])
 						arq_obj.write(' ')
 						arq_obj.write(opm['tipo'])
@@ -407,11 +418,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					OPRD1 = pilha_semantico.desempilha()
 					if OPRD1['tipo'] != 'lit' and (OPRD2['tipo'] == OPRD1['tipo']):
 						var_temp+=1
-						EXP = {'lexema':'T'+var_temp, 'token':'','tipo':''}
+						EXP = {'lexema':'T'+str(var_temp), 'token':'','tipo':''}
 						pilha_semantico.empilha(EXP)
 						arq_obj = open('programa.c', 'a+')
 						arq_obj.write('T')
-						arq_obj.write(var_temp)
+						arq_obj.write(str(var_temp))
 						arq_obj.write(OPRD1['lexema'])
 						arq_obj.write(' ')
 						arq_obj.write(opm['tipo'])
