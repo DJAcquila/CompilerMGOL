@@ -410,7 +410,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					while count_tab < qnt_tabs:
 						arq_obj.write('\t')
 						count_tab+=1
-					arq_obj.write('if('+expressao['lexema']+')\n')
+					arq_obj.write('if('+expressao['lexema']+'){\n')
 					arq_obj.close()
 					cabecalho = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(cabecalho)
@@ -461,7 +461,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					count_tab = 0
 					while count_tab < qnt_tabs:
 						arq_obj.write('\t')
-						count_tab+=1 
+						count_tab+=1
 					arq_obj.write('while('+expressao['lexema']+'){\n')
 					arq_obj.close()
 					w = {'lexema':'', 'token':'','tipo':''}
