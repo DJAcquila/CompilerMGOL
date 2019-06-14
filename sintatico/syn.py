@@ -339,7 +339,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					print("*******tipo: {}".format(OPRD2['tipo']))
 					if OPRD1['tipo'] != 'lit' and ((OPRD2['tipo'] == OPRD1['tipo'])):
 						var_temp+=1
-						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':''}
+						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD2['tipo']}
 						pilha_semantico.empilha(LD)
 						arq_obj = open('programa.c', 'a+')
 						arq_obj.write('T')
