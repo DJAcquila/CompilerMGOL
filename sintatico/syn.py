@@ -249,21 +249,21 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							while count_tab < qnt_tabs:
 								arq_obj.write('\t')
 								count_tab+=1
-							arq_obj.write('scanf(\"%s\",'+tipo_teste['lexema']+')\n')
+							arq_obj.write('scanf(\"%s\",'+tipo_teste['lexema']+');\n')
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'inteiro':
 							arq_obj = open('rascunho.c', 'a+')
 							while count_tab < qnt_tabs:
 								arq_obj.write('\t')
 								count_tab+=1
-							arq_obj.write('scanf(\"%d\",'+tipo_teste['lexema']+')\n')
+							arq_obj.write('scanf(\"%d\",'+tipo_teste['lexema']+');\n')
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'real':
 							arq_obj = open('rascunho.c', 'a+')
 							while count_tab < qnt_tabs:
 								arq_obj.write('\t')
 								count_tab+=1
-							arq_obj.write('scanf(\"%lf\",'+tipo_teste['lexema']+')\n')
+							arq_obj.write('scanf(\"%lf\",'+tipo_teste['lexema']+');\n')
 							arq_obj.close()
 						else:
 							flag_sintatico = 1

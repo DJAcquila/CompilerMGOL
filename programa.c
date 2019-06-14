@@ -15,9 +15,9 @@ void main (void)
 
 
 	printf("Digite um nome:");
-	scanf("%s",A)
+	scanf("%s",A);
 	printf("Digite um numero:");
-	scanf("%d",B)
+	scanf("%d",B);
 	B = 2
 	B = 3
 	T0=B+1
