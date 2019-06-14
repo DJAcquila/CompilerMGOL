@@ -329,7 +329,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							while count_tab < qnt_tabs:
 								arq_obj.write('\t')
 								count_tab+=1
-							arq_obj.write(identificador['lexema']+' '+rcb['tipo']+' '+LD['lexema']+'\n')
+							arq_obj.write(identificador['lexema']+' '+rcb['tipo']+' '+LD['lexema']+';\n')
 							arq_obj.close()
 						else:
 							flag_sintatico = 1
@@ -355,7 +355,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						while count_tab < qnt_tabs:
 							arq_obj.write('\t')
 							count_tab+=1
-						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opm['tipo']+OPRD2['lexema']+'\n')
+						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opm['tipo']+OPRD2['lexema']+';\n')
 						arq_obj.close()
 					else:
 						flag_sintatico = 1
@@ -429,7 +429,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						while count_tab < qnt_tabs:
 							arq_obj.write('\t')
 							count_tab+=1
-						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opr['tipo']+OPRD2['lexema']+'\n')
+						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opr['tipo']+OPRD2['lexema']+';\n')
 						arq_obj.close()
 					else:
 						flag_sintatico = 1
