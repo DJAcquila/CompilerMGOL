@@ -49,6 +49,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 	a_antigo = a
 	flag_a_antigo = 3
 	flag_a_novo = 0
+	qnt_tabs = 1
 
 	var_temp = -1
 	pilha = Pilha()
@@ -242,16 +243,26 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.desempilha()
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
 					if tipo_teste:
+						count_tab = 0
 						if tipo_teste['tipo'] == 'lit':
 							arq_obj = open('rascunho.c', 'a+')
+							while count_tab < qnt_tabs:
+								arq_obj.write('\t')
+								count_tab+=1
 							arq_obj.write('scanf(\"%s\",'+tipo_teste['lexema']+')\n')
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'inteiro':
 							arq_obj = open('rascunho.c', 'a+')
+							while count_tab < qnt_tabs:
+								arq_obj.write('\t')
+								count_tab+=1
 							arq_obj.write('scanf(\"%d\",'+tipo_teste['lexema']+')\n')
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'real':
 							arq_obj = open('rascunho.c', 'a+')
+							while count_tab < qnt_tabs:
+								arq_obj.write('\t')
+								count_tab+=1
 							arq_obj.write('scanf(\"%lf\",'+tipo_teste['lexema']+')\n')
 							arq_obj.close()
 						else:
@@ -269,6 +280,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					argumento = pilha_semantico.desempilha()
 					escreva = pilha_semantico.desempilha()
 					arq_obj = open('rascunho.c', 'a+')
+					count_tab = 0
+					while count_tab < qnt_tabs:
+						arq_obj.write('\t')
+						count_tab+=1
 					arq_obj.write('printf('+argumento['lexema']+');\n')
 					arq_obj.close()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
@@ -310,6 +325,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
 						if LD['tipo'] == tipo_teste['tipo']:
 							arq_obj = open('rascunho.c', 'a+')
+							count_tab = 0
+							while count_tab < qnt_tabs:
+								arq_obj.write('\t')
+								count_tab+=1
 							arq_obj.write(identificador['lexema']+' '+rcb['tipo']+' '+LD['lexema']+'\n')
 							arq_obj.close()
 						else:
@@ -332,6 +351,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD2['tipo']}
 						pilha_semantico.empilha(LD)
 						arq_obj = open('rascunho.c', 'a+')
+						count_tab = 0
+						while count_tab < qnt_tabs:
+							arq_obj.write('\t')
+							count_tab+=1
 						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opm['tipo']+OPRD2['lexema']+'\n')
 						arq_obj.close()
 					else:
@@ -368,6 +391,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					COND = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(COND)
 					arq_obj = open('rascunho.c', 'a+')
+					qnt_tabs-=1
+					count_tab = 0
+					while count_tab < qnt_tabs:
+						arq_obj.write('\t')
+						count_tab+=1
 					arq_obj.write('}\n')
 					arq_obj.close()
 				elif num_semantico == 24:
@@ -378,10 +406,15 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					abrep = pilha_semantico.desempilha()
 					se = pilha_semantico.desempilha()
 					arq_obj = open('rascunho.c', 'a+')
+					count_tab = 0
+					while count_tab < qnt_tabs:
+						arq_obj.write('\t')
+						count_tab+=1
 					arq_obj.write('if('+expressao['lexema']+')\n')
 					arq_obj.close()
 					cabecalho = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(cabecalho)
+					qnt_tabs+=1
 				elif num_semantico == 25:
 					a_repetido = pilha_semantico.desempilha()
 					OPRD2 = pilha_semantico.desempilha()
@@ -392,6 +425,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						EXP = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD1['tipo']}
 						pilha_semantico.empilha(EXP)
 						arq_obj = open('rascunho.c', 'a+')
+						count_tab = 0
+						while count_tab < qnt_tabs:
+							arq_obj.write('\t')
+							count_tab+=1
 						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opr['tipo']+OPRD2['lexema']+'\n')
 						arq_obj.close()
 					else:
@@ -406,6 +443,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					REP = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(REP)
 					arq_obj = open('rascunho.c', 'a+')
+					qnt_tabs-=1
+					count_tab = 0
+					while count_tab < qnt_tabs:
+						arq_obj.write('\t')
+						count_tab+=1
 					arq_obj.write('}\n')
 					arq_obj.close()
 				elif num_semantico == 34:
@@ -416,10 +458,15 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					abrep = pilha_semantico.desempilha()
 					enquanto = pilha_semantico.desempilha()
 					arq_obj = open('rascunho.c', 'a+')
+					count_tab = 0
+					while count_tab < qnt_tabs:
+						arq_obj.write('\t')
+						count_tab+=1 
 					arq_obj.write('while('+expressao['lexema']+'){\n')
 					arq_obj.close()
 					w = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(w)
+					qnt_tabs+=1
 						#SEMANICO
 				#print(pilha_semantico.topo())
 				pilha_semantico.empilha(a_repetido)
