@@ -8,10 +8,14 @@ from common.symbtable.table import SymbTable
 from common.file.fileHandler import FileHandler
 from lexico.analisadorlexico import *
 import array
+import os
 
-#Sempre que roda o programa o arquivo programa.c é apagado
-arq_obj = open('programa.c','w')
+#Sempre que roda o programa o arquivo rascunho.c é apagado
+arq_obj = open('rascunho.c','w')
 arq_obj.close()
+
+arq_obj_final = open('programa.c', 'w')
+arq_obj_final.close()
 
 class Pilha(object): #pilha utilizada para guardar estados no algoritmo sintatico
 	def __init__(self):
@@ -193,7 +197,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			else:
 				num_semantico = int(resultado)
 				if num_semantico == 5:
-					arq_obj = open('programa.c', 'a+')
+					arq_obj = open('rascunho.c', 'a+')
 					arq_obj.write('\n\n\n')
 					arq_obj.close()
 					a_repetido = pilha_semantico.desempilha()
@@ -203,17 +207,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.empilha(val_semantico)
 				elif num_semantico == 6:
 					a_repetido = pilha_semantico.desempilha()
-					arq_obj = open('programa.c', 'a+')
+					arq_obj = open('rascunho.c', 'a+')
 					pilha_semantico.desempilha()
 					tipo = pilha_semantico.desempilha()
 					ident = pilha_semantico.desempilha()
 					tabela_simbolos.put_tipo(ident['lexema'],ident['token'],tipo['tipo'])
 					#print(tabela_simbolos.get_symbol(ident['lexema'],ident['token']))
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
-					arq_obj.write(tipo['tipo'])
-					arq_obj.write(' ')
-					arq_obj.write(ident['lexema'])
-					arq_obj.write('\n')
+					arq_obj.write(tipo['tipo']+' '+ident['lexema']+';\n')
 					arq_obj.close()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(val_semantico)
@@ -242,21 +243,21 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
 					if tipo_teste:
 						if tipo_teste['tipo'] == 'lit':
-							arq_obj = open('programa.c', 'a+')
+							arq_obj = open('rascunho.c', 'a+')
 							arq_obj.write('scanf(\"%s\",')
 							arq_obj.write(tipo_teste['lexema'])
 							arq_obj.write(')')
 							arq_obj.write('\n')
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'inteiro':
-							arq_obj = open('programa.c', 'a+')
+							arq_obj = open('rascunho.c', 'a+')
 							arq_obj.write('scanf(\"%d\",')
 							arq_obj.write(tipo_teste['lexema'])
 							arq_obj.write(')')
 							arq_obj.write('\n')
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'real':
-							arq_obj = open('programa.c', 'a+')
+							arq_obj = open('rascunho.c', 'a+')
 							arq_obj.write('scanf(\"%lf\",')
 							arq_obj.write(tipo_teste['lexema'])
 							arq_obj.write(')')
@@ -276,7 +277,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.desempilha()
 					argumento = pilha_semantico.desempilha()
 					escreva = pilha_semantico.desempilha()
-					arq_obj = open('programa.c', 'a+')
+					arq_obj = open('rascunho.c', 'a+')
 					arq_obj.write('printf(')
 					arq_obj.write(argumento['lexema'])
 					arq_obj.write(');\n')
@@ -319,7 +320,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					#print(tipo_teste['tipo'])
 					if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
 						if LD['tipo'] == tipo_teste['tipo']:
-							arq_obj = open('programa.c', 'a+')
+							arq_obj = open('rascunho.c', 'a+')
 							arq_obj.write(identificador['lexema'])
 							arq_obj.write(' ')
 							arq_obj.write(rcb['tipo'])
@@ -330,7 +331,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						else:
 							flag_sintatico = 1
 							tabela_simbolos.print_table()
-							print('Erro semântico: Tipos diferentes para atribuição. '+ LD['tipo']+' '+tipo_teste['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							print('Erro semântico: Tipos diferentes para atribuição. '+ LD['tipo']+' e '+tipo_teste['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 						tipo_erro = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(tipo_erro)
 				elif num_semantico == 18:
@@ -346,7 +347,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						var_temp+=1
 						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD2['tipo']}
 						pilha_semantico.empilha(LD)
-						arq_obj = open('programa.c', 'a+')
+						arq_obj = open('rascunho.c', 'a+')
 						arq_obj.write('T')
 						arq_obj.write(str(var_temp))
 						arq_obj.write(' = ')
@@ -359,7 +360,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.close()
 					else:
 						flag_sintatico = 1
-						print('Erro semântico: Tipos diferentes para atribuição. '+ OPRD1['tipo']+' '+OPRD2['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						print('Erro semântico: Tipos diferentes para atribuição. '+ OPRD1['tipo']+' e '+OPRD2['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 						LD = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(LD)
 				elif num_semantico == 19:
@@ -390,7 +391,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.desempilha()
 					COND = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(COND)
-					arq_obj = open('programa.c', 'a+')
+					arq_obj = open('rascunho.c', 'a+')
 					arq_obj.write('}')
 					arq_obj.write('\n')
 					arq_obj.close()
@@ -401,7 +402,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					expressao = pilha_semantico.desempilha()
 					abrep = pilha_semantico.desempilha()
 					se = pilha_semantico.desempilha()
-					arq_obj = open('programa.c', 'a+')
+					arq_obj = open('rascunho.c', 'a+')
 					arq_obj.write('if(')
 					arq_obj.write(expressao['lexema'])
 					arq_obj.write('){')
@@ -418,7 +419,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						var_temp+=1
 						EXP = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD1['tipo']}
 						pilha_semantico.empilha(EXP)
-						arq_obj = open('programa.c', 'a+')
+						arq_obj = open('rascunho.c', 'a+')
 						arq_obj.write('T')
 						arq_obj.write(str(var_temp))
 						arq_obj.write(' = ')
@@ -431,7 +432,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.close()
 					else:
 						flag_sintatico = 1
-						print('Erro semântico: Tipos diferentes para atribuição. '+ OPRD1['tipo']+' '+OPRD2['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						print('Erro semântico: Tipos diferentes para atribuição. '+ OPRD1['tipo']+' e '+OPRD2['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 						EXP = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(EXP)
 				elif num_semantico == 33:
@@ -440,7 +441,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.desempilha()
 					REP = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(REP)
-					arq_obj = open('programa.c', 'a+')
+					arq_obj = open('rascunho.c', 'a+')
 					arq_obj.write('}')
 					arq_obj.write('\n')
 					arq_obj.close()
@@ -451,7 +452,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					expressao = pilha_semantico.desempilha()
 					abrep = pilha_semantico.desempilha()
 					enquanto = pilha_semantico.desempilha()
-					arq_obj = open('programa.c', 'a+')
+					arq_obj = open('rascunho.c', 'a+')
 					arq_obj.write('while(')
 					arq_obj.write(expressao['lexema'])
 					arq_obj.write('){')
@@ -466,8 +467,25 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			if flag_sintatico == 0:
 				print('Analise sintatica realizada. Codigo correto.')
 				tabela_simbolos.print_table()
+				arq_obj_final = open('programa.c', 'a+')
+				arq_obj_final.write('#include<stdio.h>\ntypedef char lit[256];\nvoid main (void)\n{\n\t/*----Variaveis temporarias----*/\n')
+				count_var = 0
+				while (count_var <= var_temp):
+					arq_obj_final.write('\tint T'+str(count_var)+';\n')
+					count_var += 1
+				arq_obj_final.write('\t/*------------------------------*/\n')
+				arq_obj = open('rascunho.c', 'r')
+				for line in arq_obj:
+					arq_obj_final.write(line)
+				arq_obj_final.write('}')
+				arq_obj_final.close()
+				arq_obj.close()
+				os.remove("rascunho.c")
+
 			else:
 				print('Analise sintatica realizada. Codigo incorreto.') #deveria ser aceito, mas como teve erro sintatico não aceita
+				os.remove("rascunho.c")
+				os.remove('programa.c')
 			break
 		else: #ocorre um erro sintatico
 			flag_sintatico = 1 #utilizada para adicionar tokens faltantes

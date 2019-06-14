@@ -1,6 +1,16 @@
-lit A
-inteiro B
-inteiro c
+#include<stdio.h>
+typedef char lit[256];
+void main (void)
+{
+	/*----Variaveis temporarias----*/
+	int T0;
+	int T1;
+	int T2;
+	int T3;
+	/*------------------------------*/
+lit A;
+inteiro B;
+inteiro c;
 
 
 
@@ -22,3 +32,4 @@ printf("texto");
 }
 }
 printf("programa finalizado");
+}
