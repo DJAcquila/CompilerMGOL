@@ -472,7 +472,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				pilha_semantico.empilha(a_repetido)
 		elif 'acc' in tabela_acoes.loc[s][a[2]]: #aceita o arquivo
 			if flag_sintatico == 0:
-				print('Analise sintatica realizada. Codigo correto.')
+				print('Analise sintatica e semantica realizadas. Codigo correto.')
 				tabela_simbolos.print_table()
 				arq_obj_final = open('programa.c', 'a+')
 				arq_obj_final.write('#include<stdio.h>\ntypedef char lit[256];\nvoid main (void)\n{\n\t/*----Variaveis temporarias----*/\n')
@@ -490,7 +490,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				os.remove("rascunho.c")
 
 			else:
-				print('Analise sintatica realizada. Codigo incorreto.') #deveria ser aceito, mas como teve erro sintatico não aceita
+				print('Analise sintatica e semantica realizadas. Codigo incorreto.') #deveria ser aceito, mas como teve erro sintatico não aceita
 				os.remove("rascunho.c")
 				os.remove('programa.c')
 			break
