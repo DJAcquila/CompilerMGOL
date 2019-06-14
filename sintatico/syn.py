@@ -308,8 +308,12 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					LD = pilha_semantico.desempilha()
 					rcb = pilha_semantico.desempilha()
 					identificador = pilha_semantico.desempilha()
-					print(identificador['tipo'])
+					print("*******tipo rcb: {}".format(rcb['tipo']))
+					print("*******tipo LD: {}".format(LD['tipo']))
+					print("*******lexema id: {}".format(identificador['tipo']))
+					print("*******tipo id: {}".format(identificador['tipo']))
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
+					print(tipo_teste['tipo'])
 					if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
 						if LD['tipo'] == tipo_teste['tipo']:
 							arq_obj = open('programa.c', 'a+')
@@ -329,7 +333,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					OPRD2 = pilha_semantico.desempilha()
 					opm = pilha_semantico.desempilha()
 					OPRD1 = pilha_semantico.desempilha()
-					if OPRD1['tipo'] != 'lit' and ((OPRD2['tipo'] == OPRD1['tipo']) or ()):
+					print("*******lexema: {}".format(OPRD1['lexema']))
+					print("*******tipo: {}".format(OPRD1['tipo']))
+					print("*******lexema: {}".format(OPRD2['lexema']))
+					print("*******tipo: {}".format(OPRD2['tipo']))
+					if OPRD1['tipo'] != 'lit' and ((OPRD2['tipo'] == OPRD1['tipo'])):
 						var_temp+=1
 						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':''}
 						pilha_semantico.empilha(LD)
