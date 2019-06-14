@@ -31,7 +31,7 @@ class SymbTable():
             return True
         except:
             raise
-        
+
     def get_symbol(self, lexema, token):
         for line in self.tabela:
             if line['token'] == token and line['lexema'] == lexema :
@@ -40,9 +40,9 @@ class SymbTable():
 
     def put_tipo (self, lexema, token, tipo):
         for line in self.tabela:
-            if line['token'] == token and line['lexema'] == lexema: 
+            if line['token'] == token and line['lexema'] == lexema:
                 line.update(('tipo', tipo) for chave, valor in line.items())
-        
+
             #if line['token'] == token and line['lexema'] == lexema :
 
     def palavra_reservada(self, lexema):

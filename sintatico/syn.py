@@ -294,15 +294,16 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.write('printf('+argumento['lexema']+');\n')
 					else:
 						tipo_teste = tabela_simbolos.get_symbol(argumento['lexema'],argumento['token'])
-						if tipo_teste['tipo'] == 'lit':
-							arq_obj.write('printf(\"%s\",'+argumento['lexema']+');\n')
-						elif tipo_teste['tipo'] == 'real':
-							arq_obj.write('printf(\"%lf\",'+argumento['lexema']+');\n')
-						elif tipo_teste['tipo'] == 'inteiro':
-							arq_obj.write('printf(\"%d\",'+argumento['lexema']+');\n')
-						else:
-							flag_sintatico = 1
-							print('Erro semântico: Variável '+ argumento['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						if type(tipo_teste) is not bool:
+							if tipo_teste['tipo'] == 'lit':
+								arq_obj.write('printf(\"%s\",'+argumento['lexema']+');\n')
+							elif tipo_teste['tipo'] == 'real':
+								arq_obj.write('printf(\"%lf\",'+argumento['lexema']+');\n')
+							elif tipo_teste['tipo'] == 'inteiro':
+								arq_obj.write('printf(\"%d\",'+argumento['lexema']+');\n')
+							else:
+								flag_sintatico = 1
+								print('Erro semântico: Variável '+ argumento['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 					arq_obj.close()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(val_semantico)
@@ -320,14 +321,15 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					a_repetido = pilha_semantico.desempilha()
 					identificador = pilha_semantico.desempilha()
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
-					if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
-						argumento = {'lexema':tipo_teste['lexema'], 'token':tipo_teste['token'],'tipo':tipo_teste['tipo']}
-						pilha_semantico.empilha(tipo_teste)
-					else:
-						flag_sintatico = 1
-						print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
-						tipo_erro = {'lexema':'', 'token':'','tipo':''}
-						pilha_semantico.empilha(tipo_erro)
+					if type(tipo_teste) is not bool:
+						if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
+							argumento = {'lexema':tipo_teste['lexema'], 'token':tipo_teste['token'],'tipo':tipo_teste['tipo']}
+							pilha_semantico.empilha(tipo_teste)
+						else:
+							flag_sintatico = 1
+							print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							tipo_erro = {'lexema':'', 'token':'','tipo':''}
+							pilha_semantico.empilha(tipo_erro)
 				elif num_semantico == 17:
 					a_repetido = pilha_semantico.desempilha()
 					pilha_semantico.desempilha()
@@ -340,21 +342,22 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					print("*******tipo id: {}".format(identificador['tipo']))'''
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
 					#print(tipo_teste['tipo'])
-					if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
-						if LD['tipo'] == tipo_teste['tipo']:
-							arq_obj = open('rascunho.c', 'a+')
-							count_tab = 0
-							while count_tab < qnt_tabs:
-								arq_obj.write('\t')
-								count_tab+=1
-							arq_obj.write(identificador['lexema']+' '+rcb['tipo']+' '+LD['lexema']+';\n')
-							arq_obj.close()
-						else:
-							flag_sintatico = 1
-							tabela_simbolos.print_table()
-							print('Erro semântico: Tipos diferentes para atribuição. '+ LD['tipo']+' e '+tipo_teste['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
-						tipo_erro = {'lexema':'', 'token':'','tipo':''}
-						pilha_semantico.empilha(tipo_erro)
+					if type(tipo_teste) is not bool:
+						if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
+							if LD['tipo'] == tipo_teste['tipo']:
+								arq_obj = open('rascunho.c', 'a+')
+								count_tab = 0
+								while count_tab < qnt_tabs:
+									arq_obj.write('\t')
+									count_tab+=1
+								arq_obj.write(identificador['lexema']+' '+rcb['tipo']+' '+LD['lexema']+';\n')
+								arq_obj.close()
+							else:
+								flag_sintatico = 1
+								tabela_simbolos.print_table()
+								print('Erro semântico: Tipos diferentes para atribuição. '+ LD['tipo']+' e '+tipo_teste['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							tipo_erro = {'lexema':'', 'token':'','tipo':''}
+							pilha_semantico.empilha(tipo_erro)
 				elif num_semantico == 18:
 					a_repetido = pilha_semantico.desempilha()
 					OPRD2 = pilha_semantico.desempilha()
@@ -389,9 +392,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					a_repetido = pilha_semantico.desempilha()
 					identificador = pilha_semantico.desempilha()
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
-					if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
-						OPRD = {'lexema':tipo_teste['lexema'], 'token':tipo_teste['token'],'tipo':tipo_teste['tipo']}
-						pilha_semantico.empilha(OPRD)
+					if type(tipo_teste) is not bool:
+						if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
+							OPRD = {'lexema':tipo_teste['lexema'], 'token':tipo_teste['token'],'tipo':tipo_teste['tipo']}
+							pilha_semantico.empilha(OPRD)
 					else:
 						flag_sintatico = 1
 						print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
