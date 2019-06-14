@@ -354,7 +354,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								arq_obj.close()
 							else:
 								flag_sintatico = 1
-								tabela_simbolos.print_table()
+								#tabela_simbolos.print_table()
 								print('Erro semântico: Tipos diferentes para atribuição. '+ LD['tipo']+' e '+tipo_teste['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 							tipo_erro = {'lexema':'', 'token':'','tipo':''}
 							pilha_semantico.empilha(tipo_erro)
