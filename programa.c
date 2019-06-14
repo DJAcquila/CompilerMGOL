@@ -25,9 +25,9 @@ void main (void)
 	T1=c+1
 	c = T1
 	T2=B<1
-	if(T2)
+	if(T2){
 		T3=c<2
-		if(T3)
+		if(T3){
 			printf("texto");
 		}
 	}
