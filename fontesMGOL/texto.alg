@@ -28,5 +28,6 @@ inicio
    fimse
 
    escreva "programa finalizado";
+   escreva A;
 
 fim

@@ -290,7 +290,19 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					while count_tab < qnt_tabs:
 						arq_obj.write('\t')
 						count_tab+=1
-					arq_obj.write('printf('+argumento['lexema']+');\n')
+					if '\"' in argumento['lexema']:
+						arq_obj.write('printf('+argumento['lexema']+');\n')
+					else:
+						tipo_teste = tabela_simbolos.get_symbol(argumento['lexema'],argumento['token'])
+						if tipo_teste['tipo'] == 'lit':
+							arq_obj.write('printf(\"%s\",'+argumento['lexema']+');\n')
+						elif tipo_teste['tipo'] == 'real':
+							arq_obj.write('printf(\"%lf\",'+argumento['lexema']+');\n')
+						elif tipo_teste['tipo'] == 'inteiro':
+							arq_obj.write('printf(\"%d\",'+argumento['lexema']+');\n')
+						else:
+							flag_sintatico = 1
+							print('Erro semântico: Variável '+ argumento['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 					arq_obj.close()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(val_semantico)

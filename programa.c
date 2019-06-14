@@ -32,4 +32,5 @@ void main (void)
 		}
 	}
 	printf("programa finalizado");
+	printf("%s",A);
 }
