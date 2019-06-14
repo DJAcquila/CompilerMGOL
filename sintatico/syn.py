@@ -87,7 +87,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 						pilha_semantico.empilha(val_semantico)
 						flag_a_novo = 1
-						print('struct Semantico: {}'.format(val_semantico['lexema']))
+						#print('struct Semantico: {}'.format(val_semantico['lexema']))
 				else:
 					print('erro lexico: {}'.format(accept[1])) #impressao dos erros lexicos
 					flag_sintatico = 1
@@ -130,7 +130,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								a = list(a)
 								linha_s0 = file.linha
 								coluna_s0 = file.coluna - len(accept[1])
-								print(accept[1])
+								#print(accept[1])
 								#tem que ver sobre constante numerica, por causa do exponencial
 								if accept[2] == 'Comentario':
 									pass
@@ -154,7 +154,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 									pilha_semantico.empilha(val_semantico)
 									flag_a_novo = 1
-									print('struct Semantico: {}'.format(val_semantico['lexema']))
+									#print('struct Semantico: {}'.format(val_semantico['lexema']))
 							else:
 								print('Erro lexico: {}'.format(accept[1]))
 								flag_sintatico = 1
@@ -208,7 +208,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					tipo = pilha_semantico.desempilha()
 					ident = pilha_semantico.desempilha()
 					tabela_simbolos.put_tipo(ident['lexema'],ident['token'],tipo['tipo'])
-					print(tabela_simbolos.get_symbol(ident['lexema'],ident['token']))
+					#print(tabela_simbolos.get_symbol(ident['lexema'],ident['token']))
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					arq_obj.write(tipo['tipo'])
 					arq_obj.write(' ')
@@ -220,7 +220,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				elif num_semantico == 7:
 					a_repetido = pilha_semantico.desempilha()
 					inteiro = pilha_semantico.desempilha()
-					print(inteiro['tipo'])
+					#print(inteiro['tipo'])
 					TIPO = {'lexema':'','token':'','tipo':inteiro['tipo']}
 					pilha_semantico.empilha(TIPO)
 				elif num_semantico == 8:
@@ -230,7 +230,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.empilha(TIPO)
 				elif num_semantico == 9:
 					a_repetido = pilha_semantico.desempilha()
-					print(pilha_semantico.topo())
+					#print(pilha_semantico.topo())
 					lit = pilha_semantico.desempilha()
 					TIPO = {'lexema':'','token':'','tipo':lit['tipo']}
 					pilha_semantico.empilha(TIPO)
@@ -311,12 +311,12 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					LD = pilha_semantico.desempilha()
 					rcb = pilha_semantico.desempilha()
 					identificador = pilha_semantico.desempilha()
-					print("*******tipo rcb: {}".format(rcb['tipo']))
+					'''print("*******tipo rcb: {}".format(rcb['tipo']))
 					print("*******tipo LD: {}".format(LD['tipo']))
 					print("*******lexema id: {}".format(identificador['tipo']))
-					print("*******tipo id: {}".format(identificador['tipo']))
+					print("*******tipo id: {}".format(identificador['tipo']))'''
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
-					print(tipo_teste['tipo'])
+					#print(tipo_teste['tipo'])
 					if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
 						if LD['tipo'] == tipo_teste['tipo']:
 							arq_obj = open('programa.c', 'a+')
@@ -460,7 +460,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					w = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(w)
 						#SEMANICO
-				print(pilha_semantico.topo())
+				#print(pilha_semantico.topo())
 				pilha_semantico.empilha(a_repetido)
 		elif 'acc' in tabela_acoes.loc[s][a[2]]: #aceita o arquivo
 			if flag_sintatico == 0:
@@ -599,7 +599,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 									pilha_semantico.empilha(val_semantico)
 									flag_a_novo = 1
-									print('struct Semantico: {}'.format(val_semantico['lexema']))
+									#print('struct Semantico: {}'.format(val_semantico['lexema']))
 
 							else:
 								print('Erro lexico: {}'.format(accept[1]))
