@@ -184,7 +184,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 
 			pilha.empilha(int(tabela_desvios.loc[t][Ant]))
 			print(regras.loc[red]['Antecedente']+'->'+regras.loc[red]['Consequente']+'\n')
-						#SEMANTICO
+			############################SEMANTICO############################
 			resultado = regras.loc[red]['Semantico']
 			#print('pilha: {}'.format(pilha_semantico.dados))
 			a_repetido = 0
@@ -485,13 +485,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					w = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(w)
 					qnt_tabs+=1
-						#SEMANICO
 				#print(pilha_semantico.topo())
 				pilha_semantico.empilha(a_repetido)
+				############################SEMANTICO############################
 		elif 'acc' in tabela_acoes.loc[s][a[2]]: #aceita o arquivo
 			if flag_sintatico == 0:
 				print('Analise sintatica e semantica realizadas. Codigo correto.')
 				tabela_simbolos.print_table()
+				############################SEMANTICO############################
 				arq_obj_final = open('programa.c', 'a+')
 				arq_obj_final.write('#include<stdio.h>\ntypedef char literal[256];\nvoid main (void)\n{\n\t/*----Variaveis temporarias----*/\n')
 				count_var = 0
@@ -506,7 +507,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				arq_obj_final.close()
 				arq_obj.close()
 				os.remove("rascunho.c")
-
+				############################SEMANTICO############################
 			else:
 				print('Analise sintatica e semantica realizadas. Codigo incorreto.') #deveria ser aceito, mas como teve erro sintatico não aceita
 				os.remove("rascunho.c")
