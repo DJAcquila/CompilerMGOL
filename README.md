@@ -27,14 +27,14 @@ optional arguments:
   -h, --help     show this help message and exit
   -l, --lexico   Realiza somente a analise léxica
   -v, --verbose  Ativa o modo verboso do compilador
-  -s, --sintatico Realiza analise sintática
+  -s, --sintatico Realiza analise sintática e semântica
 ```
 Para executar a análise léxica
 
 ```bash 
 $ python3 main.py fontesMGOL/algumarquivo.alg -l
 ```
-Para executar a análise sintática
+Para executar a análise sintática e semântica
 
 ```bash 
 $ python3 main.py fontesMGOL/algumarquivo.alg -s
