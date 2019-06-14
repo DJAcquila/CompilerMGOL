@@ -215,6 +215,12 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					tabela_simbolos.put_tipo(ident['lexema'],ident['token'],tipo['tipo'])
 					#print(tabela_simbolos.get_symbol(ident['lexema'],ident['token']))
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
+					if tipo['tipo'] == 'inteiro':
+						tipo['tipo'] = 'int'
+					elif tipo['tipo'] == 'lit':
+						tipo['tipo'] = 'literal'
+					elif tipo['tipo'] == 'real':
+						tipo['tipo'] = 'double'
 					arq_obj.write('\t'+tipo['tipo']+' '+ident['lexema']+';\n')
 					arq_obj.close()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
@@ -256,14 +262,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							while count_tab < qnt_tabs:
 								arq_obj.write('\t')
 								count_tab+=1
-							arq_obj.write('scanf(\"%d\",'+tipo_teste['lexema']+');\n')
+							arq_obj.write('scanf(\"%d\",&'+tipo_teste['lexema']+');\n')
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'real':
 							arq_obj = open('rascunho.c', 'a+')
 							while count_tab < qnt_tabs:
 								arq_obj.write('\t')
 								count_tab+=1
-							arq_obj.write('scanf(\"%lf\",'+tipo_teste['lexema']+');\n')
+							arq_obj.write('scanf(\"%lf\",&'+tipo_teste['lexema']+');\n')
 							arq_obj.close()
 						else:
 							flag_sintatico = 1
@@ -475,7 +481,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				print('Analise sintatica e semantica realizadas. Codigo correto.')
 				tabela_simbolos.print_table()
 				arq_obj_final = open('programa.c', 'a+')
-				arq_obj_final.write('#include<stdio.h>\ntypedef char lit[256];\nvoid main (void)\n{\n\t/*----Variaveis temporarias----*/\n')
+				arq_obj_final.write('#include<stdio.h>\ntypedef char literal[256];\nvoid main (void)\n{\n\t/*----Variaveis temporarias----*/\n')
 				count_var = 0
 				while (count_var <= var_temp):
 					arq_obj_final.write('\tint T'+str(count_var)+';\n')

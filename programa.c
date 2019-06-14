@@ -1,5 +1,5 @@
 #include<stdio.h>
-typedef char lit[256];
+typedef char literal[256];
 void main (void)
 {
 	/*----Variaveis temporarias----*/
@@ -8,16 +8,16 @@ void main (void)
 	int T2;
 	int T3;
 	/*------------------------------*/
-	lit A;
-	inteiro B;
-	inteiro c;
+	literal A;
+	int B;
+	int c;
 
 
 
 	printf("Digite um nome:");
 	scanf("%s",A);
 	printf("Digite um numero:");
-	scanf("%d",B);
+	scanf("%d",&B);
 	B = 2;
 	B = 3;
 	T0=B+1;
