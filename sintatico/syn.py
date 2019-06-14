@@ -338,10 +338,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					OPRD2 = pilha_semantico.desempilha()
 					opm = pilha_semantico.desempilha()
 					OPRD1 = pilha_semantico.desempilha()
-					print("*******lexema: {}".format(OPRD1['lexema']))
+					'''print("*******lexema: {}".format(OPRD1['lexema']))
 					print("*******tipo: {}".format(OPRD1['tipo']))
 					print("*******lexema: {}".format(OPRD2['lexema']))
-					print("*******tipo: {}".format(OPRD2['tipo']))
+					print("*******tipo: {}".format(OPRD2['tipo']))'''
 					if OPRD1['tipo'] != 'lit' and ((OPRD2['tipo'] == OPRD1['tipo'])):
 						var_temp+=1
 						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD2['tipo']}
