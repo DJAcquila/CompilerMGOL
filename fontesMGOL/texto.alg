@@ -18,7 +18,7 @@ inicio
    c <- c + 5;
    c <- c+1;
 
-   se (B<1)
+   se (D<1)
    entao
    se (c <2)
      entao
