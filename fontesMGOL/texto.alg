@@ -3,7 +3,7 @@ inicio
    varinicio
       A lit;
       B inteiro;
-      c inteiro;
+      c real;
    varfim;
 
 
@@ -13,10 +13,10 @@ inicio
    escreva "Digite um numero:";
    leia B;
 
-   B <- 2;
-   B <- 3;
-   c <- 2+1;
-   c <- c+1;
+   B <- 2 + B;
+   B <- 3 + B;
+   c <- 2.0;
+   c <- c+1.0;
 
    escreva "programa finalizado";
    escreva A;
