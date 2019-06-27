@@ -52,6 +52,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 	qnt_tabs = 1
 
 	var_temp = -1
+	var_temp_tipo = []
 	pilha = Pilha()
 	pilha_semantico = Pilha()
 	pilha.empilha(0) #empilha 0 para comecar do estado inicial do automato LR 0
@@ -370,6 +371,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					if OPRD1['tipo'] != 'lit' and ((OPRD2['tipo'] == OPRD1['tipo'])):
 						var_temp+=1
 						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD2['tipo']}
+						var_temp_tipo.append({'num': var_temp, 'tipo':OPRD2['tipo']})
 						pilha_semantico.empilha(LD)
 						arq_obj = open('rascunho.c', 'a+')
 						count_tab = 0
@@ -445,6 +447,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					if OPRD1['tipo'] != 'lit' and (OPRD2['tipo'] == OPRD1['tipo']):
 						var_temp+=1
 						EXP = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD1['tipo']}
+						var_temp_tipo.append({'num': var_temp, 'tipo':OPRD1['tipo']})
 						pilha_semantico.empilha(EXP)
 						arq_obj = open('rascunho.c', 'a+')
 						count_tab = 0
@@ -500,8 +503,17 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				arq_obj_final = open('programa.c', 'a+')
 				arq_obj_final.write('#include<stdio.h>\ntypedef char literal[256];\nvoid main (void)\n{\n\t/*----Variaveis temporarias----*/\n')
 				count_var = 0
+				temp = {}
 				while (count_var <= var_temp):
-					arq_obj_final.write('\tint T'+str(count_var)+';\n')
+					for line in var_temp_tipo:
+						if line['num'] == count_var:
+							temp = line
+					if temp['tipo'] == 'inteiro':
+						arq_obj_final.write('\tint T'+str(count_var)+';\n')
+					elif temp['tipo'] == 'real':
+						arq_obj_final.write('\tdouble T'+str(count_var)+';\n')
+					elif temp['tipo'] == 'lit':
+						arq_obj_final.write('\tliteral T'+str(count_var)+';\n')
 					count_var += 1
 				arq_obj_final.write('\t/*------------------------------*/\n')
 				arq_obj = open('rascunho.c', 'r')

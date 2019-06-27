@@ -15,17 +15,8 @@ inicio
 
    B <- 2;
    B <- 3;
-   c <- c + 5;
+   c <- 2+1;
    c <- c+1;
-
-   se (B<1)
-   entao
-   se (c <2)
-     entao
-       escreva "texto";
-     fimse
-
-   fimse
 
    escreva "programa finalizado";
    escreva A;
