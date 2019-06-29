@@ -4,8 +4,8 @@ void main (void)
 {
 	/*----Variaveis temporarias----*/
 	int T0;
-	int T1;
-	double T2;
+	double T1;
+	int T2;
 	/*------------------------------*/
 	literal A;
 	int B;
@@ -13,17 +13,20 @@ void main (void)
 
 
 
-	printf("Digite um nome:");
+	printf("Digite um nome: ");
 	scanf("%s",A);
-	printf("Digite um numero:");
+	printf("Digite um numero: ");
 	scanf("%d",&B);
-	T0=2+B;
+	T0=1+B;
 	B = T0;
-	T1=3+B;
-	B = T1;
 	c = 2.0;
-	T2=c+1.0;
-	c = T2;
-	printf("programa finalizado");
-	printf("%s",A);
+	T1=c+1.0;
+	c = T1;
+	T2=B>=2;
+	if(T2){
+		printf("\nok\n");
+	}
+	printf("\nprograma finalizado\n");
+	printf("%d",B);
+	printf("\n");
 }

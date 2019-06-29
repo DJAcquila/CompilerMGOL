@@ -7,18 +7,23 @@ inicio
    varfim;
 
 
-   escreva "Digite um nome:";
+   escreva "Digite um nome: ";
    leia A;
 
-   escreva "Digite um numero:";
+   escreva "Digite um numero: ";
    leia B;
 
-   B <- 2 + B;
-   B <- 3 + B;
+   {B <- 2 + B;}
+   B <- 1 + B;
    c <- 2.0;
    c <- c+1.0;
 
-   escreva "programa finalizado";
-   escreva A;
+   se (B >= 2) entao
+    escreva "\nok\n";
+   fimse
+
+   escreva "\nprograma finalizado\n";
+   escreva B;
+   escreva "\n";
 
 fim
