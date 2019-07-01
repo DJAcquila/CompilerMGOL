@@ -210,8 +210,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.desempilha()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(val_semantico)
-					print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
-					print("[*] Inserir: Três espaços vazios\n")
+					print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+					print("[!] Inserir: Três espaços vazios\n")
 				elif num_semantico == 6:
 					a_repetido = pilha_semantico.desempilha()
 					arq_obj = open('rascunho.c', 'a+')
@@ -231,7 +231,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					arq_obj.close()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(val_semantico)
-					print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+					print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 					print("[*] Imprimir( {}{} {};{} )\n".format(bcolors.BOLD, tipo['tipo'], ident['lexema'], bcolors.END))
 				elif num_semantico == 7:
 					a_repetido = pilha_semantico.desempilha()
@@ -239,31 +239,26 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					#print(inteiro['tipo'])
 					TIPO = {'lexema':'','token':'','tipo':inteiro['tipo']}
 					pilha_semantico.empilha(TIPO)
-					print("--> Semântico: {}pilha semântica{} <--".format(bcolors.BLUE, bcolors.END))
-					print("[*] Empilhar: TIPO -> TIPO.tipo = {}\n".format(inteiro['tipo']))
+
 				elif num_semantico == 8:
 					a_repetido = pilha_semantico.desempilha()
 					real = pilha_semantico.desempilha()
 					TIPO = {'lexema':'','token':'','tipo':real['tipo']}
 					pilha_semantico.empilha(TIPO)
-					print("--> Semântico: {}pilha semântica{} <--".format(bcolors.BLUE, bcolors.END))
-					print("[*] Empilhar: TIPO -> TIPO.tipo = {}\n".format(real['tipo']))
 				elif num_semantico == 9:
 					a_repetido = pilha_semantico.desempilha()
 					#print(pilha_semantico.topo())
 					lit = pilha_semantico.desempilha()
 					TIPO = {'lexema':'','token':'','tipo':lit['tipo']}
 					pilha_semantico.empilha(TIPO)
-					print("--> Semântico: {}pilha semântica{} <--".format(bcolors.BLUE, bcolors.END))
-					print("[*] Empilhar: TIPO -> TIPO.tipo = {}\n".format(lit['tipo']))
 				elif num_semantico == 11:
 					a_repetido = pilha_semantico.desempilha()
 					pilha_semantico.desempilha()
 					identificador = pilha_semantico.desempilha()
 					pilha_semantico.desempilha()
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
-					print("--> Semântico: {}tabela de símbolos{} <--".format(bcolors.BLUE, bcolors.END))
-					print("[*] Verificar: {}.tipo = {}\n".format(identificador['token'], tipo_teste['tipo']))
+					print("--* Semântico: {}tabela de símbolos{} *--".format(bcolors.BLUE, bcolors.END))
+					print("[!] Verificar: {}.tipo = {}\n".format(identificador['token'], tipo_teste['tipo']))
 					if tipo_teste:
 						count_tab = 0
 						if tipo_teste['tipo'] == 'lit':
@@ -272,7 +267,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								arq_obj.write('\t')
 								count_tab+=1
 							arq_obj.write('scanf(\"%s\",'+tipo_teste['lexema']+');\n')
-							print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+							print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 							print("[*] Imprimir( {}scanf(\"%s\",{});{} )\n".format(bcolors.BOLD, tipo_teste['lexema'], bcolors.END))
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'inteiro':
@@ -281,7 +276,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								arq_obj.write('\t')
 								count_tab+=1
 							arq_obj.write('scanf(\"%d\",&'+tipo_teste['lexema']+');\n')
-							print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+							print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 							print("[*] Imprimir( {}scanf(\"%d\",{});{} )\n".format(bcolors.BOLD, tipo_teste['lexema'], bcolors.BOLD))
 							arq_obj.close()
 						elif tipo_teste['tipo'] == 'real':
@@ -290,7 +285,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								arq_obj.write('\t')
 								count_tab+=1
 							arq_obj.write('scanf(\"%lf\",&'+tipo_teste['lexema']+');\n')
-							print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+							print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 							print("[*] Imprimir( {}scanf(\"%lf\",{});{} )\n".format(bcolors.BOLD, tipo_teste['lexema'], bcolors.END))
 							arq_obj.close()
 						else:
@@ -314,22 +309,22 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						count_tab+=1
 					if '\"' in argumento['lexema']:
 						arq_obj.write('printf('+argumento['lexema']+');\n')
-						print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+						print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 						print("[*] Imprimir( {}printf({});{} )\n".format(bcolors.BOLD, argumento['lexema'], bcolors.END))
 					else:
 						tipo_teste = tabela_simbolos.get_symbol(argumento['lexema'],argumento['token'])
 						if type(tipo_teste) is not bool:
 							if tipo_teste['tipo'] == 'lit':
 								arq_obj.write('printf(\"%s\",'+argumento['lexema']+');\n')
-								print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+								print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 								print("[*] Imprimir( {}printf(\"%s\",{});{} )\n".format(bcolors.BOLD, argumento['lexema'], bcolors.END))
 							elif tipo_teste['tipo'] == 'real':
 								arq_obj.write('printf(\"%lf\",'+argumento['lexema']+');\n')
-								print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+								print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 								print("[*] Imprimir( {}printf(\"%lf\",{});{} )\n".format(bcolors.BOLD, argumento['lexema'], bcolors.END))
 							elif tipo_teste['tipo'] == 'inteiro':
 								arq_obj.write('printf(\"%d\",'+argumento['lexema']+');\n')
-								print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+								print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 								print("[*] Imprimir( {}printf(\"%lf\",{});{} )\n".format(bcolors.BOLD, argumento['lexema'], bcolors.END))
 							else:
 								flag_sintatico = 1
@@ -370,7 +365,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					print("*******tipo LD: {}".format(LD['tipo']))
 					print("*******lexema id: {}".format(identificador['tipo']))
 					print("*******tipo id: {}".format(identificador['tipo']))'''
+
 					tipo_teste = tabela_simbolos.get_symbol(identificador['lexema'],identificador['token'])
+					print("--* Semântico: {}tabela de símbolos{} *--".format(bcolors.BLUE, bcolors.END))
+					print("[!] Verificar: {} declarado ({}.tipo = {})\n".format(identificador['lexema'], identificador['token'], tipo_teste['tipo']))
 					#print(tipo_teste['tipo'])
 					if type(tipo_teste) is not bool:
 						if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
@@ -381,6 +379,9 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 									arq_obj.write('\t')
 									count_tab+=1
 								arq_obj.write(identificador['lexema']+' '+rcb['tipo']+' '+LD['lexema']+';\n')
+								print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+								print("[*] Imprimir( {}{} {} {};{} )\n".format(bcolors.BOLD, identificador['lexema'], rcb['tipo'], LD['lexema'], bcolors.END))
+
 								arq_obj.close()
 							else:
 								flag_sintatico = 1
@@ -410,6 +411,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							arq_obj.write('\t')
 							count_tab+=1
 						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opm['tipo']+OPRD2['lexema']+';\n')
+						print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+						print("[*] Imprimir( {}T{} = {}{}{};{} )\n".format(bcolors.BOLD, var_temp, OPRD1['lexema'],opm['tipo'], OPRD2['lexema'], bcolors.END))
 						arq_obj.close()
 					elif OPRD1['tipo'] == 'lit' or OPRD2['tipo'] == 'lit':
 						flag_sintatico = 1
@@ -457,6 +460,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.write('\t')
 						count_tab+=1
 					arq_obj.write('}\n')
+					print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+					print("[*] Imprimir( {}{}{} )\n".format(bcolors.BOLD, '}',bcolors.END))
 					arq_obj.close()
 				elif num_semantico == 24:
 					a_repetido = pilha_semantico.desempilha()
@@ -471,6 +476,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.write('\t')
 						count_tab+=1
 					arq_obj.write('if('+expressao['lexema']+'){\n')
+					print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+					print("[*] Imprimir( {}if({}){}{} )\n".format(bcolors.BOLD, expressao['lexema'], '{',  bcolors.END))
 					arq_obj.close()
 					cabecalho = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(cabecalho)
@@ -493,6 +500,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							arq_obj.write('\t')
 							count_tab+=1
 						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opr['tipo']+OPRD2['lexema']+';\n')
+						print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+						print("[*] Imprimir( {}T{} = {}{}{};{} )\n".format(bcolors.BOLD, var_temp, OPRD1['lexema'],opr['tipo'], OPRD2['lexema'], bcolors.END))
 						arq_obj.close()
 					elif OPRD1['tipo'] == 'lit' or OPRD2['tipo'] == 'lit':
 						flag_sintatico = 1
@@ -517,10 +526,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					for line in expressao_while:
 						if line['expressao'] == var_temp_while:
 							arq_obj.write(line['expressao']+'='+line['operacao']);
+							print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+							print("[*] Imprimir( {}{}={}{} )\n".format(bcolors.BOLD, line['expressao'],line['operacao'], bcolors.END))
 					while count_tab < qnt_tabs:
 						arq_obj.write('\t')
 						count_tab+=1
 					arq_obj.write('}\n')
+					print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+					print("[*] Imprimir( {}{}{} )\n".format(bcolors.BOLD, '}',bcolors.END))
 					arq_obj.close()
 				elif num_semantico == 34:
 					a_repetido = pilha_semantico.desempilha()
@@ -536,6 +549,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						arq_obj.write('\t')
 						count_tab+=1
 					arq_obj.write('while('+expressao['lexema']+'){\n')
+					print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+					print("[*] Imprimir( {}while({}){}{} )\n".format(bcolors.BOLD, expressao['lexema'], '{', bcolors.END))
 					arq_obj.close()
 					w = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(w)
@@ -545,11 +560,14 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				############################SEMANTICO############################
 		elif 'acc' in tabela_acoes.loc[s][a[2]]: #aceita o arquivo
 			if flag_sintatico == 0:
+				print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
+				print("[*] Arquivo objeto finalizado \n")
 				print('Analise sintatica e semantica realizadas. Codigo correto.')
 				tabela_simbolos.print_table()
 				############################SEMANTICO############################
 				arq_obj_final = open('programa.c', 'a+')
 				arq_obj_final.write('#include<stdio.h>\ntypedef char literal[256];\nvoid main (void)\n{\n\t/*----Variaveis temporarias----*/\n')
+				arq_obj.close()
 				count_var = 0
 				temp = {}
 				while (count_var <= var_temp):

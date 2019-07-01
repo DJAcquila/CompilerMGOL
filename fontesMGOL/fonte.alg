@@ -14,7 +14,9 @@ inicio
    B <- 2;
    B <- 3;
 
-   
+    se (B = 2) entao
+        B <- 9;
+    fimse
 
    {o contador B recebe valor dez e vai decaindo
    com as iteracoes}
