@@ -398,6 +398,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						if tipo_teste['tipo'] == 'lit' or tipo_teste['tipo'] == 'real' or tipo_teste['tipo'] == 'inteiro':
 							OPRD = {'lexema':tipo_teste['lexema'], 'token':tipo_teste['token'],'tipo':tipo_teste['tipo']}
 							pilha_semantico.empilha(OPRD)
+						else:
+							flag_sintatico = 1
+							print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							OPRD = {'lexema':'', 'token':'','tipo':''}
+							pilha_semantico.empilha(OPRD)
 					else:
 						flag_sintatico = 1
 						print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')

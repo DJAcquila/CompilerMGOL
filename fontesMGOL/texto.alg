@@ -18,7 +18,7 @@ inicio
    c <- 2.0;
    c <- c+1.0;
 
-   se (B >= 2) entao
+   se (D >= 2) entao
     escreva "\nok\n";
    fimse
 
