@@ -403,11 +403,6 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 							OPRD = {'lexema':'', 'token':'','tipo':''}
 							pilha_semantico.empilha(OPRD)
-					else:
-						flag_sintatico = 1
-						print('Erro semântico: Variável '+ identificador['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
-						OPRD = {'lexema':'', 'token':'','tipo':''}
-						pilha_semantico.empilha(OPRD)
 				elif num_semantico == 21:
 					a_repetido = pilha_semantico.desempilha()
 					num = pilha_semantico.desempilha()
