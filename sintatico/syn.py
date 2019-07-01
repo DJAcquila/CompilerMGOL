@@ -17,6 +17,8 @@ arq_obj.close()
 arq_obj_final = open('programa.c', 'w')
 arq_obj_final.close()
 
+expressao_while = []
+
 class Pilha(object): #pilha utilizada para guardar estados no algoritmo sintatico
 	def __init__(self):
 		self.dados = []
@@ -55,6 +57,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 	var_temp_tipo = []
 	pilha = Pilha()
 	pilha_semantico = Pilha()
+	var_while = Pilha()
 	pilha.empilha(0) #empilha 0 para comecar do estado inicial do automato LR 0
 	flag_sintatico = 0
 
@@ -370,6 +373,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					print("*******tipo: {}".format(OPRD2['tipo']))'''
 					if OPRD1['tipo'] != 'lit' and ((OPRD2['tipo'] == OPRD1['tipo'])):
 						var_temp+=1
+						while_temp = {'expressao':'T'+str(var_temp),'operacao': OPRD1['lexema']+opm['tipo']+OPRD2['lexema']+';\n'}
+						expressao_while.append(while_temp)
 						LD = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD2['tipo']}
 						var_temp_tipo.append({'num': var_temp, 'tipo':OPRD2['tipo']})
 						pilha_semantico.empilha(LD)
@@ -451,6 +456,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					OPRD1 = pilha_semantico.desempilha()
 					if OPRD1['tipo'] != 'lit' and (OPRD2['tipo'] == OPRD1['tipo']):
 						var_temp+=1
+						while_temp = {'expressao':'T'+str(var_temp),'operacao':OPRD1['lexema']+opr['tipo']+OPRD2['lexema']+';\n'}
+						expressao_while.append(while_temp)
 						EXP = {'lexema':'T'+str(var_temp), 'token':'','tipo':OPRD1['tipo']}
 						var_temp_tipo.append({'num': var_temp, 'tipo':OPRD1['tipo']})
 						pilha_semantico.empilha(EXP)
@@ -480,6 +487,10 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					arq_obj = open('rascunho.c', 'a+')
 					qnt_tabs-=1
 					count_tab = 0
+					var_temp_while = var_while.desempilha()
+					for line in expressao_while:
+						if line['expressao'] == var_temp_while:
+							arq_obj.write(line['expressao']+'='+line['operacao']);
 					while count_tab < qnt_tabs:
 						arq_obj.write('\t')
 						count_tab+=1
@@ -494,6 +505,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					enquanto = pilha_semantico.desempilha()
 					arq_obj = open('rascunho.c', 'a+')
 					count_tab = 0
+					var_while.empilha('T'+str(var_temp))
 					while count_tab < qnt_tabs:
 						arq_obj.write('\t')
 						count_tab+=1

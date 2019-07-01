@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Variaveis globais 
+# Variaveis globais
 
 
 erro = 0
@@ -26,10 +26,11 @@ TOKEN.noToken = 'noToken'
 class bcolors:
     BOLD = '\033[1m'
     GREEN = '\033[92m'
+    BLUE = '\033[94m'
     RED = '\033[91m'
     END = '\033[0m'
 
-'''		
+'''
 Traduzir o token para string
 '''
 def token_def(token):
@@ -42,7 +43,7 @@ def token_def(token):
 		return 'literal'
 	elif token == TOK.id:
 		return 'id'
-	elif token == TOK.Comentario: 
+	elif token == TOK.Comentario:
 		return 'Comentario'
 	elif token == TOK.eof:
 		return 'eof'
