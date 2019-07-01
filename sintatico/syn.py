@@ -380,6 +380,11 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							count_tab+=1
 						arq_obj.write('T'+str(var_temp)+'='+OPRD1['lexema']+opm['tipo']+OPRD2['lexema']+';\n')
 						arq_obj.close()
+					elif OPRD1['tipo'] == 'lit' or OPRD2['tipo'] == 'lit':
+						flag_sintatico = 1
+						print('Erro semântico: Não é possível atribuicao de tipo lit' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						LD = {'lexema':'', 'token':'','tipo':''}
+						pilha_semantico.empilha(LD)
 					else:
 						flag_sintatico = 1
 						print('Erro semântico: Tipos diferentes para atribuição. '+ OPRD1['tipo']+' e '+OPRD2['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
