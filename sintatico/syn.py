@@ -210,6 +210,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					pilha_semantico.desempilha()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(val_semantico)
+					print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+					print("Inserir: Três espaços vazios\n")
 				elif num_semantico == 6:
 					a_repetido = pilha_semantico.desempilha()
 					arq_obj = open('rascunho.c', 'a+')
@@ -229,23 +231,31 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					arq_obj.close()
 					val_semantico = {'lexema':'', 'token':'','tipo':''}
 					pilha_semantico.empilha(val_semantico)
+					print("--> Semântico: {}arquivo objeto{} <--".format(bcolors.BLUE, bcolors.END))
+					print("Imprimir( {} {}; )\n".format(tipo['tipo'], ident['lexema']))
 				elif num_semantico == 7:
 					a_repetido = pilha_semantico.desempilha()
 					inteiro = pilha_semantico.desempilha()
 					#print(inteiro['tipo'])
 					TIPO = {'lexema':'','token':'','tipo':inteiro['tipo']}
 					pilha_semantico.empilha(TIPO)
+					print("--> Semântico: {}pilha semântica{} <--".format(bcolors.BLUE, bcolors.END))
+					print("Empilhar: TIPO\n[*] TIPO.tipo = {}\n".format(inteiro['tipo']))
 				elif num_semantico == 8:
 					a_repetido = pilha_semantico.desempilha()
 					real = pilha_semantico.desempilha()
 					TIPO = {'lexema':'','token':'','tipo':real['tipo']}
 					pilha_semantico.empilha(TIPO)
+					print("--> Semântico: {}pilha semântica{} <--".format(bcolors.BLUE, bcolors.END))
+					print("Empilhar: TIPO\n[*] TIPO.tipo = {}\n".format(real['tipo']))
 				elif num_semantico == 9:
 					a_repetido = pilha_semantico.desempilha()
 					#print(pilha_semantico.topo())
 					lit = pilha_semantico.desempilha()
 					TIPO = {'lexema':'','token':'','tipo':lit['tipo']}
 					pilha_semantico.empilha(TIPO)
+					print("--> Semântico: {}pilha semântica{} <--".format(bcolors.BLUE, bcolors.END))
+					print("Empilhar: TIPO\n[*] TIPO.tipo = {}\n".format(lit['tipo']))
 				elif num_semantico == 11:
 					a_repetido = pilha_semantico.desempilha()
 					pilha_semantico.desempilha()

@@ -2,7 +2,7 @@ inicio
 
     varinicio
         B inteiro;
-        C lit;
+        c lit;
         A real;
     varfim;
 
@@ -13,16 +13,8 @@ inicio
 
    B <- 2;
    B <- 3;
-   c <- B+1;
-   c <- c+1;
-    
-   se (B<1)
-   entao
-     se (c <2)
-     entao
-       escreva "texto";
-     fimse
-   fimse
+
+   
 
    {o contador B recebe valor dez e vai decaindo
    com as iteracoes}
@@ -30,14 +22,6 @@ inicio
    enquanto (B >= 0) faca
      escreva "iteracao...iterando...";
      B <- B -  1;
-     se (B > 5)
-     entao
-       escreva "Numero maior que cinco";
-       D <- 2;
-       enquanto (D >= 0) faca
-        escreva "imprimindo teste...";
-       fimenquanto
-     fimse
    fimenquanto
 
    escreva "programa finalizado";
