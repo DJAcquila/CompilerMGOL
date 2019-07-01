@@ -525,9 +525,13 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					var_temp_while = var_while.desempilha()
 					for line in expressao_while:
 						if line['expressao'] == var_temp_while:
+							while count_tab < (qnt_tabs+1):
+								arq_obj.write('\t')
+								count_tab+=1
 							arq_obj.write(line['expressao']+'='+line['operacao']);
 							print("--* Semântico: {}arquivo objeto{} *--".format(bcolors.BLUE, bcolors.END))
 							print("[*] Imprimir( {}{}={}{} )\n".format(bcolors.BOLD, line['expressao'],line['operacao'], bcolors.END))
+					count_tab = 0
 					while count_tab < qnt_tabs:
 						arq_obj.write('\t')
 						count_tab+=1
