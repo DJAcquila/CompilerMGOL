@@ -117,7 +117,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 		s = int(pilha.topo())
 		if 's' in tabela_acoes.loc[s][a[2]]: #acao shift
 			t = tabela_acoes.loc[s][a[2]]
-			print('acao shift {}\n' .format(t))
+			#print('Sintático: {}ação shift{} {}\n' .format(bcolors.RED, bcolors.END, t))
 			t = t.split('s')
 			t = int(t[1])
 			pilha.empilha(int(t))
@@ -172,7 +172,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						break
 		elif 'r' in tabela_acoes.loc[s][a[2]]: #acao reduce
 			red = tabela_acoes.loc[s][a[2]]
-			print('acao reduce {}' .format(red))
+			print('--> Sintático: {}ação reduce {} {} <--' .format(bcolors.GREEN,bcolors.END,red))
 			red = red.split('r')
 			red = int(red[1])
 			B_simbols = int(regras.loc[red]['B_number'])
