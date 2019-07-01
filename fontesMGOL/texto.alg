@@ -14,13 +14,14 @@ inicio
    leia B;
 
    {B <- 2 + B;}
-   B <- 1 + D;
+   B <- 1 + B;
    c <- 2.0;
    c <- c+1.0;
-
-   se (D >= 2) entao
-    escreva "\nok\n";
-   fimse
+   B <- 3;
+   enquanto (B > 0) faca
+      escreva "\nloop\n";
+	  B <- B - 1;
+   fimenquanto
 
    escreva "\nprograma finalizado\n";
    escreva B;
