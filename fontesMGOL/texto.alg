@@ -5,27 +5,15 @@ inicio
       B inteiro;
       c real;
    varfim;
-
-
-   escreva "Digite um nome: ";
-   leia A;
-
-   escreva "Digite um numero: ";
-   leia B;
-
-   {B <- 2 + B;}
-   B <- 1 + B;
-   B <- 1 + B;
    c <- 2.0;
-   c <- c+1.0;
+   B <- 34;
+
+   se (c < 15.0) entao
+        se (B > 1) entao
+            escreva "entrei";
+        fimse
+        c <- 30.0;
+        escreva "sai";
+   fimse
    B <- 3;
-   enquanto (B > 0) faca
-      escreva "\nloop\n";
-	  B <- B - 1;
-   fimenquanto
-
-   escreva "\nprograma finalizado\n";
-   escreva B;
-   escreva "\n";
-
 fim
