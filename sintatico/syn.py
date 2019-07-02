@@ -91,6 +91,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'real'}
 							else:
 								val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'inteiro'}
+						elif accept[2] == 'literal':
+								val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'lit'}
 						else:
 							val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
 
@@ -120,7 +122,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 		s = int(pilha.topo())
 		if 's' in tabela_acoes.loc[s][a[2]]: #acao shift
 			t = tabela_acoes.loc[s][a[2]]
-			#print('Sintático: {}ação shift{} {}\n' .format(bcolors.RED, bcolors.END, t))
+			print('Sintático: {}ação shift{} {}\n' .format(bcolors.RED, bcolors.END, t))
 			t = t.split('s')
 			t = int(t[1])
 			pilha.empilha(int(t))
@@ -158,6 +160,8 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'real'}
 										else:
 											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'inteiro'}
+									elif accept[2] == 'literal':
+											val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':'lit'}
 									else:
 										val_semantico = {'lexema':accept[1],'token':accept[2],'tipo':accept[1]}
 
@@ -383,10 +387,46 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 								print("[*] Imprimir( {}{} {} {};{} )\n".format(bcolors.BOLD, identificador['lexema'], rcb['tipo'], LD['lexema'], bcolors.END))
 
 								arq_obj.close()
+							elif LD['tipo'] == '':
+								flag_sintatico = 1
+								if LD['lexema'] == '':
+									print('Erro semântico: Tentando atribuir expressao invalida. ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+								else:
+									print('Erro semântico: Variável '+ LD['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+								LD = {'lexema':'', 'token':'','tipo':''}
+								pilha_semantico.empilha(LD)
+							elif tipo_teste['tipo'] == '':
+								flag_sintatico = 1
+								if tipo_teste['lexema']:
+									print('Erro semântico: Tentando atribuir à expressao invalida. ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+								else:
+									print('Erro semântico: Variável '+ tipo_teste['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+								LD = {'lexema':'', 'token':'','tipo':''}
+								pilha_semantico.empilha(LD)
 							else:
 								flag_sintatico = 1
 								#tabela_simbolos.print_table()
 								print('Erro semântico: Tipos diferentes para atribuição. '+ LD['tipo']+' e '+tipo_teste['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							tipo_erro = {'lexema':'', 'token':'','tipo':''}
+							pilha_semantico.empilha(tipo_erro)
+						elif LD['tipo'] == '':
+							flag_sintatico = 1
+							if LD['lexema'] == '':
+								print('Erro semântico: Tentando atribuir expressao invalida. ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							else:
+								print('Erro semântico: Variável '+ LD['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							LD = {'lexema':'', 'token':'','tipo':''}
+							pilha_semantico.empilha(LD)
+						elif tipo_teste['tipo'] == '':
+							flag_sintatico = 1
+							if tipo_teste['lexema']:
+								print('Erro semântico: Tentando atribuir à expressao invalida. ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							else:
+								print('Erro semântico: Variável '+ tipo_teste['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+							LD = {'lexema':'', 'token':'','tipo':''}
+							pilha_semantico.empilha(LD)
+						else:
+							print('Erro semântico: Variável '+ tipo_teste['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 							tipo_erro = {'lexema':'', 'token':'','tipo':''}
 							pilha_semantico.empilha(tipo_erro)
 				elif num_semantico == 18:
@@ -417,6 +457,22 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 					elif OPRD1['tipo'] == 'lit' or OPRD2['tipo'] == 'lit':
 						flag_sintatico = 1
 						print('Erro semântico: Não é possível atribuicao de tipo lit ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						LD = {'lexema':'', 'token':'','tipo':''}
+						pilha_semantico.empilha(LD)
+					elif OPRD2['tipo'] == '':
+						flag_sintatico=1
+						if OPRD2['lexema'] == '':
+							print('Erro semântico: Tentando utilizar variavel invalida na expressao ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						else:
+							print('Erro semântico: Variável '+ OPRD2['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						LD = {'lexema':'', 'token':'','tipo':''}
+						pilha_semantico.empilha(LD)
+					elif OPRD1['tipo'] == '':
+						flag_sintatico=1
+						if OPRD1['lexema'] == '':
+							print('Erro semântico: Tentando utilizar variavel invalida na expressao ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						else:
+							print('Erro semântico: Variável '+ OPRD2['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 						LD = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(LD)
 					else:
@@ -508,6 +564,22 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 						print('Erro semântico: Tipo lit não permitido em expressoes ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 						EXP = {'lexema':'', 'token':'','tipo':''}
 						pilha_semantico.empilha(EXP)
+					elif OPRD2['tipo'] == '':
+						flag_sintatico=1
+						if OPRD2['lexema'] == '':
+							print('Erro semântico: Tentando utilizar variavel invalida na expressao ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						else:
+							print('Erro semântico: Variável '+ OPRD2['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						LD = {'lexema':'', 'token':'','tipo':''}
+						pilha_semantico.empilha(LD)
+					elif OPRD1['tipo'] == '':
+						flag_sintatico=1
+						if OPRD2['lexema'] == '':
+							print('Erro semântico: Tentando utilizar variavel invalida na expressao ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						else:
+							print('Erro semântico: Variável '+ OPRD2['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+						LD = {'lexema':'', 'token':'','tipo':''}
+						pilha_semantico.empilha(LD)
 					else:
 						flag_sintatico = 1
 						print('Erro semântico: Tipos diferentes para atribuição. '+ OPRD1['tipo']+' e '+OPRD2['tipo']+' ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')

@@ -14,9 +14,7 @@ inicio
    leia B;
 
    {B <- 2 + B;}
-
-   B <- 1 + D;
-   A <- "ssss";
+   B <- 1 + B;
    B <- 1 + B;
    c <- 2.0;
    c <- c+1.0;
