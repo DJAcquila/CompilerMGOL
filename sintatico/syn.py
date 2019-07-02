@@ -398,7 +398,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 							elif tipo_teste['tipo'] == '':
 								flag_sintatico = 1
 								if tipo_teste['lexema']:
-									print('Erro semântico: Tentando atribuir à expressao invalida. ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
+									print('Erro semântico: Tentando atribuir à variavel invalida. ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 								else:
 									print('Erro semântico: Variável '+ tipo_teste['lexema']+' não declarada ('+ bcolors.GREEN + bcolors.BOLD +'linha: '+ bcolors.END +str(linha_s0)+ bcolors.GREEN + bcolors.BOLD+ ' coluna: '+bcolors.END+ str(coluna_s0)+')')
 								LD = {'lexema':'', 'token':'','tipo':''}
