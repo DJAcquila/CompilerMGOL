@@ -653,7 +653,7 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 				os.remove("rascunho.c")
 				############################SEMANTICO############################
 			else:
-				print('Analise sintatica e semantica realizadas. Codigo incorreto.') #deveria ser aceito, mas como teve erro sintatico não aceita
+				print('Analise sintatica e semantica realizadas. Codigo incorreto.') #deveria ser aceito, mas como teve erro sintatico/lexico não aceita
 				os.remove("rascunho.c")
 				os.remove('programa.c')
 			break
