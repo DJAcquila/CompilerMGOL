@@ -199,11 +199,13 @@ def Shift_Reduce(file, tabela_acoes, tabela_desvios, regras, tabela_erros, tabel
 			a_repetido = 0
 			if resultado == '-':
 				a_repetido = pilha_semantico.desempilha()
+				print("aaaaaaaaaaaaaaaaaa {}".format(a_repetido))
 				while (B_simbols > 0):
 					pilha_semantico.desempilha()
 					B_simbols-= 1
 				preenche = {'lexema':'', 'token':'', 'tipo':''}
 				pilha_semantico.empilha(preenche)
+				pilha_semantico.empilha(a_repetido)
 			else:
 				num_semantico = int(resultado)
 				if num_semantico == 5:

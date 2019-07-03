@@ -12,6 +12,7 @@ void main (void)
 
 
 
+	c = 2.0;
 	B = 34;
 	T0=c<15.0;
 	if(T0){
@@ -19,6 +20,8 @@ void main (void)
 		if(T1){
 			printf("entrei");
 		}
+		c = 30.0;
 		printf("sai");
 	}
+	B = 3;
 }
