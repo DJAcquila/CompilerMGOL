@@ -5,6 +5,8 @@ void main (void)
 	/*----Variaveis temporarias----*/
 	double T0;
 	int T1;
+	double T2;
+	int T3;
 	/*------------------------------*/
 	literal A;
 	int B;
@@ -20,7 +22,13 @@ void main (void)
 		if(T1){
 			printf("entrei");
 		}
-		c = 30.0;
+		T2=c+1.0;
+		c = T2;
+		T3=B>2;
+		if(T3){
+			printf("entrei2");
+		}
+		c = 2.0;
 		printf("sai");
 	}
 	B = 3;

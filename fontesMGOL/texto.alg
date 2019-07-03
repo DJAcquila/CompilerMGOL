@@ -12,7 +12,11 @@ inicio
         se (B > 1) entao
             escreva "entrei";
         fimse
-        c <- 30.0;
+        c <- c + 1.0;
+        se (B > 2) entao
+            escreva "entrei2";
+        fimse
+        c <- 2.0;
         escreva "sai";
    fimse
    B <- 3;
